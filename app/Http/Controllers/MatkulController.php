@@ -20,9 +20,12 @@ class MatkulController extends Controller
         $get_ProdiAndMatkul = DB::table('matkul')
                             ->join ('prodi', 'matkul.prodi', '=', 'prodi.id')
                             ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.kurikulum','prodi.nama');
-                            $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id); 
-        
+                             
+        if($id){
+            $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
+        }
         if(!empty($_GET)){
+            
             $kurikulum = $_GET['kurikulum'];
             $get_ProdiAndMatkul->where('matkul.kurikulum',$kurikulum);
             
@@ -58,11 +61,24 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
-                                    'matkul'=>$request->matkul,
-                                    'sks'=>$request->sks,
-                                    'kurikulum'=>$request->kurikulum,
-                                    'prodi'=>$request->prodi ?? $request->user()->prodi ]); 
+        $all_prodi = $request->prodi;
+        if($all_prodi == 'all'){
+            $all = DB::table('prodi')->get();
+            foreach ($all as $prodi){
+                DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
+                'matkul'=>$request->matkul,
+                'sks'=>$request->sks,
+                'kurikulum'=>$request->kurikulum,
+                'prodi'=>$prodi->id ?? $request->user()->prodi ]);    
+            }
+        }else{
+            DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
+            'matkul'=>$request->matkul,
+            'sks'=>$request->sks,
+            'kurikulum'=>$request->kurikulum,
+            'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
+        }
+        
         return redirect('matkul');
     }
 

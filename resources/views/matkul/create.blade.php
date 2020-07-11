@@ -20,7 +20,8 @@
         <tr><td><label for="kurikulum">Kurikulum</label></td><td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017'],null,['class'=>'form-control'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
         <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" id="prodi">
-                <option selected>Pilih Prodi</option>
+                <option selected disabled>Pilih Prodi</option>
+                <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                                 @endforeach

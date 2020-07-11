@@ -16,17 +16,17 @@ class SebaranController extends Controller
      */
     public function index()
     {
+        $id =  Auth::user()->prodi;
         $data['sebaran'] = DB::table('sebaran')->get();
         $sebaran = Auth::user()->id;
         $get_prodiAndSebaran = DB::table('sebaran')
                              ->join('prodi','sebaran.prodi', '=', 'prodi.id')
                              ->select('sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar');
-                             
-        if(!empty($id)){
-            $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id);
-            }
-            $get_prodiAndSebaran = $get_prodiAndSebaran->get();
-            $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;
+       if($id){
+        $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id);
+       }                   
+        $get_prodiAndSebaran = $get_prodiAndSebaran->get();
+        $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          
        
         return view('sebaran.index',$data);
     }
