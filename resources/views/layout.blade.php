@@ -100,30 +100,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             <ul class="nav nav-treeview">
+
             @if(Auth::user()->level == 'admin')
               <li class="nav-item">
-                <a href="prodi" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="kelas" class="nav-link">
+                  <i class="far fa-file-alt nav-icon"></i>
                   <p>Program Studi</p>
                 </a>
               </li>
               @endif
               <li class="nav-item">
                 <a href="kelas" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fas fa-cube nav-icon"></i>
                   <p>Kelas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="matkul" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-book-open nav-icon"></i>
                   <p>Mata Kuliah</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="dosen" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-id-badge nav-icon"></i>
                   <p>Dosen</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="sebaran" class="nav-link">
+                  <i class="fas fa-file-archive nav-icon"></i>
+                  <p>Sebaran</p>
                 </a>
               </li>
             </ul>
