@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Matkul extends Model
 {
     protected $table = 'matkul';
-    protected $filable = ['kode_matkul','matkul','sks','id_prodi'];
+    protected $filable = ['kode_matkul','matkul','sks','prodi','semester'];
 
     public function prodi()
     {
-        return $this->belongsToMany(Matkul::class)->withPivot(['nama']);
+        return $this->belongsTo('App\Prodi', 'id', 'prodi');
     }
 
 }

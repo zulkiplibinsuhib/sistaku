@@ -25,6 +25,10 @@ class DosenController extends Controller
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
         }
         $get_prodiAndDosen = $get_prodiAndDosen->get();
+        foreach($get_prodiAndDosen as &$dosen)
+        {
+            $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->where('approved', 1)->sum('jam');
+        }
         $data['get_prodiAndDosen'] = $get_prodiAndDosen;
 
         return view('dosen.index',$data);
@@ -64,7 +68,12 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['dosen'] = DB::table('dosen')->where('id',$id)->first();
+        $get_name = DB::table('dosen')->where('id', $id)->value('name');
+        $data['get_name'] = $get_name;
+        return view('dosen.show',$data);
+        
+        
     }
 
     /**

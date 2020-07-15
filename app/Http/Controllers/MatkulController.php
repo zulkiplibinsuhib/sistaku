@@ -19,7 +19,7 @@ class MatkulController extends Controller
         $id = Auth::user()->prodi;
         $get_ProdiAndMatkul = DB::table('matkul')
                             ->join ('prodi', 'matkul.prodi', '=', 'prodi.id')
-                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.kurikulum','prodi.nama');
+                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.kurikulum','matkul.semester','prodi.nama');
                              
         if($id){
             $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
@@ -69,6 +69,7 @@ class MatkulController extends Controller
                 'matkul'=>$request->matkul,
                 'sks'=>$request->sks,
                 'kurikulum'=>$request->kurikulum,
+                'semester'=>$request->semester,
                 'prodi'=>$prodi->id ?? $request->user()->prodi ]);    
             }
         }else{
@@ -76,6 +77,7 @@ class MatkulController extends Controller
             'matkul'=>$request->matkul,
             'sks'=>$request->sks,
             'kurikulum'=>$request->kurikulum,
+            'semester'=>$request->semester,
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
         }
         
@@ -120,6 +122,7 @@ class MatkulController extends Controller
                                                         'matkul'=>$request->matkul,
                                                         'sks'=>$request->sks,
                                                         'kurikulum'=>$request->kurikulum,
+                                                        'semester'=>$request->semester,
                                                         'prodi'=>$request->prodi]);
                                                         return redirect('matkul');
     }

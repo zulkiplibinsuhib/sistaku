@@ -12,12 +12,14 @@
 @endif
 
     {{ Form::model($prodi,['url'=>'prodi/'.$prodi->id,'method'=>'put'])}}
-    Kode Prodi: {{ Form::text('kode',null,['placeholder'=>'Kode prodi'])}}
-    <br>
-    Prodi : {{ Form::text('nama',null,['placeholder'=>'Program studi'])}}
-    <br>
-   
-    {{ Form::submit('Update Data')}}
-    {{ Link_to('prodi','Kembali')}}
-    {{ Form::close()}}
+    <table class="table table-bordered">
+        <tr><td> Kode Prodi <td>{{ Form::text('kode',null,['placeholder'=>'Kode prodi','class'=>'form-control','required'])}}</td></td></tr>
+        <tr><td> Prodi  <td>{{ Form::text('nama',null,['placeholder'=>'Program studi','class'=>'form-control','required'])}}</td> </td></tr>
+    
+        <tr><td></td><td> 
+            {{ Form::submit('Update Data',['class'=>'btn btn-success'])}}
+            {{ Link_to('prodi','Kembali',['class'=>'btn btn-danger'])}}
+            {{ Form::close()}}
+        </td></tr>
+    </table>
 @endsection

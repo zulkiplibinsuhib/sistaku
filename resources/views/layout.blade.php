@@ -178,6 +178,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
+
+
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -188,5 +190,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin_lte/dist/js/adminlte.min.js') }}"></script>
+              <!-- <script>
+                  $('#lihat').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var nama = button.data('nama') // Extract info from data nama
+                var nidn = button.data('nidn') // Extract info from data nidn
+                var jam = button.data('jam-mengajar') // Extract info from jam mengajar
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#text-nama').text('Nama Dosen :  ' + nama)
+                modal.find('#text-nidn').text('NIDN : ' + nidn)
+                modal.find('#text-jam').text('Jam Mengajar : ' + jam)
+              })
+              </script> -->
+
+
+</script>
+  
+
 </body>
 </html>

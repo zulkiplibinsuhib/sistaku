@@ -12,7 +12,7 @@
                 <td>
                     
                     {{ Form::open(['url'=>'prodi/'.$row->id,'method'=>'delete'])}}
-                    {{ Form::submit('Delete',['class'=>'btn btn-danger btn-sm'])}}
+                    {{ Form::submit('Delete',['class'=>'btn btn-danger '])}}
                     {{ Form::close()}}
                 </td>
 

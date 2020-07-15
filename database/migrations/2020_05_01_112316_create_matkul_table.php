@@ -19,6 +19,7 @@ class CreateMatkulTable extends Migration
             $table->string('matkul');
             $table->integer('sks');
             $table->string('kurikulum');
+            $table->string('semester');
             $table->string('prodi');
             $table->timestamps();
         });

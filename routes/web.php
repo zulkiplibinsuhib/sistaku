@@ -24,6 +24,7 @@ Route::resource('matkul', 'MatkulController');
 Route::resource('prodi', 'ProdiController'); 
 Route::resource('kelas', 'KelasController'); 
 Route::resource('sebaran', 'SebaranController'); 
+Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
 
 
 Auth::routes();

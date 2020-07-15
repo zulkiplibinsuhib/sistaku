@@ -24,6 +24,7 @@ class CreateSebaranTable extends Migration
             $table->integer('sks');
             $table->integer('jam');
             $table->string('dosen_mengajar');
+            $table->integer('approved')->default(0);
             $table->timestamps();
         });
     }

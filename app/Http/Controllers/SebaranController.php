@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Kelas;
+use App\Matkul;
 use Illuminate\Support\Facades\Auth;
 
 class SebaranController extends Controller
@@ -21,14 +22,24 @@ class SebaranController extends Controller
         $sebaran = Auth::user()->id;
         $get_prodiAndSebaran = DB::table('sebaran')
                              ->join('prodi','sebaran.prodi', '=', 'prodi.id')
-                             ->select('sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar');
-       if($id){
-        $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id);
-       }                   
+                             ->join('dosen','sebaran.dosen_mengajar','=','dosen.id')
+                             ->select('sebaran.approved','sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar','dosen.name');
+                            
+        if($id){
+        $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id)->where('sebaran.approved',1);
+       } 
+                 
         $get_prodiAndSebaran = $get_prodiAndSebaran->get();
         $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          
        
         return view('sebaran.index',$data);
+    }
+    public function approve(Request $request, $id)
+    {
+        $sebaran = DB::table('sebaran')->where('id',$id)->update(['approved'=>1]);
+        return redirect()->back();
+        
+
     }
 
     /**
@@ -38,11 +49,12 @@ class SebaranController extends Controller
      */
     public function create()
     {
+        
         $data_prodi = DB::table('prodi')->pluck('nama');
         $data_kode = DB::table('kelas')->pluck('kode');
         $data_kelas = DB::table('kelas')->pluck('kelas');
         $data_matkul = DB::table('matkul')->pluck('matkul');
-        $data_dosen = DB::table('dosen')->pluck('name');
+        $data_dosen = DB::table('dosen')->get();
         $data['data_prodi'] = $data_prodi;
         $data['data_kode'] = $data_kode;
         $data['data_kelas'] = $data_kelas;
