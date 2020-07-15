@@ -27,7 +27,7 @@
             </select></td></tr>
         @if(empty(Auth::user()->prodi))
         <tr><td><label for="prodi">Prodi</label></td><td><select class="form-control col-md-4" name="prodi" id="prodi">
-                <option selected>Pilih Prodi</option>
+                <option selected disabled>Pilih Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                                 @endforeach

@@ -75,7 +75,7 @@ class SebaranController extends Controller
         $validatedData = $request->validate([
             'kd_kelas' => 'required',
             'kelas' => 'required',
-            
+
             'semester' => 'required',
             'mhs' => 'required',
             'mata_kuliah' => 'required',
@@ -117,11 +117,11 @@ class SebaranController extends Controller
      */
     public function edit($id)
     {
-        $data_prodi = DB::table('prodi')->pluck('nama');
+        $data_prodi = DB::table('prodi')->get();
         $data_kode = DB::table('kelas')->pluck('kode');
         $data_kelas = DB::table('kelas')->pluck('kelas');
         $data_matkul = DB::table('matkul')->pluck('matkul');
-        $data_dosen = DB::table('dosen')->pluck('name');
+        $data_dosen = DB::table('dosen')->get();
         $data['data_prodi'] = $data_prodi;
         $data['data_kode'] = $data_kode;
         $data['data_kelas'] = $data_kelas;
