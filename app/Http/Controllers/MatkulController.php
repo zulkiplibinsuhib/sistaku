@@ -25,10 +25,14 @@ class MatkulController extends Controller
             $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
         }
         if(!empty($_GET)){
-            
-            $kurikulum = $_GET['kurikulum'];
-            $get_ProdiAndMatkul->where('matkul.kurikulum',$kurikulum);
-            
+            if(!empty($_GET['prodi'])){
+                $prodi = $_GET['prodi'];
+                $get_ProdiAndMatkul->where('prodi.id',$prodi);
+              } 
+              if(!empty($_GET['kurikulum'])){
+                $kurikulum = $_GET['kurikulum'];
+                $get_ProdiAndMatkul->where('matkul.kurikulum',$kurikulum);
+              }
         }
        
         $get_ProdiAndMatkul = $get_ProdiAndMatkul->get();
@@ -71,7 +75,7 @@ class MatkulController extends Controller
                 'kurikulum'=>$request->kurikulum,
                 'semester'=>$request->semester,
                 'prodi'=>$prodi->id ?? $request->user()->prodi ]);    
-            }
+            } 
         }else{
             DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
             'matkul'=>$request->matkul,

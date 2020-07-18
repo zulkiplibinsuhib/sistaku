@@ -14,7 +14,15 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $data['prodi'] = DB::table('prodi')->get();
+        $data['prodi'] = DB::table('prodi');
+         if(!empty($_GET)){ 
+            if(!empty($_GET['prodi'])){
+                $prodi = $_GET['prodi'];
+                $data['prodi'] = $data['prodi']->where('prodi.id',$prodi);
+              } 
+            }
+            $data['prodi'] = $data['prodi']->get();
+        
         return view('prodi.index',$data);
     }
 

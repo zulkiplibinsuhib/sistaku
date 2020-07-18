@@ -26,8 +26,22 @@ class SebaranController extends Controller
                              ->select('sebaran.approved','sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar','dosen.name');
                             
         if($id){
-        $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id)->where('sebaran.approved',1);
+        $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id);
        } 
+       if(!empty($_GET)){
+          if(!empty($_GET['prodi'])){
+            $prodi = $_GET['prodi'];
+            $get_prodiAndSebaran->where('prodi.id',$prodi);
+          } 
+          if(!empty($_GET['semester'])){
+            $semester = $_GET['semester'];
+            $get_prodiAndSebaran->where('sebaran.semester',$semester);
+          } 
+           
+        
+        
+        
+    }
                  
         $get_prodiAndSebaran = $get_prodiAndSebaran->get();
         $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          

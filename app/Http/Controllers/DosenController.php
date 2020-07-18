@@ -20,17 +20,24 @@ class DosenController extends Controller
         $get_prodiAndDosen = DB::table('dosen')
                             ->join('prodi', 'dosen.prodi', '=', 'prodi.id')
                             ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id');
-
+ 
     if(!empty($id)){
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
         }
+        
+        if(!empty($_GET)){ 
+            if(!empty($_GET['prodi'])){
+                $prodi = $_GET['prodi'];
+                $get_prodiAndDosen->where('prodi.id',$prodi);
+              } 
+            }
         $get_prodiAndDosen = $get_prodiAndDosen->get();
         foreach($get_prodiAndDosen as &$dosen)
         {
             $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->where('approved', 1)->sum('jam');
         }
-        $data['get_prodiAndDosen'] = $get_prodiAndDosen;
-
+            
+            $data['get_prodiAndDosen'] = $get_prodiAndDosen;
         return view('dosen.index',$data);
     }
 
@@ -41,7 +48,9 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create');
+        $data_dosen = DB::table('dosen')->pluck('name');
+        $data['data_dosen'] = $data_dosen;
+        return view('dosen.create'); 
     }
 
     /**
@@ -52,11 +61,24 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('dosen')->insert(['name'=>$request->name,
-                                    'nidn'=>$request->nidn,
-                                    'jenis_kelamin'=>$request->jenis_kelamin,
-                                    'status'=>$request->status,
-                                    'prodi'=>$request->prodi ?? $request->user()->prodi ]);
+        $all_prodi = $request->prodi;
+        if($all_prodi == 'all'){
+            $all = DB::table('prodi')->get();
+            foreach ($all as $prodi){
+                DB::table('dosen')->insert(['name'=>$request->name,
+                'nidn'=>$request->nidn,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+                'status'=>$request->status,
+                'prodi'=>$prodi->id ?? $request->user()->prodi ]);     
+            }
+        }else{
+            DB::table('dosen')->insert(['name'=>$request->name,
+            'nidn'=>$request->nidn,
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'status'=>$request->status,
+            'prodi'=>$request->prodi ?? $request->user()->prodi ]);   
+        }
+        
         return redirect('dosen');
     }
 

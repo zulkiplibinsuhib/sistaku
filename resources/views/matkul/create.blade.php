@@ -25,9 +25,10 @@
                 <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
-                                @endforeach
+                                @endforeach 
             </select></td></tr>
-        @endif
+        
+        @endif 
         </td></tr>
         <tr><td></td><td>    {{ Form::submit('Simpan Data',['class'=>'btn btn-success'])}}
                 {{ Link_to('matkul','Kembali',['class'=>'btn btn-danger'])}}

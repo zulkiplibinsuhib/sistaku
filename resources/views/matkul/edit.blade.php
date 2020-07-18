@@ -8,7 +8,7 @@
                 <li>{{ $error }}</li>
             @endforeach
         </ul> 
-    </div>
+    </div> 
 @endif
 
     {{ Form::model($matkul,['url'=>'matkul/'.$matkul->id,'method'=>'put'])}}

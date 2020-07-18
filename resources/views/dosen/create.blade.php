@@ -10,7 +10,7 @@
         </ul>
     </div>
 @endif
-
+ 
     {{ Form::open(['url'=>'dosen'])}}
     <table class="table table-bordered">
        
@@ -19,12 +19,13 @@
         <tr><td>Jenis Kelamin </td><td>{{ Form::select('jenis_kelamin',['Laki-Laki'=>'Laki-Laki','Perempuan'=>'Perempuan'],null,['class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td>Status </td><td>{{ Form::select('status',['aktif'=>'Aktif','tidak_aktif'=>'Tidak Aktif'],null,['class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
-        <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" id="prodi"class="form-control col-md-4" required>
-                <option selected>Pilih Prodi</option>
+        <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" id="prodi" class="form-control col-md-4">
+                <option selected disabled>Pilih Prodi</option>
+                <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
-                                @endforeach
-            </select></td></tr> 
+                                @endforeach 
+            </select></td></tr>
         @endif
         <tr><td></td><td>    {{ Form::submit('Simpan Data',['class'=>'btn btn-success'])}}
                 {{ Link_to('dosen','Kembali',['class'=>'btn btn-danger'])}}

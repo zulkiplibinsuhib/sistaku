@@ -13,7 +13,7 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response 
      */
-    public function index()
+    public function index() 
     {
         $data['kelas'] = DB::table('kelas')->get();
         $id = Auth::user()->prodi;
@@ -24,6 +24,12 @@ class KelasController extends Controller
         if(!empty($id)){
             $get_prodiAndKelas = $get_prodiAndKelas->where('kelas.prodi',$id);
         }
+        if(!empty($_GET)){ 
+            if(!empty($_GET['prodi'])){
+                $prodi = $_GET['prodi'];
+                $get_prodiAndKelas->where('prodi.id',$prodi);
+              } 
+            }
         $get_prodiAndKelas = $get_prodiAndKelas->get();
         $data['get_prodiAndKelas'] = $get_prodiAndKelas;
        

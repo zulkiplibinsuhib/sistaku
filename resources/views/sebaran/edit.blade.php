@@ -41,7 +41,7 @@
                     </select></td></tr>
             <tr><td>SKS <td>{{ Form::number('sks',null,['placeholder'=>'Jumlah SKS','class'=>'form-control col-md-4','required'])}}</td></td></tr>
             <tr><td>Jam <td>{{ Form::number('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-md-4','required'])}}</td></td></tr>
-            <tr><td><label for="dosen">Dosen Mengajar</label></td><td><select class="form-control col-md-6" name="dosen_mengajar" id="dosen">
+            <tr><td><label for="dosen">Dosen Mengajar</label></td><td><select class="form-control col-md-4" name="dosen_mengajar" id="dosen">
                 @foreach($data_dosen as $dosen)
                 <option value="{{ $dosen->id}}">{{ $dosen->name}}</option>
                 @endforeach
