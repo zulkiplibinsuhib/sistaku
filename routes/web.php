@@ -25,12 +25,13 @@ Route::resource('prodi', 'ProdiController');
 Route::resource('kelas', 'KelasController'); 
 Route::resource('sebaran', 'SebaranController'); 
 Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
+
+

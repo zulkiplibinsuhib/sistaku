@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Kelas;
 use App\Matkul;
+use App\Sebaran;
 use Illuminate\Support\Facades\Auth;
 
 class SebaranController extends Controller
@@ -37,25 +38,33 @@ class SebaranController extends Controller
             $semester = $_GET['semester'];
             $get_prodiAndSebaran->where('sebaran.semester',$semester);
           } 
-           
-        
-        
         
     }
                  
         $get_prodiAndSebaran = $get_prodiAndSebaran->get();
         $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          
-       
         return view('sebaran.index',$data);
     }
+    // Autofill sebaran gagal 
+    public function ajax_select(Request $request){
+        $kode = $request->kode;
+        $kelas= Kelas::where('kode','=',$kode)->first();
+        if(isset($kelas)){
+            $data = array(
+            'kode' => $kelas['kode'],
+            'kelas' =>  $kelas['kelas'],
+            'semester' =>  $kelas['semester'],
+            'mhs' =>  $kelas['mhs'],
+            );
+        return json_encode($data);}
+    }
+
     public function approve(Request $request, $id)
     {
         $sebaran = DB::table('sebaran')->where('id',$id)->update(['approved'=>1]);
         return redirect()->back();
         
-
     }
-
     /**
      * Show the form for creating a new resource.
      *
