@@ -56,7 +56,8 @@
                         onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
                 </form>
                 @if(!$row->approved)
-                <a href="{{ route('sebaran.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit "></a>
+               
+                
                 {{ link_to( route ('sebaran.approve', ['id' => $row->id]),'ACC',['class'=>'btn btn-success btn-sm']) }}
             </td>
             @endif
