@@ -8,6 +8,9 @@
         <!-- small box -->
         <div class="small-box bg-info text-center">
             <div class="inner">
+            <h3>
+            {{$prodi}}
+        </h3>
                 <h3>Program Studi</h3>
                 
             </div>
@@ -23,6 +26,7 @@
     <!-- small box   -->
     <div class="small-box bg-success text-center">
         <div class="inner">
+        <h3>{{$kelas}}</h3>
         <h3>Kelas</h3>
         </div>
         <div class="icon">
@@ -34,10 +38,13 @@
     <!-- ./col -->
     <div class="col-6">
     <!-- small box -->
+    
     <div class="small-box bg-warning text-center">
         <div class="inner">
+        <h3>
+            {{$matkul}}
+        </h3>
         <h3>Mata Kuliah</h3>
-
         </div>
         <div class="icon">
         <i class="ion ion-pie-graph"></i>
@@ -49,6 +56,7 @@
     <div class="col-6">
     <div class="small-box bg-danger text-center">
         <div class="inner">
+            <h3>{{$sebaran}}</h3>
             <h3>Sebaran</h3>
         </div>
             <div class="icon">
@@ -62,6 +70,7 @@
     <!-- small box -->
     <div class="small-box bg-orange text-center">
         <div class="inner">
+        <h3>{{$dosen}}</h3>
         <h3>Dosen</h3>
 
         </div>

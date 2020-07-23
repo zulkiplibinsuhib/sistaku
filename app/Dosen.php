@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosen extends Model
 {
-    //
+    protected $table = 'dosen';
+    protected $filable = ['name','nidn','jenis_kelamin','status','prodi'];
 }

@@ -55,13 +55,12 @@
                 <button class="btn btn-danger btn-sm fas fa-trash-alt " onclick="return confirm('Yakin Mau di Hapus ?')"
                     type="submit"></button>
             </form>
-        </td>
+        
 
 
         @if(!$row->approved)
-        <td><a href="{{ route('sebaran.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit "></a>
-        <td>
-        <td>{{ link_to( route ('sebaran.approve', ['id' => $row->id]),'ACC',['class'=>'btn btn-success btn-sm']) }}</td>
+        <a href="{{ route('sebaran.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit "></a>
+        {{ link_to( route ('sebaran.approve', ['id' => $row->id]),'ACC',['class'=>'btn btn-success btn-sm']) }}</td>
         @endif
         @endif
 

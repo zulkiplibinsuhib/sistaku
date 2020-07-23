@@ -13,5 +13,7 @@ class Matkul extends Model
     {
         return $this->belongsTo('App\Prodi', 'id', 'prodi');
     }
+    
+    }
 
-}
+

@@ -15,7 +15,7 @@
     <table class="table table-bordered">
        
        
-        <tr><td><label for="kd_kelas">Kode Kelas</label></td><td><select class="form-control col-md-4 " name="kode" id="kode">
+        <tr><td><label for="kd_kelas">Kode Kelas</label></td><td><select class="form-control col-md-4" name="kd_kelas" id="kd_kelas">
                 @foreach($data_kode as $kode)
                 <option value="{{ $kode}}">{{ $kode}}</option>
                 @endforeach
@@ -33,8 +33,8 @@
                                 @endforeach
             </select></td></tr>
         @endif
-        <tr><td>Semester </td><td >{{ Form::number('semester',null,['placeholder'=>'masukkan semester','class'=>'form-control col-md-4','name'=>'semester','id'=>'semester'])}}</td></tr>
-        <tr><td>Mahasiswa</td><td>{{ Form::number('mhs',null,['placeholder'=>'Jumlah Mahasiswa ','class'=>'form-control col-md-4','name'=>'mhs','id'=>'mhs'])}}</td></tr>
+        <tr><td>Semester </td><td >{{ Form::number('semester',null,['placeholder'=>'masukkan semester','class'=>'form-control col-md-4','name'=>'semester'])}}</td></tr>
+        <tr><td>Mahasiswa</td><td>{{ Form::number('mhs',null,['placeholder'=>'Jumlah Mahasiswa ','class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td><label for="matkul">Mata Kuliah</label></td><td><select class="form-control col-md-4" name="mata_kuliah" id="matkul">
                 @foreach($data_matkul as $matkul)
                 <option value="{{ $matkul}}">{{ $matkul}}</option>
@@ -53,5 +53,4 @@
                 {{ Link_to('sebaran','Kembali',['class'=>'btn btn-danger'])}}
                 {{ Form::close()}}</td></tr>
     </table>
-
-        @endsection
+@endsection

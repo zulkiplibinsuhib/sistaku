@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Matkul;
 
 class MatkulController extends Controller
 {
@@ -44,6 +45,7 @@ class MatkulController extends Controller
         return view('matkul.index',$data); 
         
     }
+    
 
     /**
      * Show the form for creating a new resource.
