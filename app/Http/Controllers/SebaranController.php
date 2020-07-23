@@ -56,6 +56,7 @@ class SebaranController extends Controller
             'semester' =>  $kelas['semester'],
             'mhs' =>  $kelas['mhs'],
             );
+           
         return json_encode($data);}
     }
 

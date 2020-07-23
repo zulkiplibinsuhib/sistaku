@@ -185,81 +185,104 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin_lte/dist/js/adminlte.min.js') }}"></script>
-    <!-- <script>
-                  $('#lihat').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var nama = button.data('nama') // Extract info from data nama
-                var nidn = button.data('nidn') // Extract info from data nidn
-                var jam = button.data('jam-mengajar') // Extract info from jam mengajar
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('#text-nama').text('Nama Dosen :  ' + nama)
-                modal.find('#text-nidn').text('NIDN : ' + nidn)
-                modal.find('#text-jam').text('Jam Mengajar : ' + jam)
-              })
-              </script> -->
 
-              <!-- Data Table -->
-              <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-              <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-              <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-              <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-              <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
-              <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
-              <script>
-                $(document).ready(function() {
-                      $('#sebaran').DataTable( {
-                          dom: 'Bfrtip',
-                          buttons: [
-                               'excel', 'pdf', 'print'
-                          ]
-                      } );
-                  } );
-              </script>
-              <script>
-                $(document).ready(function() {
-                      $('#prodi').DataTable( {
-                          dom: 'Bfrtip',
-                          buttons: [
-                               'excel', 'pdf', 'print'
-                          ]
-                      } );
-                  } );
-              </script>
-              <script>
-                $(document).ready(function() {
-                      $('#matkul').DataTable( {
-                          dom: 'Bfrtip',
-                          buttons: [
-                               'excel', 'pdf', 'print'
-                          ]
-                      } );
-                  } );
-              </script>
-              <script>
-                $(document).ready(function() {
-                      $('#kelas ').DataTable( {
-                          dom: 'Bfrtip',
-                          buttons: [
-                               'excel', 'pdf', 'print'
-                          ]
-                      } );
-                  } );
-              </script>
-              <script>
-                $(document).ready(function() {
-                      $('#dosen ').DataTable( {
-                          dom: 'Bfrtip',
-                          buttons: [
-                               'excel', 'pdf', 'print'
-                          ]
-                      } );
-                  } );
-              </script>
+    <!-- Data Table -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+          console.log($('#kode'))
+         $('#kode').on('input',function(){
+             var kode=$(this).val();
+             $.ajax({
+                 type : "GET",
+                 url  : "{{ route('sebaran.ajax_select') }}",
+                 dataType : "JSON",
+                 data : {kode: kode},
+                 cache:false,
+                 success: function(data){
+                   console.log(data);
+                   var json = data;
+                    var kelas = json.kelas;
+                    var semester = json.semester;
+                    var mhs = json.mhs;
+                    
+                    console.log(kelas);
+                    console.log(semester);
+                    console.log(mhs);
+                    
+                    $('#kelas-sebaran').val(kelas);
+                    $('#semester-sebaran').val(semester);
+                    $('#mhs-seabran').val(mhs);
+                                          
+                 }
+             });
+             return false;
+        });
+      });
+
+    </script>
+   
+    <script>
+    $(document).ready(function() {
+            $('#prodi').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+    <script>
+    $(document).ready(function() {
+            $('#matkul').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+    <script>
+    $(document).ready(function() {
+            $('#kelas ').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+    <script>
+    $(document).ready(function() {
+            $('#dosen ').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.sebaran').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+ 
+    
 
               
 

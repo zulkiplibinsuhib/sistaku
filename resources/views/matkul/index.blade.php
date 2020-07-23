@@ -24,7 +24,7 @@
             <th>Kode</th>
             <th>Mata Kuliah</th>
             <th>SKS</th>
-            <th>>Kurikulum</th>
+            <th>Kurikulum</th>
             <th>Semester</th>
             <th>Prodi</th>
             <th>Action</th>
