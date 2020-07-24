@@ -12,29 +12,31 @@
 </form> -->
 
 <table class="table table-bordered" id="prodi">
-  <thead>
-    <tr class="text-center">
-        <th>Kode Prodi</th>
-        <th>Prodi</th>
-        <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($prodi as $row)
-    <tr class="text-center">
-        <td>{{ $row->kode}}</td>
-        <td>{{ $row->nama}}</td>
-        <td><a href="{{ route('prodi.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit "></a>
-            <form action="{{route('prodi.destroy',$row->id)}}" method="post">
-                @csrf
-                @method('Delete')
-                <button class="btn btn-danger btn-sm fas fa-trash-alt " onclick="return confirm('Yakin Mau di Hapus ?')"
-                    type="submit"></button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-  </tbody>
+    <thead>
+        <tr class="text-center">
+            <th>Kode Prodi</th>
+            <th>Prodi</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($prodi as $row)
+        <tr class="text-center">
+            <td>{{ $row->kode}}</td>
+            <td>{{ $row->nama}}</td>
+            <td>
+                <a href="{{ route('prodi.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>
+                <form action="{{route('prodi.destroy',$row->id)}}" method="post" title="Hapus">
+                    @csrf
+                    @method('Delete')
+                    <button class="btn btn-danger btn-sm fas fa-trash-alt "
+                        onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
+                </form>
+
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
 </table>
 
 <a href="{{ route('prodi.create') }}" class="btn btn-success  ">Tambah Data</a>

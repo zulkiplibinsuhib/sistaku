@@ -12,11 +12,13 @@
     </select>
     <select name="kurikulum" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Kurikulum</option>
+        <option value="2015">2015</option>
         <option value="2016">2016</option>
         <option value="2017">2017</option>
         <option value="2018">2018</option>
+        <option value="2019">2019</option>
     </select>
-    <button type="submit" class="btn btn-primary my-1 btn-sm">Search</button>
+    <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
 <table class="table table-bordered" id="matkul">
     <thead>
@@ -39,13 +41,15 @@
             <td>{{ $row->kurikulum}}</td>
             <td>{{ $row->semester}}</td>
             <td>{{ $row->nama}}</td>
-            <td> <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit "></a>
-                <form action="{{route('matkul.destroy',$row->id)}}" method="post">
+            <td> <div class="d-flex">
+                <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>
+                <form action="{{route('matkul.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')
                     <button class="btn btn-danger btn-sm fas fa-trash-alt " onclick="return confirm('Yakin Mau di Hapus ?')"
                         type="submit"></button>
                 </form>
+                </div>
                 </td>
         </tr>
         @endforeach

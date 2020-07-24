@@ -45,8 +45,10 @@ class SebaranController extends Controller
         $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          
         return view('sebaran.index',$data);
     }
-    // Autofill sebaran gagal 
-    public function ajax_select(Request $request){
+      // Autofill sebaran gagal 
+
+      public function ajax_select(Request $request)
+      {
         $kode = $request->kode;
         $kelas= Kelas::where('kode','=',$kode)->first();
         if(isset($kelas)){
@@ -57,8 +59,34 @@ class SebaranController extends Controller
             'mhs' =>  $kelas['mhs'],
             );
            
-        return json_encode($data);}
+        return response()->json($data);
+        }
     }
+
+    public function ajax_select_matkul(Request $request)
+      {
+        $kode = $request->kode;
+        $matkul= Matkul::where('matkul','=',$kode)->first();
+        if(isset($matkul)){
+            $data = array(
+            'sks' =>  $matkul['sks'],
+            ); 
+        return response()->json($data);
+        }
+    }
+
+    public function ajax_select_matkul_edit(Request $request)
+      {
+        $kode = $request->kode;
+        $matkul= Matkul::where('matkul','=',$kode)->first();
+        if(isset($matkul)){
+            $data = array(
+            'sks' =>  $matkul['sks'],
+            ); 
+        return response()->json($data);
+        }
+    }
+  
 
     public function approve(Request $request, $id)
     {
@@ -75,10 +103,10 @@ class SebaranController extends Controller
     {
         
         $data_prodi = DB::table('prodi')->pluck('nama');
-        $data_kode = DB::table('kelas')->pluck('kode');
+        $data_kode = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
         $data_kelas = DB::table('kelas')->pluck('kelas');
-        $data_matkul = DB::table('matkul')->pluck('matkul');
-        $data_dosen = DB::table('dosen')->get();
+        $data_matkul = DB::table('matkul')->where('prodi',Auth::user()->prodi)->get();
+        $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
         $data['data_prodi'] = $data_prodi;
         $data['data_kode'] = $data_kode;
         $data['data_kelas'] = $data_kelas;
@@ -99,7 +127,6 @@ class SebaranController extends Controller
         $validatedData = $request->validate([
             'kd_kelas' => 'required',
             'kelas' => 'required',
-
             'semester' => 'required',
             'mhs' => 'required',
             'mata_kuliah' => 'required',
@@ -151,7 +178,6 @@ class SebaranController extends Controller
         $data['data_kelas'] = $data_kelas;
         $data['data_matkul'] = $data_matkul;
         $data['data_dosen'] = $data_dosen;
-        
         $data['sebaran'] = DB::table('sebaran')->where('id',$id)->first();
         $data_prodi = DB::table('prodi')->pluck('nama');
         $data['data_prodi'] = $data_prodi;

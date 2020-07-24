@@ -16,8 +16,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('admin_lte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin_lte/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
+    
     
 
 </head>
@@ -187,9 +188,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('admin_lte/dist/js/adminlte.min.js') }}"></script>
 
     <!-- Data Table -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src=" {{ asset('js/app.js') }}"></script>
+  
+    
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -221,7 +225,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     $('#kelas-sebaran').val(kelas);
                     $('#semester-sebaran').val(semester);
-                    $('#mhs-seabran').val(mhs);
+                    $('#mhs-sebaran').val(mhs);
+                                          
+                 }
+             });
+             return false;
+        });
+      });
+
+    </script>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          console.log($('#nama'))
+         $('#nama').on('input',function(){
+             var kode=$(this).val();
+             $.ajax({
+                 type : "GET",
+                 url  : "{{ route('sebaran.ajax_select_matkul') }}",
+                 dataType : "JSON",
+                 data : {kode: kode},
+                 cache:false,
+                 success: function(data){
+                   console.log(data);
+                   var json = data;
+                    var sks = json.sks;
+                    console.log(sks);
+                    $('#sks').val(sks);
+                                          
+                 }
+             });
+             return false;
+        });
+      });
+
+    </script>
+
+    
+<script type="text/javascript">
+      $(document).ready(function(){
+          console.log($('#matkul-edit'))
+         $('#matkul-edit').on('input',function(){
+             var kode=$(this).val();
+             $.ajax({
+                 type : "GET",
+                 url  : "{{ route('sebaran.ajax_select_matkul_edit') }}",
+                 dataType : "JSON",
+                 data : {kode: kode},
+                 cache:false,
+                 success: function(data){
+                   console.log(data);
+                   var json = data;
+                    var sks = json.sks;
+                    console.log(sks);
+                    $('#sks-edit').val(sks);
                                           
                  }
              });

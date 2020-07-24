@@ -17,9 +17,9 @@
         <option value="4">4</option>
     </select>
 
-    <button type="submit" class="btn btn-primary my-1 btn-sm">Search</button>
+    <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
-<table class="sebaran table table-bordered" id="sebaran">
+<table class="sebaran table table-bordered table table-striped" id="sebaran">
     <thead>
         <tr class="text-center">
             <th>Kode Kelas</th>
@@ -48,17 +48,22 @@
             <td>{{ $row->name}}</td>
             <td>{{ $row->approved ? 'approved' : 'not approved'}}</td>
             @if(Auth::user()->level == 'admin')
-            <td>
-                <form action="{{route('sebaran.destroy',$row->id)}}" method="post">
+            <td><div class="d-flex">
+            @if(!$row->approved)
+                <a href="{{ route('sebaran.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit" title="Edit"></a>
+                @endif
+                <form action="{{route('sebaran.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')
                     <button class="btn btn-danger btn-sm fas fa-trash-alt "
-                        onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
+                        onclick="return confirm('Yakin mau menghapus data ini ?')" type="submit"></button>
                 </form>
-                @if(!$row->approved)
+                @if(!$row->approved)        
+                <a href="{{route('sebaran.approve',$row->id)}}" class="btn btn-success btn-sm " title="Konfirmasi"  onclick="return confirm('Yakin data sudah benar ?')" type="submit">Accept</a>
+
+                  
                
-                
-                {{ link_to( route ('sebaran.approve', ['id' => $row->id]),'ACC',['class'=>'btn btn-success btn-sm']) }}
+            </div>
             </td>
             @endif
             @endif
