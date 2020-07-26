@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Update Data Mata Kuliah')
+@section('title','Update Data Kelas')
 @section('content')
     @if ($errors->any())
     <div class="alert alert-danger">

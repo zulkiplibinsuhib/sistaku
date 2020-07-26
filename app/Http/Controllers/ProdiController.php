@@ -44,6 +44,11 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+            
+        ]);
         DB::table('prodi')->insert(['kode'=>$request->kode,
                                     'nama'=>$request->nama]);
         return redirect('prodi');

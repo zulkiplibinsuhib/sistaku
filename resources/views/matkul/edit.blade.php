@@ -16,7 +16,7 @@
         <tr><td>Kode Mata Kuliah <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Kode Matkul','class'=>'form-control','required'])}}</td></td></tr> 
         <tr><td>Mata Kuliah <td>{{ Form::text('matkul',null,['placeholder'=>'mata kuliah','class'=>'form-control','required'])}}</td></td></tr> 
         <tr><td> SKS <td>{{ Form::number('sks',null,['placeholder'=>'sks','class'=>'form-control col-md-4','required'])}}</td></td></tr> 
-        <tr><td>Kurikulum<td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017'],'null',['class'=>'form-control col-md-4'])}}</td></td></tr>
+        <tr><td>Kurikulum<td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],'null',['class'=>'form-control col-md-4'])}}</td></td></tr>
         <tr><td>Semester</td><td>{{  Form::number('semester',null,['placeholder'=>'Enter Semester','class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
         <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" class="form-control col-md-4">

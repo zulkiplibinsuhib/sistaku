@@ -193,6 +193,17 @@ class SebaranController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'kd_kelas' => 'required',
+            'kelas' => 'required',
+            'semester' => 'required',
+            'mhs' => 'required',
+            'mata_kuliah' => 'required',
+            'sks' => 'required',
+            'jam' => 'required',
+            'dosen_mengajar' => 'required'
+        ]);
+    
         DB::table('sebaran')->where('id',$id)->update(['kd_kelas'=>$request->kd_kelas,
                                                         'kelas'=>$request->kelas,
                                                         'prodi'=>$request->prodi,

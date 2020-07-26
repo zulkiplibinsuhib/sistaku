@@ -19,7 +19,7 @@ class KelasController extends Controller
         $id = Auth::user()->prodi;
         $get_prodiAndKelas = DB::table('kelas')
                                 ->join('prodi', 'kelas.prodi', '=', 'prodi.id')
-                                ->select('kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id');
+                                ->select('kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id','kelas.id');
       
         if(!empty($id)){
             $get_prodiAndKelas = $get_prodiAndKelas->where('kelas.prodi',$id);
@@ -76,12 +76,7 @@ class KelasController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id 
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
         $data['kelas'] = DB::table('kelas')->where('id',$id)->first();

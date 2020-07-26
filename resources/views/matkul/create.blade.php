@@ -17,10 +17,10 @@
         <tr><td>Kode Mata Kuliah</td><td>{{ Form::text('kode_matkul',null,['placeholder'=>'Enter Kode Mata Kuliah ','class'=>'form-control'])}}</td></tr>
         <tr><td>Mata Kuliah</td><td>{{ Form::text('matkul',null,['placeholder'=>'Enter Mata Kuliah','class'=>'form-control'])}}</td></tr>
         <tr><td>SKS </td><td>{{ Form::number('sks',null,['placeholder'=>'Enter SKS','class'=>'form-control col-md-4'])}}</td></tr>
-        <tr><td><label for="kurikulum">Kurikulum</label></td><td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017'],null,['class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td><label for="kurikulum">Kurikulum</label></td><td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],null,['class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td><label for="semester">Semester</label></td><td>{{  Form::number('semester',null,['placeholder'=>'Enter Semester','class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
-        <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" id="prodi" class="form-control col-md-4">
+        <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi"  class="form-control col-md-4">
                 <option selected disabled>Pilih Prodi</option>
                 <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)

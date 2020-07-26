@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// AJAX REQUEST
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
 Route::get('sebaran/cari_matkul', 'SebaranController@ajax_select_matkul')->name('sebaran.ajax_select_matkul');
 Route::get('sebaran/cari_matkul_edit', 'SebaranController@ajax_select_matkul_edit')->name('sebaran.ajax_select_matkul_edit');
@@ -27,9 +28,22 @@ Route::get('sebaran/cari_matkul_edit', 'SebaranController@ajax_select_matkul_edi
 Route::resource('dosen', 'DosenController'); 
 Route::resource('matkul', 'MatkulController'); 
 Route::resource('prodi', 'ProdiController'); 
-Route::resource('kelas', 'KelasController'); 
 Route::resource('sebaran', 'SebaranController'); 
+
+// APPROVE SEBARAN
 Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
+
+
+// KELAS
+Route::resource('kelas', 'KelasController'); 
+
+
+// Route::get('kelas', 'KelasController@index')->name('kelas.index');
+// Route::get('kelas/create', 'KelasController@create')->name('kelas.create');
+// Route::post('kelas/store', 'KelasController@store')->name('kelas.store');
+// Route::get('kelas/edit/{id}', 'KelasController@edit')->name('kelas.edit');
+// Route::get('kelas/delete/{id}', 'KelasController@destroy')->name('kelas.destroy');
+// Route::post('kelas/update/{id}', 'KelasController@update')->name('kelas.update');
 
 
 
