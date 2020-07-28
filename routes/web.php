@@ -22,13 +22,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // AJAX REQUEST
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
+
 Route::get('sebaran/cari_matkul', 'SebaranController@ajax_select_matkul')->name('sebaran.ajax_select_matkul');
 Route::get('sebaran/cari_matkul_edit', 'SebaranController@ajax_select_matkul_edit')->name('sebaran.ajax_select_matkul_edit');
 
+Route::resource('users', 'UserController');
 Route::resource('dosen', 'DosenController'); 
 Route::resource('matkul', 'MatkulController'); 
 Route::resource('prodi', 'ProdiController'); 
-Route::resource('sebaran', 'SebaranController'); 
+Route::resource('sebaran', 'SebaranController');
+
+
 
 // APPROVE SEBARAN
 Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');

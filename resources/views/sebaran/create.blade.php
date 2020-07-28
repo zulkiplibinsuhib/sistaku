@@ -32,6 +32,7 @@
         @endif
         <tr><td>Semester </td><td >{{ Form::text('semester',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'semester','id'=>'semester-sebaran','readonly'])}}</td></tr>
         <tr><td>Mahasiswa</td><td>{{ Form::text('mhs',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mhs','id'=>'mhs-sebaran','readonly'])}}</td></tr>
+        
         <tr><td><label for="matkul">Mata Kuliah</label></td><td><select class="form-control col-md-4" name="mata_kuliah" id="nama">
                 @foreach($data_matkul as $matkul)
                 <option value="{{ $matkul->matkul}}">{{ $matkul->matkul}}</option>
@@ -39,7 +40,7 @@
             </select></td></tr>
         <tr><td>SKS</td><td>{{ Form::text('sks',null,['placeholder'=>'','class'=>'form-control col-md-4','id'=>'sks','readonly'])}}</td></tr>
         <tr><td>Jam</td><td>{{ Form::number('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-md-4','id'=>'jam'])}}</td></tr>
-        <tr><td><label for="dosen">Dosen Mengajar</label></td><td><select class="form-control col-md-6" name="dosen_mengajar" id="dosen-sebaran">
+        <tr><td><label for="dosen">Dosen Mengajar</label></td><td><select class="form-control col-md-4" name="dosen_mengajar" id="dosen-sebaran">
                 @foreach($data_dosen as $dosen)
                 <option value="{{ $dosen->id}}">{{ $dosen->name}}</option>
                 @endforeach

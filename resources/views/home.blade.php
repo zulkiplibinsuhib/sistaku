@@ -20,7 +20,7 @@
                 <h4>Program Studi</h4>
             </div>
             <div class="icon">
-                <i class="fa fa-clock-o"></i>
+                <i class="ion ion-stats-bars"></i>
             </div>
             <a href="prodi" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -35,7 +35,7 @@
                 <h4>Kelas</h4>
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="far fas fa-cube"></i>
             </div>
             <a href="kelas" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -52,7 +52,7 @@
                 <h4>Mata Kuliah</h4>
             </div>
             <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fas fa-book-open"></i>
             </div>
             <a href="matkul" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -65,14 +65,13 @@
                 <h4>Sebaran</h4>
             </div>
             <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fas fa-file-archive"></i>
             </div>
             <a href="sebaran" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <!-- ./col -->
+
     <div class="col-6">
-        <!-- small box -->
         <div class="small-box bg-orange text-center">
             <div class="inner">
                 <h3>{{$dosen}}</h3>
@@ -80,7 +79,7 @@
 
             </div>
             <div class="icon">
-                <i class="ion ion-pie-orange"></i>
+                <i class="ion ion-person-add"></i>
             </div>
             <a href="dosen" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
         </div>

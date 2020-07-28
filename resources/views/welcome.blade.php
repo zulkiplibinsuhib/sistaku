@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>SISTAKU</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -79,42 +79,60 @@
 <body>
 
 
-    <!-- ======= Header ======= -->
-    <header id="header">
-        <div class="container d-flex align-items-center">
+   <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container d-flex align-items-center">
+    
+      <div class="logo mr-auto">
+        
+      <h1 class="text-light"><a href="{{ url('/home') }}">Sistaku<span>.</span></a></h1>
+      
+      </div>
+      
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
         @if (Route::has('login'))
         @auth
-            <div class="logo mr-auto">
-                <h1 class="text-light"><a href="{{ url('/home') }}">SISTAKU<span>.</span></a></h1>
-            </div>
-            @else
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                     <li class="get-started"><a href="{{ route('login') }}">Login</a></li>
-                </ul>
-            </nav>
-            @if (Route::has('register'))
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                     <li class="get-started"><a href="{{ route('register') }}">Register</a></li>
-                </ul>
-            </nav>
-            @endif
-            @endauth
-        </div>
-        @endif
-    </header><!-- End Header -->
-       <div class="flex-center position-ref full-height">     
-            <div class="content">
-                <div class="title m-b-md">
-                    SISTAKU
-                </div>
+        @else
+        <li class="get-started"><a href="{{ route('login') }}">Login</a></li>
+        <!-- @if (Route::has('register'))
+        <li class="get-started"><a href="{{ route('register') }}">Register</a></li> -->
+        </ul>
+      </nav><!-- .nav-menu -->
+    <!-- @endif -->
+    @endauth
+    @endif
+    </div>
+  </header><!-- End Header -->
+    <section id="hero">
 
-                <div>
-                    Sistem Informasi Penentuan Dosen Pengampu Mata Kuliah
-                </div>
+        <div class="container">
+            <div class="row d-flex align-items-center"">
+  <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+                <h1 class="text-center"> SISTAKU</h1>
+                <h2 class="text-center"> Sistem Informasi Penentuan Dosen Pengampu Mata Kuliah</h2>
+                
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
+                <img src="{{ asset('assets/img/hero-img.png')}}" class="img-fluid" alt="">
             </div>
         </div>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/venobox/venobox.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/aos/aos.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{ asset('assets/js/main.js')}}"></script>
 </body>
 
 </html>

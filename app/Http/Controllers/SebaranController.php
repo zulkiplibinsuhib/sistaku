@@ -66,7 +66,10 @@ class SebaranController extends Controller
     public function ajax_select_matkul(Request $request)
       {
         $kode = $request->kode;
+        // $sms = $request->sms;
+       
         $matkul= Matkul::where('matkul','=',$kode)->first();
+        // $matkul= Matkul::where('semester','=',$sms)->first();
         if(isset($matkul)){
             $data = array(
             'sks' =>  $matkul['sks'],

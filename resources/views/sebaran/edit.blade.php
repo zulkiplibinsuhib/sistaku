@@ -17,21 +17,15 @@
     <tr>
         <td><label for="kd_kelas">Kode Kelas</label></td>
         <td>{{ Form::text('kd_kelas',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'kd_kelas',' readonly'])}}
-
     </tr>
     <tr>
         <td><label for="kelas">Kelas</label></td>
         <td>{{ Form::text('kelas',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'kelas',' readonly'])}}
         </td>
     </tr>
-  
-    <tr>
-       
-       {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}
-        
+    <tr> 
+       {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}      
     </tr>
-    
-
     <tr>
         <td>Semester </td>
         <td>{{ Form::number('semester',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'semester','readonly'])}}
