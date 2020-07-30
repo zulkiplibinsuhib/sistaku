@@ -20,7 +20,7 @@ class MatkulController extends Controller
         $id = Auth::user()->prodi;
         $get_ProdiAndMatkul = DB::table('matkul')
                             ->join ('prodi', 'matkul.prodi', '=', 'prodi.id')
-                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.kurikulum','matkul.semester','prodi.nama');
+                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','matkul.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','prodi.nama');
                              
         if($id){
             $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
@@ -74,6 +74,9 @@ class MatkulController extends Controller
                 DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
                 'matkul'=>$request->matkul,
                 'sks'=>$request->sks,
+                'teori'=>$request->teori,
+                'praktek'=>$request->praktek,
+                'jam_minggu'=>$request->jam_minggu,
                 'kurikulum'=>$request->kurikulum,
                 'semester'=>$request->semester,
                 'prodi'=>$prodi->id ?? $request->user()->prodi ]);    
@@ -82,6 +85,9 @@ class MatkulController extends Controller
             DB::table('matkul')->insert(['kode_matkul'=>$request->kode_matkul,
             'matkul'=>$request->matkul,
             'sks'=>$request->sks,
+            'teori'=>$request->teori,
+            'praktek'=>$request->praktek,
+            'jam_minggu'=>$request->jam_minggu,
             'kurikulum'=>$request->kurikulum,
             'semester'=>$request->semester,
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
@@ -127,6 +133,9 @@ class MatkulController extends Controller
         DB::table('matkul')->where('id',$id)->update(['kode_matkul'=>$request->kode_matkul,
                                                         'matkul'=>$request->matkul,
                                                         'sks'=>$request->sks,
+                                                        'teori'=>$request->teori,
+                                                        'praktek'=>$request->praktek,
+                                                        'jam_minggu'=>$request->jam_minggu,
                                                         'kurikulum'=>$request->kurikulum,
                                                         'semester'=>$request->semester,
                                                         'prodi'=>$request->prodi]);

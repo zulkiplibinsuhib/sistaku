@@ -17,7 +17,8 @@
             <th>NIDN</th>
             <th>Jenis Kelamin</th>
             <th>Status</th>
-            <th>Prodi</th>
+            <th>Bidang</th>
+            <!-- <th>Prodi</th> -->
             <th>Jumlah Jam Mengajar</th>
             <th>Action</th>
         </tr>
@@ -29,7 +30,8 @@
             <td>{{ $row->nidn}}</td>
             <td>{{ $row->jenis_kelamin}}</td>
             <td>{{ $row->status}}</td>
-            <td>{{ $row->nama}}</td>
+            <td>{{ $row->bidang}}</td>
+            <!-- <td>{{ $row->nama}}</td> -->
             <td>{{ $row->jumlah_jam}}</td>
             <td><div class="d-flex">
                 <a href="{{ route('dosen.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>

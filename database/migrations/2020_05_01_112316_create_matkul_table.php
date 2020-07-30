@@ -18,6 +18,9 @@ class CreateMatkulTable extends Migration
             $table->string('kode_matkul');
             $table->string('matkul');
             $table->integer('sks');
+            $table->integer('teori');
+            $table->integer('praktek');
+            $table->integer('jam_minggu');
             $table->string('kurikulum');
             $table->string('semester');
             $table->string('prodi');

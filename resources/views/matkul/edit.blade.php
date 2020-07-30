@@ -16,6 +16,9 @@
         <tr><td>Kode Mata Kuliah <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Kode Matkul','class'=>'form-control','required'])}}</td></td></tr> 
         <tr><td>Mata Kuliah <td>{{ Form::text('matkul',null,['placeholder'=>'mata kuliah','class'=>'form-control','required'])}}</td></td></tr> 
         <tr><td> SKS <td>{{ Form::number('sks',null,['placeholder'=>'sks','class'=>'form-control col-md-4','required'])}}</td></td></tr> 
+        <tr><td>Teori </td><td>{{ Form::number('teori',null,['placeholder'=>'Enter jam teori','class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td>Praktek </td><td>{{ Form::number('praktek',null,['placeholder'=>'Enter jam praktek','class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td>Jam / Minggu </td><td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td>Kurikulum<td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],'null',['class'=>'form-control col-md-4'])}}</td></td></tr>
         <tr><td>Semester</td><td>{{  Form::number('semester',null,['placeholder'=>'Enter Semester','class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))

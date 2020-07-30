@@ -19,6 +19,7 @@ class CreateTableDosen extends Migration
             $table->string('nidn');
             $table->string('jenis_kelamin');
             $table->string('status');
+            $table->string('bidang');
             $table->string('prodi');
             $table->timestamps();
         });

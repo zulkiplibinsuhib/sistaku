@@ -31,7 +31,7 @@
             <td>{{ $row->level}}</td>
 
             <td>
-                <a href="{{ route('users.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>
+              
                 <form action="{{route('users.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')

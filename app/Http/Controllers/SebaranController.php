@@ -7,6 +7,8 @@ use DB;
 use App\Kelas;
 use App\Matkul;
 use App\Sebaran;
+use App\Dosen;
+
 use Illuminate\Support\Facades\Auth;
 
 class SebaranController extends Controller
@@ -18,6 +20,7 @@ class SebaranController extends Controller
      */
     public function index()
     {
+        
         $id =  Auth::user()->prodi;
         $data['sebaran'] = DB::table('sebaran')->get();
         $sebaran = Auth::user()->id;
@@ -45,10 +48,31 @@ class SebaranController extends Controller
         $data['get_prodiAndSebaran'] = $get_prodiAndSebaran;          
         return view('sebaran.index',$data);
     }
-      // Autofill sebaran gagal 
+    public function ajax_create(Request $request)
+    {
+        $get = $request->get;
+        $get_data = DB::table('matkul')
+                            ->join ('kelas', 'matkul.semester', '=', 'kelas.semester')
+                            ->select('matkul.jam_minggu','matkul.teori','matkul.praktek','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','kelas.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','kelas.kode','kelas.mhs','kelas.kelas','kelas.prodi')
+         
+                            ->where ('kelas.semester',$get);
+                        
+      $get_data = $get_data->get();
+ 
+      return response()->json(['data'=>$get_data]);
+      
+  }
 
       public function ajax_select(Request $request)
       {
+        $get_data = DB::table('sebaran')
+        ->join('prodi','sebaran.prodi', '=', 'prodi.id')
+        ->join('dosen','sebaran.dosen_mengajar','=','dosen.id')
+        ->select('sebaran.approved','sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar','dosen.name');
+       
+        $get_data = $get_data->get();
+        $data['get_data'] = $get_data;
+        
         $kode = $request->kode;
         $kelas= Kelas::where('kode','=',$kode)->first();
         if(isset($kelas)){
@@ -104,7 +128,8 @@ class SebaranController extends Controller
      */
     public function create()
     {
-        
+        $data['get_data'] = Dosen::all();
+        $data['sebaran'] = DB::table('sebaran')->get();
         $data_prodi = DB::table('prodi')->pluck('nama');
         $data_kode = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
         $data_kelas = DB::table('kelas')->pluck('kelas');

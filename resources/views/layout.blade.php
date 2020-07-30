@@ -137,12 +137,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>Sebaran</p>
                                     </a>
                                 </li>
+                                @if(Auth::user()->level == 'admin')
                                 <li class="nav-item">
                                     <a href="{{ route('users.index')}}" class="nav-link">
                                         <i class="fas fa-file-archive nav-icon"></i>
                                         <p>Users</p>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
 
@@ -215,33 +217,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 
+   
     <!-- AJAX KODE KELAS CREATE -->
     <script type="text/javascript">
       $(document).ready(function(){
-          console.log($('#kode'))
-         $('#kode').on('input',function(){
-             var kode=$(this).val();
+          console.log($('#get'))
+         $('#get').on('input',function(){
+             var get=$(this).val();
              $.ajax({
                  type : "GET",
-                 url  : "{{ route('sebaran.ajax_select') }}",
+                 url  : "{{ route('sebaran.ajax_create') }}",
                  dataType : "JSON",
-                 data : {kode: kode},
+                 data : {get: get},
                  cache:false,
                  success: function(data){
                    console.log(data);
-                   var json = data;
-                    var kelas = json.kelas;
-                    var semester = json.semester;
-                    var mhs = json.mhs;
-                    
-                    console.log(kelas);
-                    console.log(semester);
-                    console.log(mhs);
-                    
-                    $('#kelas-sebaran').val(kelas);
-                    $('#semester-sebaran').val(semester);
-                    $('#mhs-sebaran').val(mhs);
-                                          
+                   dosens = @json($get_data->toArray(), JSON_HEX_TAG);
+                   console.log(dosens)
+                   var data = data.data;
+                   table = $('#sebaran')
+                   table.find('.data-sebaran').remove()
+                   table.find('.odd').hide()
+                   data.forEach(row=>{
+                    sebaran = `
+                        <tr class="data-sebaran">
+                            <td>${row.kode}</td>
+                            <td>${row.kelas}</td>
+                            <td>${row.prodi}</td>
+                            <td>${row.semester}</td>
+                            <td>${row.mhs}</td>
+                            <td>${row.matkul}</td>
+                            <td>${row.sks}</td>
+                            <td>${row.teori}</td>
+                            <td>${row.praktek}</td>
+                            <td>${row.jam_minggu}</td>
+                            <td>  <select class="form-control" name="prodi">
+                                <option selected disabled>Pilih Dosen</option>
+                    `
+                    dosens.forEach(dosen => {
+                        sebaran += `<option value="${dosen.id}">${dosen.name}</option>`
+                    })
+                    sebaran += `
+                                </select></td>
+                        </tr>
+                    `
+                    table.append(sebaran)
+                   })
                  }
              });
              return false;
@@ -311,7 +332,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('#prodi').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
-                    'excel', 'pdf', 'print'
+                    
                 ]
             } );
         } );
@@ -356,20 +377,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             } );
         } );
     </script>
- 
-    
-
-              
-
-
-
-
-
-
-
-
-
-
-</body>
+      <script>
+        $(document).ready(function() {
+            $('.users').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    
+                ]
+            } );
+        } );
+    </script>
+ </body>
 
 </html>

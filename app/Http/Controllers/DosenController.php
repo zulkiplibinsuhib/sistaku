@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dosen;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -15,14 +16,20 @@ class DosenController extends Controller
      */
     public function index() 
     {
-        $data['dosen'] = DB::table('dosen')->get();
+        $data['dosen'] = DB::table('dosen');
         $id = Auth::user()->prodi;
-        $get_prodiAndDosen = DB::table('dosen')
+        $get_prodiAndDosen = 
+                            DB::table('dosen')
                             ->join('prodi', 'dosen.prodi', '=', 'prodi.id')
-                            ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id');
- 
-    if(!empty($id)){
+                            ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang')
+                            ->distinct('name');
+                            
+       
+        
+        
+        if(!empty($id)){
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
+        
         }
         
         if(!empty($_GET)){ 
@@ -31,13 +38,16 @@ class DosenController extends Controller
                 $get_prodiAndDosen->where('prodi.id',$prodi);
               } 
             }
+            
         $get_prodiAndDosen = $get_prodiAndDosen->get();
         foreach($get_prodiAndDosen as &$dosen)
         {
             $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->where('approved', 1)->sum('jam');
         }
-            
+     
+        
             $data['get_prodiAndDosen'] = $get_prodiAndDosen;
+           
         return view('dosen.index',$data);
     }
 
@@ -69,6 +79,7 @@ class DosenController extends Controller
                 'nidn'=>$request->nidn,
                 'jenis_kelamin'=>$request->jenis_kelamin,
                 'status'=>$request->status,
+                'bidang'=>$request->bidang,
                 'prodi'=>$prodi->id ?? $request->user()->prodi ]);     
             }
         }else{
@@ -76,6 +87,7 @@ class DosenController extends Controller
             'nidn'=>$request->nidn,
             'jenis_kelamin'=>$request->jenis_kelamin,
             'status'=>$request->status,
+            'bidang'=>$request->bidang,
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);   
         }
         
@@ -122,7 +134,8 @@ class DosenController extends Controller
         DB::table('dosen')->where('id',$id)->update(['name'=>$request->name,
                                                     'nidn'=>$request->nidn,
                                                     'jenis_kelamin'=>$request->jenis_kelamin,
-                                                    'status'=>$request->status]);
+                                                    'status'=>$request->status,
+                                                    'bidang'=>$request->bidang,]);
                                                     return redirect('dosen');
     }
 

@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // AJAX REQUEST
+Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
 
 Route::get('sebaran/cari_matkul', 'SebaranController@ajax_select_matkul')->name('sebaran.ajax_select_matkul');
