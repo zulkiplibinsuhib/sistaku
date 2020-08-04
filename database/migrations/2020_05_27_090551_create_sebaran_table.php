@@ -22,8 +22,11 @@ class CreateSebaranTable extends Migration
             $table->integer('mhs');
             $table->string('mata_kuliah');
             $table->integer('sks');
+            $table->integer('teori');
+            $table->integer('praktek');
             $table->integer('jam');
             $table->string('dosen_mengajar');
+            $table->string('dosen_pdpt');
             $table->integer('approved')->default(0);
             $table->timestamps();
         });

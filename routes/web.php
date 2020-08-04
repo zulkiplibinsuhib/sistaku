@@ -21,6 +21,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // AJAX REQUEST
+// Route::get('sebaran/send-form', 'SebaranController@send_form')->name('sebaran.send_form');
+
 Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
 
@@ -29,6 +31,7 @@ Route::get('sebaran/cari_matkul_edit', 'SebaranController@ajax_select_matkul_edi
 
 Route::resource('users', 'UserController');
 Route::resource('dosen', 'DosenController'); 
+Route::get('dosen/export_excel', 'DosenController@export_excel')->name('exportdosen');;
 Route::resource('matkul', 'MatkulController'); 
 Route::resource('prodi', 'ProdiController'); 
 Route::resource('sebaran', 'SebaranController');

@@ -30,7 +30,7 @@
             <td>{{ $row->mhs}}</td>
             <td>{{ $row->keterangan}}</td>
             <td><div class="d-flex">
-                <a href="{{ route('kelas.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " ></a>
+                <a href="{{ route('kelas.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" ></a>
                 <form action="{{route('kelas.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')

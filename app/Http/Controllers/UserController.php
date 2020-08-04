@@ -30,15 +30,16 @@ class UserController extends Controller
         //     'password' => 'required'
             
         // ]);
-        {
-            return User::create([
+        
+           User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'prodi' => $data['prodi'],
                 'level' => 'prodi',
-                'password' => Hash::make($data['password']),
+                'password' => Hash::make($data['password'])
             ]);
-        }
+            return redirect('users');
+        
         
 
     }

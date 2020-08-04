@@ -6,6 +6,9 @@ use App\Dosen;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\DosenExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class DosenController extends Controller
 {
@@ -22,7 +25,7 @@ class DosenController extends Controller
                             DB::table('dosen')
                             ->join('prodi', 'dosen.prodi', '=', 'prodi.id')
                             ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang')
-                            ->distinct('name');
+                            ->groupBy('name');
                             
        
         
@@ -50,6 +53,10 @@ class DosenController extends Controller
            
         return view('dosen.index',$data);
     }
+    public function export_excel()
+	{
+		return Excel::download(new DosenExport, 'dosen.xlsx');
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -102,10 +109,10 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        $data['dosen'] = DB::table('dosen')->where('id',$id)->first();
-        $get_name = DB::table('dosen')->where('id', $id)->value('name');
-        $data['get_name'] = $get_name;
-        return view('dosen.show',$data);
+        // $data['dosen'] = DB::table('dosen')->where('id',$id)->first();
+        // $get_name = DB::table('dosen')->where('id', $id)->value('name');
+        // $data['get_name'] = $get_name;
+        // return view('dosen.show',$data);
         
         
     }

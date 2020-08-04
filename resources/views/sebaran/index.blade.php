@@ -33,8 +33,11 @@
             <th>Mhs</th>
             <th>Mata Kuliah</th>
             <th>SKS</th>
+            <th>Teori</th>
+            <th>Praktek</th>
             <th>Jam</th>
             <th>Dosen Mengajar</th>
+            <th>Dosen PDPT</th>
             <th>Status</th>@if(Auth::user()->level == 'admin')<th>Action</th>@endif
         </tr>
     </thead>
@@ -48,8 +51,11 @@
             <td>{{ $row->mhs}}</td>
             <td>{{ $row->mata_kuliah}}</td>
             <td>{{ $row->sks}}</td>
+            <td>{{ $row->teori}}</td>
+            <td>{{ $row->praktek}}</td>
             <td>{{ $row->jam}}</td>
             <td>{{ $row->name}}</td>
+            <td>{{ $row->dosen_pdpt}}</td>
             <td>{{ $row->approved ? 'approved' : 'not approved'}}</td>
             @if(Auth::user()->level == 'admin')
             <td><div class="d-flex">

@@ -23,7 +23,7 @@
                                 @endforeach 
             </select></td></tr>
         <tr><td>Level</td><td>{{ Form::select('level',['prodi'=>'prodi','admin'=>'admin'],null,['class'=>'form-control col-md-4'])}}</td></tr>
-        <tr><td>Password</td><td>{{ Form::password('password',null,['placeholder'=>'Enter Password','class'=>'form-control','required'])}}</td></tr>
+        <tr><td>Password</td><td>{{ Form::text('password',null,['placeholder'=>'Enter Password','class'=>'form-control','required'])}}</td></tr>
         <tr><td></td><td>    {{ Form::submit('Simpan Data',['class'=>'btn btn-success'])}}
                 {{ Link_to('prodi','Kembali',['class'=>'btn btn-danger'])}}
                 {{ Form::close()}}</td></tr>

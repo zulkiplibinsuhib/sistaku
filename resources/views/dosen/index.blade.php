@@ -1,6 +1,8 @@
 @extends('layout')
 @section('title','Daftar Dosen')
 @section('content')
+
+<a class="btn btn-warning" href="{{ route('exportdosen') }}">Export</a>
 <form class="form-inline" action="" method="get">
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Prodi</option>
@@ -10,6 +12,8 @@
     </select>
     <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
+
+		
 <table class="table table-bordered" id="dosen">
     <thead>
         <tr class="text-center">

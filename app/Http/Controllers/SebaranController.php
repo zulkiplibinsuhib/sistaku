@@ -27,7 +27,7 @@ class SebaranController extends Controller
         $get_prodiAndSebaran = DB::table('sebaran')
                              ->join('prodi','sebaran.prodi', '=', 'prodi.id')
                              ->join('dosen','sebaran.dosen_mengajar','=','dosen.id')
-                             ->select('sebaran.approved','sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.dosen_mengajar','dosen.name');
+                             ->select('sebaran.approved','sebaran.id','sebaran.kd_kelas','prodi.nama','sebaran.kelas','sebaran.semester','sebaran.mhs','sebaran.mata_kuliah','sebaran.sks','sebaran.jam','sebaran.teori','sebaran.praktek','sebaran.dosen_pdpt','sebaran.dosen_mengajar','dosen.name');
                             
         if($id){
         $get_prodiAndSebaran = $get_prodiAndSebaran->where('sebaran.prodi',$id);
@@ -162,17 +162,21 @@ class SebaranController extends Controller
             'jam' => 'required',
             'dosen_mengajar' => 'required'
         ]);
-
-
-        DB::table('sebaran')->insert(['kd_kelas'=>$request->kd_kelas,
-                                    'kelas'=>$request->kelas,
-                                    'prodi'=>$request->prodi ?? $request->user()->prodi,
-                                    'semester'=>$request->semester,
-                                    'mhs'=>$request->mhs,
-                                    'mata_kuliah'=>$request->mata_kuliah,
-                                    'sks'=>$request->sks,
-                                    'jam'=>$request->jam,
-                                    'dosen_mengajar'=>$request->dosen_mengajar]);
+            
+        for($x=0;$x<count($request->kd_kelas);$x++){
+            DB::table('sebaran')->insert(['kd_kelas'=>$request->kd_kelas[$x],
+            'kelas'=>$request->kelas[$x],
+            'prodi'=>$request->prodi[$x] ?? $request->user()->prodi,
+            'semester'=>$request->semester[$x],
+            'mhs'=>$request->mhs[$x],
+            'mata_kuliah'=>$request->mata_kuliah[$x],
+            'sks'=>$request->sks[$x],
+            'teori'=>$request->teori[$x],
+            'praktek'=>$request->praktek[$x],
+            'jam'=>$request->jam[$x],
+            'dosen_mengajar'=>$request->dosen_mengajar[$x]]);
+        }
+        
                                     
         return redirect('sebaran');
     }
