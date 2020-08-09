@@ -24,11 +24,15 @@
             </select></td></tr>
         @endif
         <tr><td>Nama Kelas</td><td>{{ Form::text('kelas',null,['placeholder'=>'masukan nama kelas ','class'=>'form-control ','required'])}}</td></tr>
-        <tr><td>semester </td><td>{{ Form::number('semester',null,['placeholder'=>'masukkan semester','class'=>'form-control col-md-4','required'])}}</td></tr>
+        <tr><td>Semester </td><td>{{ Form::number('semester',null,['placeholder'=>'masukkan semester','class'=>'form-control col-md-4','required'])}}</td></tr>
+        <tr><td>Tahun Akademik </td><td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-md-4','required'])}}</td></tr>
         <tr><td>Jumlah Mahasiswa </td><td>{{ Form::number('mhs',null,['placeholder'=>'masukkan jumlah mahasiswa','class'=>'form-control col-md-4','required'])}}</td></tr>
-        <tr><td>Keterangan </td><td>{{ Form::select('keterangan',['karyawan'=>'karyawan','reguler'=>'reguler'],null,['class'=>'form-control col-md-4','required'])}}</td></tr>
+        <tr><td>Keterangan </td><td>{{ Form::select('keterangan',['reguler'=>'Reguler','karyawan'=>'Karyawan'],null,['class'=>'form-control col-md-4','required'])}}</td></tr>
         <tr><td></td><td>    {{ Form::submit('Simpan Data',['class'=>'btn btn-success'])}}
                 {{ Link_to('kelas','Kembali',['class'=>'btn btn-danger'])}}
                 {{ Form::close()}}</td></tr>
     </table>
+
+
+
 @endsection

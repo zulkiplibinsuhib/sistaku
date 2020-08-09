@@ -2,10 +2,25 @@
 @section('title','Daftar Kelas')
 @section('content')
 <form class="form-inline" action="" method="get">
+@if(Auth::user()->level == 'admin')
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Prodi</option>
         @foreach(App\Prodi::all() as $prodi)
         <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
+        @endforeach
+    </select>
+    @endif
+    <select name="tahun" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+        <option selected disabled>Tahun Akademik</option>
+        @foreach($cari_tahun as $matkul)
+        <option value="{{$matkul->tahun}}">{{$matkul->tahun}}</option>
+        @endforeach
+     
+    </select>
+    <select name="semester" class="custom-select my-1 mr-sm-2 col-md-2" id="inlineFormCustomSelectPref">
+        <option selected disabled>Semester</option>
+        @foreach($cari_semester as $semester)
+        <option value="{{$semester->semester}}">{{$semester->semester}}</option>
         @endforeach
     </select>
     <button type="submit" class="btn btn-primary my-1 ">Cari</button>
@@ -17,6 +32,7 @@
             <th>Prodi</th>
             <th>Semester</th>
             <th>Mhs</th>
+            <th>Tahun Akademik</th>
             <th>keterangan</th>
             <th>Action</th>
         </tr>
@@ -28,8 +44,9 @@
             <td>{{ $row->nama}}</td>
             <td>{{ $row->semester}}</td>
             <td>{{ $row->mhs}}</td>
+            <td>{{ $row->tahun}}</td>
             <td>{{ $row->keterangan}}</td>
-            <td><div class="d-flex">
+            <td><div class="d-flex justify-content-center">
                 <a href="{{ route('kelas.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" ></a>
                 <form action="{{route('kelas.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
@@ -43,6 +60,8 @@
         @endforeach
     </tbody>
 </table>
+
 <a href="{{ route('kelas.create') }}" class="btn btn-success  ">Tambah Data</a>
 <a href="{{ route('home') }}" class="btn btn-danger">Kembali</a>
+
 @endsection()

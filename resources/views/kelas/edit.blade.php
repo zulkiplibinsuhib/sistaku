@@ -18,6 +18,7 @@
             {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}
         </tr>
         <tr><td>Semester <td>{{ Form::text('semester',null,['placeholder'=>'Masukkan semester baru','class'=>'form-control col-md-4','required'])}} </td> </td></tr>
+        <tr><td>Tahun Akdemik <td>{{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-md-4','required'])}} </td> </td></tr>
         <tr><td>Jumlah Mahasiswa <td> {{ Form::number('mhs',null,['placeholder'=>'jumlah mahasiswa','class'=>'form-control col-md-4','required'])}}</td> </td></tr>
         <tr><td>Keterangan <td> {{ Form::select('keterangan',['karyawan'=>'karyawan','reguler'=>'reguler'],null,['class'=>'form-control col-md-4'])}}</td> </td></tr>
         <tr><td></td><td> 

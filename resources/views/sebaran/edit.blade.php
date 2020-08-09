@@ -24,35 +24,46 @@
         </td>
     </tr>
     <tr> 
+        
        {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}      
     </tr>
     <tr>
+        <td>Tahun Akademik </td>
+        <td>{{ Form::text('tahun',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'tahun','readonly'])}}
+        </td>
+    </tr>
+    <tr>
         <td>Semester </td>
-        <td>{{ Form::number('semester',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'semester','readonly'])}}
+        <td>{{ Form::text('semester',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'semester','readonly'])}}
         </td>
     </tr>
     <tr>
         <td>Mahasiswa</td>
-        <td>{{ Form::number('mhs',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mhs','id'=>'mhs-sebaran','readonly'])}}
+        <td>{{ Form::text('mhs',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mhs','id'=>'mhs-sebaran','readonly'])}}
         </td>
     </tr>
     <tr>
-        <td><label for="matkul">Mata Kuliah</label></td>
-        <td><select class="form-control col-md-4" name="mata_kuliah" id="matkul-edit" >
-                @foreach($data_matkul as $matkul)
-                <option value="{{ $matkul}}">{{ $matkul}}</option>
-                @endforeach
-            </select></td>
+    <td>Mata Kuliah</td>
+        <td>{{ Form::text('mata_kuliah',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mata_kuliah','id'=>'mhs-sebaran','readonly'])}}
+        </td>
     </tr>
     <tr>
         <td>SKS</td>
-        <td>{{ Form::number('sks',null,['placeholder'=>'','class'=>'form-control col-md-4','id'=>'sks-edit','readonly'])}}
+        <td>{{ Form::text('sks',null,['placeholder'=>'','class'=>'form-control col-md-4','id'=>'sks-edit','readonly'])}}
         </td>
     </tr>
     <tr>
         <td>Jam</td>
-        <td>{{ Form::number('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-md-4'])}}
+        <td>{{ Form::text('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-md-4','readonly'])}}
         </td>
+    </tr>
+    <tr>
+        <td><label for="dosen">Dosen PDPT</label></td>
+        <td><select class="form-control col-md-4" name="dosen_mengajar" >
+                @foreach($data_dosen as $dosen)
+                <option value="{{ $dosen->id}}">{{ $dosen->name}} </option>
+                @endforeach
+            </select></td>
     </tr>
     <tr>
         <td><label for="dosen">Dosen Mengajar</label></td>
@@ -62,6 +73,7 @@
                 @endforeach
             </select></td>
     </tr>
+
     <tr>
         <td></td>
         <td>

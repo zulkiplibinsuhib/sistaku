@@ -6,25 +6,30 @@
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+        <li>{!! $error !!}</li>
         @endforeach
     </ul>
 </div>
 @endif
 <section class="content">
-    <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="get">
-        <option selected disabled>Semester</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
+    
+    <select name="tahun" class="custom-select my-1 mr-sm-2 col-md-4" id="tahun">
+        <option selected disabled>Pilih Tahun Akademik</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        
+    </select>
+<section class="content">
+    
+    <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester">
+        <option value="" selected disabled>Pilih Semester</option>
+     
+
+        
     </select>
     {{ Form::open(['url'=>'sebaran'])}}
-    <table class="sebaran table table-bordered table table-striped">
+    <table class=" table table-bordered table table-striped">
 
 
 
@@ -32,7 +37,7 @@
             <tr>
                 <th>Kode Kelas</th>
                 <th>Kelas</th>
-                <th>Prodi</th>
+                <th>Tahun Akademik</th>
                 <th>Semester</th>
                 <th>Mhs</th>
                 <th>Mata Kuliah</th>
@@ -40,11 +45,12 @@
                 <th>T</th>
                 <th>P</th>
                 <th>Jam</th>
+                <th>Dosen PDPT</th>
                 <th>Dosen Mengajar</th>
 
             </tr>
         </thead>
-        <tbody id="sebaran">
+        <tbody id="create-sebaran">
 
         </tbody>
         
@@ -56,14 +62,53 @@
             {{ Form::close()}}</td>
     </tr>
 </section>
-
-
-<!-- AJAX KODE KELAS CREATE -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+        console.log('ini tahun')
+          console.log($('#tahun'))
+         $('#tahun').on('input',function(){
+           
+            var kode=$(this).val();
+            console.log(kode)
+             $.ajax({
+                 type : "GET",
+                 url  : "{{ route('sebaran.ajax_select') }}",
+                 dataType : "JSON",
+                 data : {tahun: kode},
+                 cache:false,
+                 success: function(data){
+                   console.log(data);
+                    $('#semester').empty()
+                    var option = ` <option value="">Pilih Semester</option>
+                        `
+                        $('#semester').append(option)
+                   var data = data.data;
+                   data.forEach(tahun=>{
+                        var option = ` <option value="${tahun.semester}">${tahun.semester}</option>
+                        `
+                        $('#semester').append(option)
+                        
+                   })
+                   
+
+        
+                   
+                      
+                   
+                 }
+             });
+             return false;
+        });
+      });
+</script>
+
+<!-- AJAX KODE KELAS CREATE -->
+
+<script type="text/javascript">
     $(document).ready(function () {
-        console.log($('#get'))
-        $('#get').on('input', function () {
+        console.log($('#semester'))
+        $('#semester').on('input', function () {
             var get = $(this).val();
             $.ajax({
                 type: "GET",
@@ -75,10 +120,10 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    dosens = @json($get_data -> toArray(), JSON_HEX_TAG);
+                    dosens = @json($data_dosen -> toArray(), JSON_HEX_TAG);
                     console.log(dosens)
                     var data = data.data;
-                    table = $('#sebaran')
+                    table = $('#create-sebaran')
                     table.find('.data-sebaran').remove()
                     table.find('.odd').hide()
                     data.forEach(row => {
@@ -90,9 +135,11 @@
                             <td id="kelas">${row.kelas}
                                 <input type="hidden" name="kelas[]" value="${row.kelas}">
                             </td>
-                            
-                            <td id="prodi">${row.prodi}
                                 <input type="hidden" name="prodi[]" value="${row.prodi}">
+                            </td>
+                            
+                            <td id="tahun">${row.tahun}
+                                <input type="hidden" name="tahun[]" value="${row.tahun}">
                             </td>
                             
                             <td id="semester">${row.semester}
@@ -122,13 +169,25 @@
                             <td id="jam_minggu">${row.jam_minggu}
                             <input type="hidden" name="jam[]" value="${row.jam_minggu}">
                             </td>
+
+                            <td>  <select class="form-control" name="dosen_pdpt[]">
+                                <option selected disabled>Pilih Dosen</option>
+
+                    `
+                        dosens.forEach(dosen => {
+                            sebaran +=
+                                `<option value="${dosen.nidn}">${dosen.name}</option>`
+                        })
+                        sebaran += `
+                                </select></td>
+                    
                             
                             <td>  <select class="form-control" name="dosen_mengajar[]">
                                 <option selected disabled>Pilih Dosen</option>
                     `
                         dosens.forEach(dosen => {
                             sebaran +=
-                                `<option value="${dosen.id}">${dosen.name}</option>`
+                                `<option value="${dosen.nidn}">${dosen.name}</option>`
                         })
                         sebaran += `
                                 </select></td>

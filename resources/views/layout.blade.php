@@ -145,6 +145,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 @endif
+                                @if(Auth::user()->level == 'admin')
+                                <li class="nav-item">
+                                    <a href="{{ route('rekap.index')}}" class="nav-link">
+                                        <i class="fas fa-file-archive nav-icon"></i>
+                                        <p>Rekap</p>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
 

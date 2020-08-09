@@ -4,19 +4,26 @@
 
 
 <form class="form-inline" action="" method="get">
+@if(Auth::user()->level == 'admin')
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Prodi</option>
         @foreach(App\Prodi::all() as $prodi)
         <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
         @endforeach
     </select>
-    <select name="kurikulum" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-        <option selected disabled>Kurikulum</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
+    @endif
+    <select name="tahun" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+        <option selected disabled>Tahun Akademik</option>
+        @foreach($cari_tahun as $matkul)
+        <option value="{{$matkul->tahun}}">{{$matkul->tahun}}</option>
+        @endforeach
+     
+    </select>
+    <select name="semester" class="custom-select my-1 mr-sm-2 col-md-2" id="inlineFormCustomSelectPref">
+        <option selected disabled>Semester</option>
+        @foreach($cari_semester as $semester)
+        <option value="{{$semester->semester}}">{{$semester->semester}}</option>
+        @endforeach
     </select>
     <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
@@ -28,7 +35,8 @@
             <th>SKS</th>
             <th>Kurikulum</th>
             <th>Semester</th>
-            <th>Prodi</th>
+            <th>Tahun Akademik</th>
+            <!-- <th>Prodi</th> -->
             <th>Action</th>
         </tr>
     </thead>
@@ -40,9 +48,10 @@
             <td>{{ $row->sks}}</td>
             <td>{{ $row->kurikulum}}</td>
             <td>{{ $row->semester}}</td>
-            <td>{{ $row->nama}}</td>
-            <td> <div class="d-flex">
-                <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>
+            <td>{{ $row->tahun}}</td>
+            <!-- <td>{{ $row->nama}}</td> -->
+            <td> <div class="d-flex justify-content-center">
+                <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
                 <form action="{{route('matkul.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')

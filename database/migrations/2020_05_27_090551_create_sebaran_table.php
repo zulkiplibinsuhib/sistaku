@@ -18,6 +18,7 @@ class CreateSebaranTable extends Migration
             $table->string('kd_kelas');
             $table->string('kelas');
             $table->string('prodi');
+            $table->string('tahun');
             $table->integer('semester');
             $table->integer('mhs');
             $table->string('mata_kuliah');

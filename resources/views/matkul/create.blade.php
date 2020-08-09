@@ -21,6 +21,7 @@
         <tr><td>Praktek </td><td>{{ Form::number('praktek',null,['placeholder'=>'Enter jam praktek','class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td>Jam / Minggu </td><td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td><label for="kurikulum">Kurikulum</label></td><td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],null,['class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td>Tahun Akademik </td><td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-md-4','required'])}}</td></tr>
         <tr><td><label for="semester">Semester</label></td><td>{{  Form::number('semester',null,['placeholder'=>'Enter Semester','class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
         <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi"  class="form-control col-md-4">

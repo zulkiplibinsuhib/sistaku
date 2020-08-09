@@ -4,12 +4,22 @@
 
 <a class="btn btn-warning" href="{{ route('exportdosen') }}">Export</a>
 <form class="form-inline" action="" method="get">
+@if(Auth::user()->level == 'admin')
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Prodi</option>
         @foreach(App\Prodi::all() as $prodi)
         <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
         @endforeach
     </select>
+    @endif
+    <select name="bidang" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+        <option selected disabled>Bidang</option>
+        @foreach($cari_bidang as $dosen)
+        <option value="{{$dosen->bidang}}">{{$dosen->bidang}}</option>
+        @endforeach
+    </select>
+    
+   
     <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
 
@@ -23,7 +33,7 @@
             <th>Status</th>
             <th>Bidang</th>
             <!-- <th>Prodi</th> -->
-            <th>Jumlah Jam Mengajar</th>
+            
             <th>Action</th>
         </tr>
     </thead>
@@ -36,9 +46,9 @@
             <td>{{ $row->status}}</td>
             <td>{{ $row->bidang}}</td>
             <!-- <td>{{ $row->nama}}</td> -->
-            <td>{{ $row->jumlah_jam}}</td>
-            <td><div class="d-flex">
-                <a href="{{ route('dosen.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit " title="Edit"></a>
+            
+            <td><div class="d-flex justify-content-center">
+                <a href="{{ route('dosen.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
                 <form action="{{route('dosen.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')

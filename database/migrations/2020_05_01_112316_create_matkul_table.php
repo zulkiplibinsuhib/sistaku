@@ -23,6 +23,7 @@ class CreateMatkulTable extends Migration
             $table->integer('jam_minggu');
             $table->string('kurikulum');
             $table->string('semester');
+            $table->string('tahun');
             $table->string('prodi');
             $table->timestamps();
         });

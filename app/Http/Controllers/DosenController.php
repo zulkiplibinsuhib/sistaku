@@ -20,6 +20,8 @@ class DosenController extends Controller
     public function index() 
     {
         $data['dosen'] = DB::table('dosen');
+        $cari_bidang = DB::table('dosen')->groupBy('bidang')->get();
+          
         $id = Auth::user()->prodi;
         $get_prodiAndDosen = 
                             DB::table('dosen')
@@ -35,21 +37,30 @@ class DosenController extends Controller
         
         }
         
+        
         if(!empty($_GET)){ 
             if(!empty($_GET['prodi'])){
                 $prodi = $_GET['prodi'];
                 $get_prodiAndDosen->where('prodi.id',$prodi);
               } 
             }
-            
+            if(!empty($_GET)){ 
+                if(!empty($_GET['bidang'])){
+                    $bidang = $_GET['bidang'];
+                    $get_prodiAndDosen->where('dosen.bidang',$bidang);
+                  } 
+                }
+                
         $get_prodiAndDosen = $get_prodiAndDosen->get();
         foreach($get_prodiAndDosen as &$dosen)
         {
-            $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->where('approved', 1)->sum('jam');
+            $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->sum('jam');
         }
      
         
             $data['get_prodiAndDosen'] = $get_prodiAndDosen;
+            $data['cari_bidang'] = $cari_bidang;
+            
            
         return view('dosen.index',$data);
     }

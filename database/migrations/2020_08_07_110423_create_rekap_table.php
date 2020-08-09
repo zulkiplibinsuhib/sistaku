@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableDosen extends Migration
+class CreateRekapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTableDosen extends Migration
      */
     public function up()
     {
-        Schema::create('dosen', function (Blueprint $table) {
+        Schema::create('rekap', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
-            $table->integer('nidn');
-            $table->string('jenis_kelamin');
-            $table->string('status');
+            $table->string('kode');
+            $table->string('nama');
             $table->string('bidang');
-            $table->string('prodi');
+            $table->string('jumlah_sks');
+            $table->string('jumlah_jam');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateTableDosen extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosen');
+        Schema::dropIfExists('rekap');
     }
 }

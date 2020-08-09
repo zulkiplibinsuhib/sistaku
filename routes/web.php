@@ -35,6 +35,7 @@ Route::get('dosen/export_excel', 'DosenController@export_excel')->name('exportdo
 Route::resource('matkul', 'MatkulController'); 
 Route::resource('prodi', 'ProdiController'); 
 Route::resource('sebaran', 'SebaranController');
+Route::resource('rekap', 'RekapController');
 
 
 

@@ -17,9 +17,11 @@ class KelasController extends Controller
     {
         $data['kelas'] = DB::table('kelas')->get();
         $id = Auth::user()->prodi;
+        $cari_tahun = DB::table('kelas')->groupBy('tahun')->get();
+        $cari_semester = DB::table('matkul')->groupBy('semester')->get();
         $get_prodiAndKelas = DB::table('kelas')
                                 ->join('prodi', 'kelas.prodi', '=', 'prodi.id')
-                                ->select('kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id','kelas.id');
+                                ->select('kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id','kelas.id','kelas.tahun');
       
         if(!empty($id)){
             $get_prodiAndKelas = $get_prodiAndKelas->where('kelas.prodi',$id);
@@ -29,9 +31,20 @@ class KelasController extends Controller
                 $prodi = $_GET['prodi'];
                 $get_prodiAndKelas->where('prodi.id',$prodi);
               } 
+            if(!empty($_GET['tahun'])){
+                $tahun = $_GET['tahun'];
+                $get_prodiAndKelas->where('kelas.tahun',$tahun);
+              }
+              if(!empty($_GET['semester'])){
+                $semester = $_GET['semester'];
+                $get_prodiAndKelas->where('kelas.semester',$semester);
+              } 
             }
+            
         $get_prodiAndKelas = $get_prodiAndKelas->get();
         $data['get_prodiAndKelas'] = $get_prodiAndKelas;
+        $data['cari_semester'] = $cari_semester;          
+        $data['cari_tahun'] = $cari_tahun;
        
         return view('kelas.index',$data);  
     }
@@ -60,6 +73,7 @@ class KelasController extends Controller
                                     'kelas'=>$request->kelas,
                                     'prodi'=>$request->prodi ?? $request->user()->prodi,
                                     'semester'=>$request->semester,
+                                    'tahun'=>$request->tahun,
                                     'mhs'=>$request->mhs,
                                     'keterangan'=>$request->keterangan]);
                                      return redirect('kelas');
@@ -95,6 +109,7 @@ class KelasController extends Controller
         DB::table('kelas')->where('id',$id)->update(['kode'=>$request->kode,
                                                     'prodi'=>$request->prodi,
                                                     'semester'=>$request->semester,
+                                                    'tahun'=>$request->tahun,
                                                     'mhs'=>$request->mhs,
                                                     'keterangan'=>$request->keterangan]);
                                                     return redirect('kelas');
