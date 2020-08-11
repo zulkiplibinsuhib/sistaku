@@ -20,7 +20,7 @@
                 <h4>Program Studi</h4>
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="far fa-file-alt"></i>
             </div>
             <a href="prodi" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -84,6 +84,40 @@
             <a href="dosen" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    @if(Auth::user()->level == 'admin')
+    <div class="col-6">
+        <!-- small box -->
+        <div class="small-box bg-success text-center ">
+            <div class="inner">
+                <h3>
+                    {{$users}}
+                </h3>
+                <h4>Users</h4>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <a href="users" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    @endif
+    @if(Auth::user()->level == 'admin')
+    <div class="col-6">
+        <!-- small box -->
+        <div class="small-box bg-info text-center ">
+            <div class="inner">
+                <h3>
+                    {{$dosen}}
+                </h3>
+                <h4>Rekapitulasi</h4>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="rekap" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    @endif
 
 </div>
 <!-- /.row -->

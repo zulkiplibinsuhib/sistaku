@@ -14,6 +14,7 @@ class RekapController extends Controller
 {
     public function index() 
     {
+
         $data['dosen'] = DB::table('dosen');
         $id = Auth::user()->prodi;
         $cari_dosen = DB::table('dosen')->groupBy('name')->get();
@@ -27,6 +28,7 @@ class RekapController extends Controller
         if(!empty($id)){
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
         }
+        
         // cari prodi
         if(!empty($_GET)){ 
             if(!empty($_GET['prodi'])){
@@ -55,6 +57,7 @@ class RekapController extends Controller
             $dosen->prodi_diambil = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->select('prodi')->get();
             $dosen->no = 1 ; 
         }
+      
         $data['get_prodiAndDosen'] = $get_prodiAndDosen;
         $data['cari_dosen'] = $cari_dosen;
         $data['cari_tahun'] = $cari_tahun;

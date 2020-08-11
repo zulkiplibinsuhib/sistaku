@@ -1,7 +1,15 @@
 @extends('layout')
 @section('title','Daftar Dosen')
 @section('content')
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <a class="btn btn-warning" href="{{ route('exportdosen') }}">Export</a>
 <form class="form-inline" action="" method="get">
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">

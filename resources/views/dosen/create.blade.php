@@ -17,8 +17,8 @@
         <tr><td>Nama Dosen</td><td>{{ Form::text('name',null,['placeholder'=>'Enter Nama Dosen ','class'=>'form-control'])}}</td></tr>
         <tr><td>NIDN</td><td>{{ Form::number('nidn',null,['placeholder'=>'Enter NIDN','class'=>'form-control col-md-4'])}}</td></tr>
         <tr><td>Jenis Kelamin </td><td>{{ Form::select('jenis_kelamin',['Laki-Laki'=>'Laki-Laki','Perempuan'=>'Perempuan'],null,['class'=>'form-control col-md-4'])}}</td></tr>
-        <tr><td>Status </td><td>{{ Form::select('status',['tetap'=>'Tetap','tidak_tetap'=>'Tidak Tetap'],null,['class'=>'form-control col-md-4'])}}</td></tr>
-        <tr><td>Bidang </td><td>{{ Form::select('bidang',['produktif'=>'Produktif','mkdu'=>'MKDU'],null,['class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td>Status </td><td>{{ Form::select('status',['Tetap'=>'Tetap','Tidak Tetap'=>'Tidak Tetap'],null,['class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td>Bidang </td><td>{{ Form::select('bidang',['Produktif'=>'Produktif','MKDU'=>'MKDU'],null,['class'=>'form-control col-md-4'])}}</td></tr>
         @if(empty(Auth::user()->prodi))
         <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi" class="form-control col-md-4">
                 <option selected disabled>Pilih Prodi</option>

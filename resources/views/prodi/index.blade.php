@@ -25,7 +25,7 @@
             <td>{{ $row->kode}}</td>
             <td>{{ $row->nama}}</td>
             <td><div class="d-flex justify-content-center align">
-                <a href="{{ route('prodi.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2 " title="Edit"></a>
+                <a href="{{ route('prodi.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" width="30px" height="30px title="Edit"></a>
                 <form action="{{route('prodi.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')

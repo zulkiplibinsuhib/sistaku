@@ -11,23 +11,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>SISTAKU</title>
-
+    
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('admin_lte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin_lte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  
 
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('admin_lte/plugins/fontawesome-free/css/all.min.css')}}">
+   
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="{{ asset('admin_lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('admin_lte/dist/css/adminlte.min.css')}}">
+ 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
     
 </head>
 
@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 @if(Auth::user()->level == 'admin')
                                 <li class="nav-item">
                                     <a href="{{ route('users.index')}}" class="nav-link">
-                                        <i class="fas fa-file-archive nav-icon"></i>
+                                        <i class="fas fa-users nav-icon"></i>
                                         <p>Users</p>
                                     </a>
                                 </li>
@@ -148,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 @if(Auth::user()->level == 'admin')
                                 <li class="nav-item">
                                     <a href="{{ route('rekap.index')}}" class="nav-link">
-                                        <i class="fas fa-file-archive nav-icon"></i>
+                                        <i class="ion ion-stats-bars nav-icon"></i>
                                         <p>Rekap</p>
                                     </a>
                                 </li>
@@ -199,11 +199,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </footer>
     </div>
 
-
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
-
+    
+    
     <!-- jQuery -->
     <script src="{{ asset('admin_lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
@@ -226,7 +223,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 
    
-   
+<script type="text/javascript">
+ $(document).ready(function(){
+    $('#hapus').on('click', function(){
+        let url =$(this).data('url')
+        console.log(url)
+    })
+ })
+
+    
+</script>
 
 <!-- AJAX MATA KULIAH CREATE -->
 <script type="text/javascript">

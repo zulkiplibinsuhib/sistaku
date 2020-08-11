@@ -77,7 +77,7 @@
                         onclick="return confirm('Yakin mau menghapus data ini ?')" type="submit"></button>
                 </form>
                 @if(!$row->approved)        
-                <a href="{{route('sebaran.approve',$row->id)}}" class="btn btn-success btn-sm " title="Konfirmasi"   type="submit">Accept</a>
+                <a href="{{route('sebaran.approve',$row->id)}}" class="" title="Konfirmasi"   type="submit"><img src="{{ asset('icons/check.png')}} " width="30px" height="30px" alt=""> </a>
 
                   
                

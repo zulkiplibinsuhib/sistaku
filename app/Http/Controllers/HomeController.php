@@ -9,6 +9,8 @@ use App\Prodi;
 use App\Sebaran;
 use App\Dosen;
 use App\Kelas;
+use App\User;
+use App\Rekap;
 use DB;
 
 class HomeController extends Controller
@@ -36,6 +38,8 @@ class HomeController extends Controller
             $data['sebaran'] = Sebaran::where('prodi',Auth::user()->prodi)->count();
             $data['dosen'] = Dosen::where('prodi',Auth::user()->prodi)->count();
             $data['kelas'] = Kelas::where('prodi',Auth::user()->prodi)->count();
+            $data['users'] = User::where('prodi',Auth::user()->prodi)->count();
+           
         }
         else{
         $data['matkul'] = Matkul::count();
@@ -43,6 +47,7 @@ class HomeController extends Controller
         $data['sebaran'] = Sebaran::count();
         $data['dosen'] = Dosen::count();
         $data['kelas'] = Kelas::count();
+        $data['users'] = User::count();
         }
         
         return view('home',$data);

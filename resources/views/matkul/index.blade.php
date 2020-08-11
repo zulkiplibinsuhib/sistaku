@@ -51,11 +51,11 @@
             <td>{{ $row->tahun}}</td>
             <!-- <td>{{ $row->nama}}</td> -->
             <td> <div class="d-flex justify-content-center">
-                <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
+                <a href="{{ route('matkul.edit',$row->id) }}" class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit" ></a>
                 <form action="{{route('matkul.destroy',$row->id)}}" method="post" title="Hapus">
                     @csrf
                     @method('Delete')
-                    <button class="btn btn-danger btn-sm fas fa-trash-alt " onclick="return confirm('Yakin Mau di Hapus ?')"
+                    <button class="btn btn-danger btn-sm fas fa-trash-alt" data-id="{{$row->id}}"  id="hapus" onclick="return confirm('Yakin Mau di Hapus ?')"
                         type="submit"></button>
                 </form>
                 </div>

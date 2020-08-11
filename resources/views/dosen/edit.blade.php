@@ -16,6 +16,7 @@
         <tr><td>Nama Dosen <td> {{ Form::text('name',null,['placeholder'=>'Nama Dosen','class'=>'form-control ','required'])}}</td></td></tr>
         <tr><td>NIDN <td> {{ Form::number('nidn',null,['placeholder'=>'NIDN','class'=>'form-control col-md-4'],'required')}}</td></td></tr>
         <tr><td>Jenis Kelamin <td> {{ Form::select('jenis_kelamin',['Laki-Laki'=>'Laki-Laki','Perempuan'=>'Perempuan'],null,['class'=>'form-control col-md-4'])}}</td></td></tr> 
+        <tr><td>Bidang<td> {{ Form::select('bidang',['Produktif'=>'Produktif','MKDU'=>'MKDU'],null,['class'=>'form-control col-md-4'])}}</td></td></tr> 
         <tr><td> Status <td>  {{ Form::select('status',['aktif'=>'Aktif','Tidak Aktif'=>'Tidak Aktif'],null,['class'=>'form-control col-md-4'])}}</td></td></tr>
         
         <tr><td></td><td>  

@@ -1,138 +1,107 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
 
-    <title>SISTAKU</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <!-- TAMPILAN AWAL SISTEM TEMPLATE BOCOR -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
-
-
-    <!-- Styles -->
-    <style>
-        html,
-        body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links>a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 0px;
-        }
-
-    </style>
+	<link rel="icon" type="image/png" href="{{ asset('FormLogin/images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/vendor/animate/animate.css')}}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('FormLogin/css/main.css')}}">
+<!--===============================================================================================-->
 </head>
-
 <body>
-
-
-   <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="container d-flex align-items-center">
-    
-      <div class="logo mr-auto">
+	
+	<div class="limiter">
         
-      <h1 class="text-light"><a href="{{ url('/home') }}">Sistaku<span>.</span></a></h1>
-      
-      </div>
-      
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-        @if (Route::has('login'))
-        @auth
-        @else
-        <li class="get-started"><a href="{{ route('login') }}">Login</a></li>
-        <!-- @if (Route::has('register'))
-        <li class="get-started"><a href="{{ route('register') }}">Register</a></li> -->
-        </ul>
-      </nav><!-- .nav-menu -->
-    <!-- @endif -->
-    @endauth
-    @endif
-    </div>
-  </header><!-- End Header -->
-    <section id="hero">
+		<div class="container-login100">
+        <div class="row d-flex align-items-center"">
+  
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{{ asset('FormLogin/images/img-01.png')}}" alt="IMG">
+				</div>
+        
+				<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                    @csrf
+					<span class="login100-form-title">
+                        <h1>S I S T A K U</h1>
+					</span>
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    {{ __('E-Mail Address') }}
+						<input class="input100" type="text" name="email" placeholder="Email" id="email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
 
-        <div class="container">
-            <div class="row d-flex align-items-center"">
-  <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
-                <h1 class="text-center"> SISTAKU</h1>
-                <h2 class="text-center"> Sistem Informasi Penentuan Dosen Pengampu Mata Kuliah</h2>
-                
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-                <img src="{{ asset('assets/img/hero-img.png')}}" class="img-fluid" alt="">
-            </div>
-        </div>
-        </div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+                    {{ __('Password') }}
+						<input class="input100" type="password" name="password" placeholder="Password" id="password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+                        {{ __('Login') }}
+						</button>
+					</div>
 
-    </section><!-- End Hero -->
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							
+						</span>
+						<a class="txt2" href="#">
+						
+						</a>
+					</div>
 
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/venobox/venobox.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/aos/aos.js')}}"></script>
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							
+							<i class=" m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
 
-    <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/main.js')}}"></script>
+	
+<!--===============================================================================================-->	
+	<script src="{{ asset('FormLogin/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('FormLogin/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{ asset('FormLogin/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('FormLogin/vendor/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('FormLogin/vendor/tilt/tilt.jquery.min.js')}}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{{ asset('Login/js/main.js')}}"></script>
+
 </body>
-
 </html>
