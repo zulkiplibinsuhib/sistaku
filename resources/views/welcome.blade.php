@@ -101,7 +101,7 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="{{ asset('Login/js/main.js')}}"></script>
+	<script src="{{ asset('FormLogin/js/main.js')}}"></script>
 
 </body>
 </html>

@@ -26,7 +26,7 @@
 
     <button type="submit" class="btn btn-primary my-1 ">Cari</button>
 </form>
-<table class="sebaran table table-bordered table table-striped" id="sebaran">
+<table class="sebaran table table-bordered table table-striped table-responsive" id="sebaran">
     <thead>
         <tr class="text-center">
             <th>Kode Kelas</th>

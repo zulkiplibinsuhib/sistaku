@@ -109,7 +109,7 @@ class DosenController extends Controller
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);   
         }
         
-        return redirect('dosen');
+        return redirect('dosen/create');
     }
 
     /**

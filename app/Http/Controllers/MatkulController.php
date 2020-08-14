@@ -104,7 +104,7 @@ class MatkulController extends Controller
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
         }
         
-        return redirect('matkul');
+        return redirect('matkul/create');
     }
 
     /**
