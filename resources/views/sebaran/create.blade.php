@@ -12,95 +12,104 @@
 </div>
 @endif
 <section class="content">
-    
-    <select name="tahun" class="custom-select my-1 mr-sm-2 col-md-4" id="tahun">
-        <option selected disabled>Pilih Tahun Akademik</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        
-    </select>
-<section class="content">
-    
-    <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester">
-        <option value="" selected disabled>Pilih Semester</option>
-     
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-info card-outline text-sm-3">
+                <div class="card-header">
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Mata Kuliah
+                    </h3>
+                    <div class="card-tools ">
+                        <select name="tahun" class="custom-select my-1 mr-sm-2 col-md-4" id="tahun">
+                            <option selected disabled>Pilih Tahun Akademik</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                        <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester">
+                            <option value="" selected disabled>Pilih Semester</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {{ Form::open(['url'=>'sebaran'])}}
+                    <table class=" table table-bordered table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Kode Kelas</th>
+                                <th>Kelas</th>
+                                <th>Tahun Akademik</th>
+                                <th>Semester</th>
+                                <th>Mhs</th>
+                                <th>Mata Kuliah</th>
+                                <th>SKS</th>
+                                <th>T</th>
+                                <th>P</th>
+                                <th>Jam</th>
+                                <th>Dosen PDPT</th>
+                                <th>Dosen Mengajar</th>
 
-        
-    </select>
-    {{ Form::open(['url'=>'sebaran'])}}
-    <table class=" table table-bordered table table-striped">
+                            </tr>
+                        </thead>
+                        <tbody id="create-sebaran">
+
+                        </tbody>
+
+                    </table>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Input</button>
+                        <a href="{{ route('sebaran.index')}}" class="btn btn-default float-right">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-        <thead>
-            <tr>
-                <th>Kode Kelas</th>
-                <th>Kelas</th>
-                <th>Tahun Akademik</th>
-                <th>Semester</th>
-                <th>Mhs</th>
-                <th>Mata Kuliah</th>
-                <th>SKS</th>
-                <th>T</th>
-                <th>P</th>
-                <th>Jam</th>
-                <th>Dosen PDPT</th>
-                <th>Dosen Mengajar</th>
-
-            </tr>
-        </thead>
-        <tbody id="create-sebaran">
-
-        </tbody>
-        
-    </table>
-    <tr>
-        <td></td>
-        <td> {{ Form::submit('Simpan Data',['class'=>'btn btn-success','id'=>'send-form'])}}
-            {{ Link_to('sebaran','Kembali',['class'=>'btn btn-danger'])}}
-            {{ Form::close()}}</td>
-    </tr>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         console.log('ini tahun')
-          console.log($('#tahun'))
-         $('#tahun').on('input',function(){
-           
-            var kode=$(this).val();
+        console.log($('#tahun'))
+        $('#tahun').on('input', function () {
+
+            var kode = $(this).val();
             console.log(kode)
-             $.ajax({
-                 type : "GET",
-                 url  : "{{ route('sebaran.ajax_select') }}",
-                 dataType : "JSON",
-                 data : {tahun: kode},
-                 cache:false,
-                 success: function(data){
-                   console.log(data);
+            $.ajax({
+                type: "GET",
+                url: "{{ route('sebaran.ajax_select') }}",
+                dataType: "JSON",
+                data: {
+                    tahun: kode
+                },
+                cache: false,
+                success: function (data) {
+                    console.log(data);
                     $('#semester').empty()
                     var option = ` <option value="">Pilih Semester</option>
                         `
-                        $('#semester').append(option)
-                   var data = data.data;
-                   data.forEach(tahun=>{
+                    $('#semester').append(option)
+                    var data = data.data;
+                    data.forEach(tahun => {
                         var option = ` <option value="${tahun.semester}">${tahun.semester}</option>
                         `
                         $('#semester').append(option)
-                        
-                   })
-                   
 
-        
-                   
-                      
-                   
-                 }
-             });
-             return false;
+                    })
+
+
+
+
+
+
+                }
+            });
+            return false;
         });
-      });
+    });
+
 </script>
 
 <!-- AJAX KODE KELAS CREATE -->
@@ -120,7 +129,7 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    dosens = @json($data_dosen -> toArray(), JSON_HEX_TAG);
+                    dosens = @json($data_dosen - > toArray(), JSON_HEX_TAG);
                     console.log(dosens)
                     var data = data.data;
                     table = $('#create-sebaran')

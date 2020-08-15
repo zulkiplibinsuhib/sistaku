@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Input Users')
+@section('title','SISTAKU')
 @section('content')
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -10,11 +10,19 @@
         </ul>
     </div>
 @endif
-    {{ Form::open(['url'=>'users'])}}
-    <table class="table table-bordered">
+<div class="row">
+    <div class="col-12">
+        <div class="card card-info card-outline text-sm-3">
+            <div class="card-header">
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input User
+                </h3>
+            </div>
+            <div class="card-body">
+            {{ Form::open(['url'=>'users'])}}
+    <table class="table table-borderless">
        
-        <tr><td>Email</td><td>{{ Form::email('email',null,['placeholder'=>'example@gmail.com  ','class'=>'form-control','required'])}}</td></tr>
-        <tr><td>Username</td><td>{{ Form::text('name',null,['placeholder'=>'Nama ','class'=>'form-control','required'])}}</td></tr>
+        <tr><td><label>Email</label> </td><td>{{ Form::email('email',null,['placeholder'=>'example@gmail.com  ','class'=>'form-control col-md-4','required'])}}</td></tr>
+        <tr><td><label for="">Username</label> </td><td>{{ Form::text('name',null,['placeholder'=>'Username ','class'=>'form-control col-md-4','required'])}}</td></tr>
         <tr><td><label for="prodi">Prodi</label></td><td><select name="prodi"  class="form-control col-md-4">
                 <option selected disabled>Pilih Prodi</option>
                 <option value="all">All Prodi</option>
@@ -22,10 +30,18 @@
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                                 @endforeach 
             </select></td></tr>
-        <tr><td>Level</td><td>{{ Form::select('level',['prodi'=>'prodi','admin'=>'admin'],null,['class'=>'form-control col-md-4'])}}</td></tr>
-        <tr><td>Password</td><td>{{ Form::text('password',null,['placeholder'=>'Enter Password','class'=>'form-control','required'])}}</td></tr>
-        <tr><td></td><td>    {{ Form::submit('Simpan Data',['class'=>'btn btn-success'])}}
-                {{ Link_to('prodi','Kembali',['class'=>'btn btn-danger'])}}
-                {{ Form::close()}}</td></tr>
+        <tr><td><label for="">Level</label> </td><td>{{ Form::select('level',['prodi'=>'prodi','admin'=>'admin'],null,['class'=>'form-control col-md-4'])}}</td></tr>
+        <tr><td><label for="">Password</label> </td><td>{{ Form::text('password',null,['placeholder'=>'Enter Password','class'=>'form-control col-md-4','required'])}}</td></tr>
+        
     </table>
+    <div class="card-footer">
+                    <button type="submit" class="btn btn-info">Input</button>
+                    <a href="{{ route('users.index')}}" class="btn btn-default float-right">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
 @endsection

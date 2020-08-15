@@ -283,14 +283,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="content">
+            <section class="content">
                 <div class="container-fluid">
                     @yield('content')
                 </div><!-- /.container-fluid -->
-            </div>
+            </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
+    
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -423,10 +423,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         $(document).ready(function () {
             $('#kelas ').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
+                
+                
             });
         });
 
@@ -434,10 +432,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         $(document).ready(function () {
             $('#dosen ').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
+                
+                
             });
         });
 

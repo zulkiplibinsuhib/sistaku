@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Sistem Informasi Penentuan Dosen Pengampu Mata Kuliah')
+@section('title','SISTAKU')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -18,70 +18,77 @@
                 </h3>
             </div>
             <div class="card-body">
-                
+
                 {{ Form::model($kelas,['url'=>'kelas/'.$kelas->id,'method'=>'put'])}}
                 <div class="form-group row">
-                <form class="form-horizontal">
-                    <label class="col-sm-2 col-form-label">Kode Kelas</label>
-                    {{ Form::text('kode',null,['placeholder'=>'Kode kelas','class'=>'form-control col-md-2','required'])}}
+                    <form class="form-horizontal">
+                        <label class="col-md-4 col-form-label">Kode Kelas</label>
+                        {{ Form::text('kode',null,['placeholder'=>'Kode kelas','class'=>'form-control col-md-3','required'])}}
                 </div>
                 <div class="form-group row">
-                    <label for="kelas" class="col-sm-2 col-form-label">Nama Kelas</label>
-                    {{ Form::text('kelas',null,['placeholder'=>'Nama Kelas','class'=>'form-control col-md-2','required'])}}
+                    <label for="kelas" class="col-sm-4 col-form-label">Nama Kelas</label>
+                    {{ Form::text('kelas',null,['placeholder'=>'Nama Kelas','class'=>'form-control col-md-3','required'])}}
 
                 </div>
 
-                {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}
+                {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-7','name'=>'prodi',' readonly'])}}
                 <div class="form-group row">
-                    <label for="semester" class="col-sm-2 col-form-label">Semester</label>
-                    <div class="form-group col-md-2">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio1" value="1">
-                            <label class="form-check-label" for="semester1" checked>1</label>
+                    <label for="semester" class="col-md-4 col-form-label">Semester</label>
+                    <div class="form-group col-md ">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="semester" value="1"
+                                class="custom-control-input" name="semester">
+                            <label class="custom-control-label" for="customRadioInline1">1</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio2" value="2">
-                            <label class="form-check-label" for="semester2">2</label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="semester" value="2"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">2</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="3">
-                            <label class="form-check-label" for="semester3">3 </label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline3" name="semester" value="3"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline3">3</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="4">
-                            <label class="form-check-label" for="semester4">4 </label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline4" name="semester" value="4"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline4">4</label>
+                        </div> <br>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline5" name="semester" value="5"
+                                class="custom-control-input" name="semester">
+                            <label class="custom-control-label" for="customRadioInline5">5</label>
                         </div>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="5">
-                            <label class="form-check-label" for="semester5">5 </label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline6" name="semester" value="6"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline6">6</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="6">
-                            <label class="form-check-label" for="semester6">6 </label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline7" name="semester" value="7"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline7">7</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="7">
-                            <label class="form-check-label" for="semester7">7 </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="semester" id="inlineRadio3" value="8">
-                            <label class="form-check-label" for="semester8">8 </label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline8" name="semester" value="8"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline8">8</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tahun" class="col-sm-2 col-form-label">Tahun Ajaran</label>
-                    {{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-md-2','required'])}}
+                    <label for="tahun" class="col-md-4 col-form-label">Tahun Ajaran</label>
+                    {{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-md-3','required'])}}
                 </div>
 
                 <div class="form-group row">
-                    <label for="mhs" class="col-sm-2 col-form-label">Jumlah Mahasiswa</label>
-                    {{ Form::number('mhs',null,['placeholder'=>'jumlah mahasiswa','class'=>'form-control col-md-2','required'])}}
+                    <label for="mhs" class="col-md-4 col-form-label">Jumlah Mahasiswa</label>
+                    {{ Form::number('mhs',null,['placeholder'=>'jumlah mahasiswa','class'=>'form-control col-md-3','required'])}}
                 </div>
                 <div class="form-group row">
-                    <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
-                    {{ Form::select('keterangan',['Reguler'=>'Reguler','Karyawan'=>'Karyawan'],null,['class'=>'form-control col-md-2'])}}
+                    <label for="keterangan" class="col-md-4 col-form-label">Keterangan</label>
+                    {{ Form::select('keterangan',['Reguler'=>'Reguler','Karyawan'=>'Karyawan'],null,['class'=>'form-control col-md-3','required'])}}
                 </div>
 
                 <div class="card-footer">

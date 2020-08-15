@@ -10,9 +10,17 @@
     </ul>
 </div>
 @endif
-
+<div class="row">
+    <div class="col-12">
+        <div class="card card-info card-outline text-sm-3">
+            <div class="card-header">
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Update Sebaran
+                </h3>
+            </div>
+            <div class="card-body">
+                
 {{ Form::model($sebaran,['url'=>'sebaran/'.$sebaran->id,'method'=>'put'])}}
-<table class="table table-bordered">
+<table class="table table-borderless">
 
     <tr>
         <td><label for="kd_kelas">Kode Kelas</label></td>
@@ -28,32 +36,32 @@
        {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'prodi',' readonly'])}}      
     </tr>
     <tr>
-        <td>Tahun Akademik </td>
+        <td><label>Tahun Akademik</label> </td>
         <td>{{ Form::text('tahun',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'tahun','readonly'])}}
         </td>
     </tr>
     <tr>
-        <td>Semester </td>
+        <td><label>Semester</label> </td>
         <td>{{ Form::text('semester',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'semester','readonly'])}}
         </td>
     </tr>
     <tr>
-        <td>Mahasiswa</td>
+        <td><label>Mahasiswa </label> </td>
         <td>{{ Form::text('mhs',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mhs','id'=>'mhs-sebaran','readonly'])}}
         </td>
     </tr>
     <tr>
-    <td>Mata Kuliah</td>
+    <td><label>Mata Kuliah</label> </td>
         <td>{{ Form::text('mata_kuliah',null,['placeholder'=>'','class'=>'form-control col-md-4','name'=>'mata_kuliah','id'=>'mhs-sebaran','readonly'])}}
         </td>
     </tr>
     <tr>
-        <td>SKS</td>
+        <td><label>SKS</label> </td>
         <td>{{ Form::text('sks',null,['placeholder'=>'','class'=>'form-control col-md-4','id'=>'sks-edit','readonly'])}}
         </td>
     </tr>
     <tr>
-        <td>Jam</td>
+        <td><label>Jam</label> </td>
         <td>{{ Form::text('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-md-4','readonly'])}}
         </td>
     </tr>
@@ -74,13 +82,13 @@
             </select></td>
     </tr>
 
-    <tr>
-        <td></td>
-        <td>
-            {{ Form::submit('Update Data',['class'=>'btn btn-success'])}}
-            {{ Link_to('sebaran','Kembali',['class'=>'btn btn-danger'])}}
-            {{ Form::close()}}
-        </td>
-    </tr>
 </table>
+<div class="card-footer">
+                    <button type="submit" class="btn btn-info">Input</button>
+                    <a href="{{ route('sebaran.index')}}" class="btn btn-default float-right">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
