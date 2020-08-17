@@ -89,6 +89,14 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nidn' => 'required',
+            'jenis_kelamin' => 'required',
+            'status' => 'required',
+            'bidang' => 'required',
+            'prodi' => 'required',
+            
+        ]);
         $all_prodi = $request->prodi;
         if($all_prodi == 'all'){
             $all = DB::table('prodi')->get();
@@ -109,7 +117,8 @@ class DosenController extends Controller
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);   
         }
         
-        return redirect('dosen/create');
+        return redirect('dosen/create')->with('status', 'Data added successfully, please add new data .');
+        
     }
 
     /**
@@ -120,10 +129,21 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        // $data['dosen'] = DB::table('dosen')->where('id',$id)->first();
-        // $get_name = DB::table('dosen')->where('id', $id)->value('name');
-        // $data['get_name'] = $get_name;
-        // return view('dosen.show',$data);
+        $dosen = Dosen::find($id); 
+        $jumlah_sks = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->sum('sks');
+        $jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->sum('jam');
+        $get_data = DB::table('sebaran')
+                        ->join('prodi', 'prodi.id','=','sebaran.prodi')
+                        ->select('prodi.nama','sebaran.jam','sebaran.mata_kuliah','sebaran.sks')
+                        ->where('dosen_mengajar',$dosen->nidn)->get();
+       
+       
+        $data['dosen'] = $dosen ;
+        $data['jumlah_sks'] = $jumlah_sks ;
+        $data['jumlah_jam'] = $jumlah_jam ;
+        $data['get_data'] = $get_data ;
+        
+        return view('dosen.show',$data);
         
         
     }
@@ -149,12 +169,21 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nidn' => 'required',
+            'jenis_kelamin' => 'required',
+            'status' => 'required',
+            'bidang' => 'required',
+            'prodi' => 'required',
+            
+        ]);
         DB::table('dosen')->where('id',$id)->update(['name'=>$request->name,
                                                     'nidn'=>$request->nidn,
                                                     'jenis_kelamin'=>$request->jenis_kelamin,
                                                     'status'=>$request->status,
+                                                    'prodi'=>$request->prodi,
                                                     'bidang'=>$request->bidang,]);
-                                                    return redirect('dosen');
+                                                    return redirect('dosen')->with('status', 'Data updated successfully  .');
     }
 
     /**
@@ -166,6 +195,6 @@ class DosenController extends Controller
     public function destroy($id)
     {
         DB::table('dosen')->where('id',$id)->delete();
-        return redirect('dosen');
+        return redirect('dosen')->with('status', 'Data deleted successfully .');
     }
 }

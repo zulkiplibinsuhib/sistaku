@@ -51,7 +51,7 @@ class ProdiController extends Controller
         ]);
         DB::table('prodi')->insert(['kode'=>$request->kode,
                                     'nama'=>$request->nama]);
-        return redirect('prodi');
+        return redirect('prodi/create')->with('status', 'Data added successfully, please add new data .');
     }
 
     /**
@@ -86,9 +86,14 @@ class ProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+            
+        ]);
         DB::table('prodi')->where('id',$id)->update(['kode'=>$request->kode,
                                                     'nama'=>$request->nama]);
-                                                        return redirect('prodi');
+                                                        return redirect('prodi')->with('status', 'Data updated successfully  .');
     }
 
     /**
@@ -100,6 +105,6 @@ class ProdiController extends Controller
     public function destroy($id)
     {
         DB::table('prodi')->where('id',$id)->delete();
-        return redirect('prodi');
+        return redirect('prodi')->with('status', 'Data deleted successfully .');
     }
 }

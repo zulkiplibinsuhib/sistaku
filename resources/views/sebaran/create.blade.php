@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('title','Input Sebaran')
 @section('content')
 @if ($errors->any())
@@ -11,12 +10,20 @@
     </ul>
 </div>
 @endif
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <section class="content">
     <div class="row">
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Mata Kuliah
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Input Sebaran
                     </h3>
                     <div class="card-tools ">
                         <select name="tahun" class="custom-select my-1 mr-sm-2 col-md-4" id="tahun">
@@ -57,8 +64,8 @@
 
                     </table>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Input</button>
-                        <a href="{{ route('sebaran.index')}}" class="btn btn-default float-right">Cancel</a>
+                        <button type="submit" class="btn btn-info float-right">Input</button>
+                        <a href="{{ route('sebaran.index')}}" class="btn btn-default ">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +136,7 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    dosens = @json($data_dosen - > toArray(), JSON_HEX_TAG);
+                    dosens = @json($data_dosen -> toArray(), JSON_HEX_TAG);
                     console.log(dosens)
                     var data = data.data;
                     table = $('#create-sebaran')

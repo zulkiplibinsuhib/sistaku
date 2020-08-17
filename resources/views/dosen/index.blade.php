@@ -1,18 +1,30 @@
 @extends('layout')
 @section('title','SISTAKU')
 @section('content')
+
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
 <section class="content">
-    <div class="container-fluid">
+   
         <div class="row">
             <div class="col-12">
                 <div class="card card-info card-outline text-sm-3">
                     <div class="card-header">
-                        <h3 class="card-title text text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Dosen
+                        <h3 class="card-title text text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar
+                            Dosen
                         </h3>
                         <div class="card-tools mr-1 ">
                             <form class="form-inline" action="" method="get">
                                 @if(Auth::user()->level == 'admin')
-                                <select name="prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="inlineFormCustomSelectPref">
+                                <select name="prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;"
+                                    id="inlineFormCustomSelectPref">
                                     <option selected disabled>Prodi</option>
                                     @foreach(App\Prodi::all() as $prodi)
                                     <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
@@ -62,6 +74,8 @@
 
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            <a href="{{ route('dosen.show',$row->id) }}"
+                                                class="btn btn-sm btn-info fas fa-eye mr-2" title="Detail"></a>
                                             <a href="{{ route('dosen.edit',$row->id) }}"
                                                 class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
                                             <form action="{{route('dosen.destroy',$row->id)}}" method="post"
@@ -83,7 +97,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 </section>
 

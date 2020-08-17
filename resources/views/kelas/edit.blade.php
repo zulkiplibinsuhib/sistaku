@@ -10,6 +10,16 @@
     </ul>
 </div>
 @endif
+
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
@@ -22,19 +32,19 @@
                 {{ Form::model($kelas,['url'=>'kelas/'.$kelas->id,'method'=>'put'])}}
                 <div class="form-group row">
                     <form class="form-horizontal">
-                        <label class="col-md-4 col-form-label">Kode Kelas</label>
-                        {{ Form::text('kode',null,['placeholder'=>'Kode kelas','class'=>'form-control col-md-3','required'])}}
+                        <label class="offset-1 col-3 col-form-label">Kode Kelas</label>
+                        {{ Form::text('kode',null,['placeholder'=>'Kode kelas','class'=>'form-control col-6','required'])}}
                 </div>
                 <div class="form-group row">
-                    <label for="kelas" class="col-sm-4 col-form-label">Nama Kelas</label>
-                    {{ Form::text('kelas',null,['placeholder'=>'Nama Kelas','class'=>'form-control col-md-3','required'])}}
+                    <label for="kelas" class="offset-1 col-3 col-form-label">Nama Kelas</label>
+                    {{ Form::text('kelas',null,['placeholder'=>'Nama Kelas','class'=>'form-control col-6','required'])}}
 
                 </div>
 
                 {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-7','name'=>'prodi',' readonly'])}}
                 <div class="form-group row">
-                    <label for="semester" class="col-md-4 col-form-label">Semester</label>
-                    <div class="form-group col-md ">
+                    <label for="semester" class="offset-1 col-3 col-form-label">Semester</label>
+                    <div class="form-group col-6 ">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline1" name="semester" value="1"
                                 class="custom-control-input" name="semester">
@@ -54,7 +64,7 @@
                             <input type="radio" id="customRadioInline4" name="semester" value="4"
                                 class="custom-control-input">
                             <label class="custom-control-label" for="customRadioInline4">4</label>
-                        </div> <br>
+                        </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline5" name="semester" value="5"
                                 class="custom-control-input" name="semester">
@@ -78,22 +88,22 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tahun" class="col-md-4 col-form-label">Tahun Ajaran</label>
-                    {{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-md-3','required'])}}
+                    <label for="tahun" class="offset-1 col-3 col-form-label">Tahun Ajaran</label>
+                    {{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-6','required'])}}
                 </div>
 
                 <div class="form-group row">
-                    <label for="mhs" class="col-md-4 col-form-label">Jumlah Mahasiswa</label>
-                    {{ Form::number('mhs',null,['placeholder'=>'jumlah mahasiswa','class'=>'form-control col-md-3','required'])}}
+                    <label for="mhs" class="offset-1 col-3 col-form-label">Jumlah Mahasiswa</label>
+                    {{ Form::number('mhs',null,['placeholder'=>'jumlah mahasiswa','class'=>'form-control col-6','required'])}}
                 </div>
                 <div class="form-group row">
-                    <label for="keterangan" class="col-md-4 col-form-label">Keterangan</label>
-                    {{ Form::select('keterangan',['Reguler'=>'Reguler','Karyawan'=>'Karyawan'],null,['class'=>'form-control col-md-3','required'])}}
+                    <label for="keterangan" class="offset-1 col-3 col-form-label">Keterangan</label>
+                    {{ Form::select('keterangan',['Reguler'=>'Reguler','Karyawan'=>'Karyawan'],null,['class'=>'form-control col-6','required'])}}
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Update</button>
-                    <a href="{{ route('kelas.index')}}" class="btn btn-default float-right">Cancel</a>
+                    <button type="submit" class="btn btn-info float-right">Update</button>
+                    <a href="{{ route('kelas.index')}}" class="btn btn-default ">Cancel</a>
                 </div>
                 {{ Form::close()}}
                 </form>

@@ -69,6 +69,18 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'kode' => 'required',
+            'kelas' => 'required',
+           
+            'semester' => 'required',
+            'tahun' => 'required',
+            'mhs' => 'required',
+            'keterangan' => 'required',
+            
+            
+        ]);
+        
         DB::table('kelas')->insert(['kode'=>$request->kode,
                                     'kelas'=>$request->kelas,
                                     'prodi'=>$request->prodi ?? $request->user()->prodi,
@@ -76,7 +88,7 @@ class KelasController extends Controller
                                     'tahun'=>$request->tahun,
                                     'mhs'=>$request->mhs,
                                     'keterangan'=>$request->keterangan]);
-                                     return redirect('kelas');
+                                     return redirect('kelas/create')->with('status', 'Data added successfully, please add new data .');
     }
 
     /**
@@ -106,13 +118,24 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'kode' => 'required',
+            'kelas' => 'required',
+            'prodi' => 'required',
+            'semester' => 'required',
+            'tahun' => 'required',
+            'mhs' => 'required',
+            'keterangan' => 'required',
+            
+            
+        ]);
         DB::table('kelas')->where('id',$id)->update(['kode'=>$request->kode,
                                                     'prodi'=>$request->prodi,
                                                     'semester'=>$request->semester,
                                                     'tahun'=>$request->tahun,
                                                     'mhs'=>$request->mhs,
                                                     'keterangan'=>$request->keterangan]);
-                                                    return redirect('kelas');
+                                                    return redirect('kelas')->with('status', 'Data updated successfully  .');
     }
 
     /**
@@ -124,6 +147,6 @@ class KelasController extends Controller
     public function destroy($id)
     {
         DB::table('kelas')->where('id',$id)->delete();
-        return redirect('kelas');
+        return redirect('kelas')->with('status', 'Data deleted successfully .');
     }
 }

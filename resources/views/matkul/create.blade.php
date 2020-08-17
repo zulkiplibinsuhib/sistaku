@@ -10,6 +10,16 @@
     </ul>
 </div>
 @endif
+
+    @if (session('status'))
+    <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+        {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
 <div class="row">
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
@@ -22,49 +32,49 @@
                 <table class="table table-borderless">
 
                     <tr>
-                        <td><label>Kode Mata Kuliah</label> </td>
-                        <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Enter Kode Mata Kuliah ','class'=>'form-control col-md-4','required'])}}
+                        <td><label class="offset-4">Kode Mata Kuliah</label> </td>
+                        <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Enter Kode Mata Kuliah ','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td> <label>Mata Kuliah</label> </td>
-                        <td>{{ Form::text('matkul',null,['placeholder'=>'Enter Mata Kuliah','class'=>'form-control col-md-4','required'])}}
+                        <td> <label class="offset-4">Mata Kuliah</label> </td>
+                        <td>{{ Form::text('matkul',null,['placeholder'=>'Enter Mata Kuliah','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td> <label>SKS</label> </td>
-                        <td>{{ Form::number('sks',null,['placeholder'=>'Enter SKS','class'=>'form-control col-md-4','required'])}}
+                        <td> <label class="offset-4">SKS</label> </td>
+                        <td>{{ Form::number('sks',null,['placeholder'=>'Enter SKS','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Teori</label> </td>
-                        <td>{{ Form::number('teori',null,['placeholder'=>'Enter jam teori','class'=>'form-control col-md-4','required'])}}
+                        <td><label class="offset-4">Teori</label> </td>
+                        <td>{{ Form::number('teori',null,['placeholder'=>'Enter jam teori','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Praktek</label> </td>
-                        <td>{{ Form::number('praktek',null,['placeholder'=>'Enter jam praktek','class'=>'form-control col-md-4','required'])}}
+                        <td><label class="offset-4">Praktek</label> </td>
+                        <td>{{ Form::number('praktek',null,['placeholder'=>'Enter jam praktek','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Jam / Minggu</label> </td>
-                        <td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-md-4','required'])}}
+                        <td><label class="offset-4">Jam / Minggu</label> </td>
+                        <td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="kurikulum">Kurikulum</label></td>
-                        <td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],null,['class'=>'form-control col-md-4','required'])}}
+                        <td><label for="kurikulum" class="offset-4">Kurikulum</label></td>
+                        <td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],null,['class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Tahun Akademik</label> </td>
-                        <td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-md-4','required'])}}
+                        <td><label class="offset-4">Tahun Akademik</label> </td>
+                        <td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="semester">Semester</label></td>
+                        <td><label for="semester" class="offset-4">Semester</label></td>
                         <td>
-                            <div class="form-group ">
+                            <div class="form-group offset-1">
 
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="customRadioInline1" name="semester" value="1"
@@ -85,7 +95,7 @@
                                     <input type="radio" id="customRadioInline4" name="semester" value="4"
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioInline4">4</label>
-                                </div> <br>
+                                </div> 
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="customRadioInline5" name="semester" value="5"
                                         class="custom-control-input" name="semester">
@@ -113,8 +123,8 @@
                     </tr>
                     @if(empty(Auth::user()->prodi))
                     <tr>
-                        <td><label for="prodi">Prodi</label></td>
-                        <td><select name="prodi" class="form-control col-md-4">
+                        <td><label for="prodi" class="offset-4 ">Prodi</label></td>
+                        <td><select name="prodi" class="form-control offset-1 col-10">
                                 <option selected disabled>Pilih Prodi</option>
                                 <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
@@ -129,8 +139,8 @@
 
                 </table>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Input</button>
-                    <a href="{{ route('dosen.index')}}" class="btn btn-default float-right">Cancel</a>
+                    <button type="submit" class="btn btn-info float-right">Input</button>
+                    <a href="{{ route('matkul.index')}}" class="btn btn-default ">Cancel</a>
                 </div>
             </div>
         </div>

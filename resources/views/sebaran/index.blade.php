@@ -1,13 +1,21 @@
 @extends('layout')
 @section('title','Sebaran Politeknik TEDC Bandung')
 @section('content')
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <section class="content">
 
     <div class="row">
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Mata Kuliah
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Sebaran
                     </h3>
                     <div class="card-tools ">
                         <form class="form-inline" action="" method="get">
@@ -25,7 +33,7 @@
                                 <option value="{{$sebaran->tahun}}">{{$sebaran->tahun}}</option>
                                 @endforeach
                             </select>
-                            <select name="semester" class="custom-select my-1 mr-sm-2 style="width: 200px;""
+                            <select name="semester" class="custom-select my-1 mr-sm-2 " 
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Semester</option>
                                 @foreach($cari_semester as $semester)
@@ -40,6 +48,7 @@
                     <table class="sebaran table table-bordered table table-striped table-responsive" id="sebaran">
                         <thead>
                             <tr class="text-center">
+                                <th>No</th>
                                 <th>Kode Kelas</th>
                                 <th>Kelas</th>
                                 <th>Prodi</th>
@@ -57,8 +66,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <?php $no = 1;?>
                             @foreach ($get_prodiAndSebaran as $row)
                             <tr class="text-center">
+                                <td>{{ $no++}} </td>
                                 <td>{{ $row->kd_kelas}}</td>
                                 <td>{{ $row->kelas}}</td>
                                 <td>{{ $row->nama}}</td>
@@ -72,7 +83,7 @@
                                 <td>{{ $row->jam}}</td>
                                 <td>{{ $row->name}}</td>
                                 <td>{{ $row->name}}</td>
-                                <td>{{ $row->approved ? 'approved' : 'not approved'}}</td>
+                                <td>{!! $row->approved ? '<span class="badge bg-primary" >Approved</span>' : '<span class="badge bg-danger">Pending</span>'!!}</td>
                                 @if(Auth::user()->level == 'admin')
                                 <td>
                                     <div class="d-flex justify-content-center">

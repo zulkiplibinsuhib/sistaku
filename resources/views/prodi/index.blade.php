@@ -1,6 +1,14 @@
 @extends('layout')
 @section('title','SISTAKU')
 @section('content')
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <!-- <form class="form-inline" action="" method="get">
     <select name="prodi" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
         <option selected disabled>Prodi</option>

@@ -32,6 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         if(Auth::user()->prodi){
             $data['matkul'] = Matkul::where('prodi',Auth::user()->prodi)->count();
             $data['prodi'] = Prodi::where('id',Auth::user()->prodi)->count();
@@ -51,6 +52,15 @@ class HomeController extends Controller
         }
         
         return view('home',$data);
+    }
+
+    public function status()
+    {
+        $data['status'] = Sebaran::where('status','Pending')->count();
+        
+       
+        
+        return view('sebaran',$data);
     }
    
 }

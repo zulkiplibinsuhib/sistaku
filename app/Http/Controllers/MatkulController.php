@@ -76,6 +76,18 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'matkul' => 'required',
+            'sks' => 'required',
+            'teori' => 'required',
+            'praktek' => 'required',
+            'jam_minggu' => 'required',
+            'kurikulum' => 'required',
+            'semester' => 'required',
+            'tahun' => 'required',
+            'prodi' => 'required',
+            
+        ]);
         $all_prodi = $request->prodi;
         if($all_prodi == 'all'){
             $all = DB::table('prodi')->get();
@@ -104,7 +116,7 @@ class MatkulController extends Controller
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
         }
         
-        return redirect('matkul/create');
+        return redirect('matkul/create')->with('status', 'Data added successfully, please add new data .');
     }
 
     /**
@@ -141,6 +153,18 @@ class MatkulController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'matkul' => 'required',
+            'sks' => 'required',
+            'teori' => 'required',
+            'praktek' => 'required',
+            'jam_minggu' => 'required',
+            'kurikulum' => 'required',
+            'semester' => 'required',
+            'tahun' => 'required',
+            'prodi' => 'required',
+            
+        ]);
         DB::table('matkul')->where('id',$id)->update(['kode_matkul'=>$request->kode_matkul,
                                                         'matkul'=>$request->matkul,
                                                         'sks'=>$request->sks,
@@ -151,7 +175,7 @@ class MatkulController extends Controller
                                                         'semester'=>$request->semester,
                                                         'tahun'=>$request->tahun,
                                                         'prodi'=>$request->prodi]);
-                                                        return redirect('matkul');
+                                                        return redirect('matkul')->with('status', 'Data updated successfully  .');
     }
 
     /**
@@ -163,6 +187,6 @@ class MatkulController extends Controller
     public function destroy($id)
     {
         DB::table('matkul')->where('id',$id)->delete();
-        return redirect('matkul');
+        return redirect('matkul')->with('status', 'Data deleted successfully .');
     }
 }

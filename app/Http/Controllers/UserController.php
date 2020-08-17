@@ -22,14 +22,14 @@ class UserController extends Controller
 
     public function store(Request $data)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     'prodi' => 'required',
-        //     'level' => 'required',
-        //     'password' => 'required'
+        $validatedData = $data->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'prodi' => 'required',
+            'level' => 'required',
+            'password' => 'required'
             
-        // ]);
+        ]);
         
            User::create([
                 'name' => $data['name'],
@@ -38,7 +38,7 @@ class UserController extends Controller
                 'level' => 'prodi',
                 'password' => Hash::make($data['password'])
             ]);
-            return redirect('users');
+            return redirect('users')->with('status', 'Data added successfully, please add new data .');
         
         
 
@@ -52,18 +52,26 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'prodi' => 'required',
+            'level' => 'required',
+            'password' => 'required'
+            
+        ]);
         DB::table('users')->where('id',$id)->update(['name'=>$request->name,
                                                     'email'=>$request->email,
                                                     'prodi'=>$request->prodi,
                                                     'level'=>$request->level,
                                                     'password'=>$request->password,]);
-                                                    return redirect('prodi');
+                                                    return redirect('prodi')->with('status', 'Data updated successfully  .');
     }
 
     public function destroy($id)
     {
         DB::table('users')->where('id',$id)->delete();
-        return redirect('users');
+        return redirect('users')->with('status', 'Data deleted successfully .');
     }
 
 }

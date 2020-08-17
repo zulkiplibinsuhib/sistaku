@@ -14,6 +14,7 @@ class RekapController extends Controller
 {
     public function index() 
     {
+        
 
         $data['dosen'] = DB::table('dosen');
         $id = Auth::user()->prodi;
@@ -55,7 +56,10 @@ class RekapController extends Controller
                                     ->where('dosen_mengajar',$dosen->nidn)
                                     ->select('sebaran.mata_kuliah','sebaran.prodi','prodi.nama')->get();
             $dosen->prodi_diambil = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->select('prodi')->get();
+            
+            
             $dosen->no = 1 ; 
+            
         }
       
         $data['get_prodiAndDosen'] = $get_prodiAndDosen;

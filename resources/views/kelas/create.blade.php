@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU)
+@section('title','SISTAKU')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -10,6 +10,16 @@
     </ul>
 </div>
 @endif
+
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show col-4" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
@@ -21,23 +31,23 @@
                 {{ Form::open(['url'=>'kelas'])}}
                 <form class="form-horizontal">
                     <div class="form-group row">
-                        <label for="kode" class="col-md-4 col-form-label">Kode Kelas</label>
-                        <div class="col-md-3">
+                        <label for="kode" class="offset-1 col-3 col-form-label">Kode Kelas</label>
+                        <div class="col-6">
                             <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Kelas"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kelas" class="col-md-4 col-form-label">Nama Kelas</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="kelas" placeholder="Nama Kelas" required>
+                        <label for="kelas" class=" offset-1 col-3 col-form-label">Nama Kelas</label>
+                        <div class="col-6">
+                            <input type="text" class="form-control " name="kelas" placeholder="Nama Kelas" required>
                         </div>
                     </div>
                     @if(empty(Auth::user()->prodi))
                     <div class="form-group row">
-                        <label for="inputPassword3" class="col-md-4 col-form-label">Program Studi</label>
-                        <div class="col-sm-8">
-                            <select class="form-control col-md-3" name="prodi" required>
+                        <label for="inputPassword3" class="offset-1 col-3 col-form-label">Program Studi</label>
+                        <div class="col-6">
+                            <select class="form-control " name="prodi" required>
                                 <option selected disabled>Pilih Program Studi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
@@ -48,8 +58,8 @@
                     @endif
 
                     <div class="form-group row">
-                        <label for="semester" class="col-md-4 col-form-label">Semester</label>
-                        <div class="form-group col-md ">
+                        <label for="semester" class="offset-1 col-3 col-form-label">Semester</label>
+                        <div class="form-group col-6">
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline1" name="semester" value="1"
                                     class="custom-control-input" name="semester">
@@ -57,7 +67,7 @@
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline2" name="semester" value="2"
-                                    class="custom-control-input">
+                                    class="custom-control-input ">
                                 <label class="custom-control-label" for="customRadioInline2">2</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -69,7 +79,7 @@
                                 <input type="radio" id="customRadioInline4" name="semester" value="4"
                                     class="custom-control-input">
                                 <label class="custom-control-label" for="customRadioInline4">4</label>
-                            </div> <br>
+                            </div>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline5" name="semester" value="5"
                                     class="custom-control-input" name="semester">
@@ -94,22 +104,22 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="tahun" class="col-md-4 col-form-label">Tahun Ajaran</label>
-                        <div class="col-md-3">
+                        <label for="tahun" class="offset-1 col-3 col-form-label">Tahun Ajaran</label>
+                        <div class="col-md-6">
                             <input type="number" class="form-control" name="tahun" placeholder="Tahun Ajaran" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="mhs" class="col-md-4 col-form-label">Jumlah Mahasiswa</label>
-                        <div class="col-md-3">
+                        <label for="mhs" class="offset-1 col-3 col-form-label">Jumlah Mahasiswa</label>
+                        <div class="col-6">
                             <input type="number" class="form-control" name="mhs" placeholder="Jumlah Mahasiswa"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="keterangan" class="col-md-4 col-form-label">Keterangan</label>
-                        <div class="col-md-8">
-                            <select name="keterangan" class="form-control col-md-3">
+                        <label for="keterangan" class="offset-1 col-3 col-form-label">Keterangan</label>
+                        <div class="col-6">
+                            <select name="keterangan" class="form-control ">
                                 <option value="Reguler">Reguler</option>
                                 <option value="karyawan">Karyawan</option>
                             </select>
@@ -119,8 +129,8 @@
 
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Input</button>
-                        <a href="{{ route('kelas.index')}}" class="btn btn-default float-right">Cancel</a>
+                        <button type="submit" class="btn btn-info float-right">Input</button>
+                        <a href="{{ route('kelas.index')}}" class="btn btn-default ">Cancel</a>
                     </div>
                     <!-- /.card-footer -->
                 </form>

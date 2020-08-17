@@ -155,7 +155,7 @@ class SebaranController extends Controller
      */
     public function store(Request $request)
     {
-        $get = DB::table('sebaran')->where('tahun',$request->tahun[0])->where('semester',$request->semester[0])->first();
+        $get = DB::table('sebaran')->where('tahun',$request->tahun[0])->where('semester',$request->semester[0])->where('prodi',Auth::user()->prodi) ->first();
         if(!empty($get)){
             return redirect()->back()->withErrors(["Warning !!! <br> Data Sebaran Semester {$request->semester[0]} Tahun {$request->tahun[0]} telah diisi sebelumnya .<br> Silahkan isi Data sebaran yang lain :)"]);
         }
@@ -190,7 +190,7 @@ class SebaranController extends Controller
         }
         
                                     
-        return redirect('sebaran');
+        return redirect('sebaran/create')->with('status', 'Data added successfully, please add new data .');
     }
 
     /**
@@ -244,12 +244,15 @@ class SebaranController extends Controller
         $validatedData = $request->validate([
             'kd_kelas' => 'required',
             'kelas' => 'required',
+            'prodi' => 'required',
+            'tahun' => 'required',
             'semester' => 'required',
             'mhs' => 'required',
             'mata_kuliah' => 'required',
             'sks' => 'required',
             'jam' => 'required',
-            'dosen_mengajar' => 'required'
+            'dosen_mengajar' => 'required',
+            'dosen_pdpt' => 'required'
         ]);
     
         DB::table('sebaran')->where('id',$id)->update(['kd_kelas'=>$request->kd_kelas,
@@ -264,7 +267,7 @@ class SebaranController extends Controller
                                                         'jam'=>$request->jam,
                                                         'dosen_pdpt'=>$request->dosen_pdpt,
                                                         'dosen_mengajar'=>$request->dosen_mengajar]);
-                                                        return redirect('sebaran');
+                                                        return redirect('sebaran')->with('status', 'Data updated successfully  .');
     }
 
     /**
@@ -276,6 +279,6 @@ class SebaranController extends Controller
     public function destroy($id)
     {
         DB::table('sebaran')->where('id',$id)->delete();
-        return redirect('sebaran');
+        return redirect('sebaran')->with('status', 'Data deleted successfully .');
     }
 }

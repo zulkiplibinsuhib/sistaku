@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{asset('admin_lte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
+                        <img src="{{asset('admin_lte/dist/img/user.jpg')}}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
                     <div class="info">
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
                             <a href="{{route('home')}}" class="nav-link active">
@@ -93,8 +93,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         @if(Auth::user()->level == 'admin')
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
+                        <li class="nav-item has-treeview {{Request::is('prodi')?'menu-open':''}} {{Request::is('prodi/create')?'menu-open':''}}">
+                            <a href="#" class="nav-link  ">
                                 <i class="nav-icon far fa-file-alt"></i>
                                 <p class="text text-bold">
                                     PROGRAM STUDI 
@@ -102,14 +102,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('prodi.index')}}" class="nav-link ">
+                                <li class="nav-item ">
+                                    <a href="{{route('prodi.index')}}" class=" nav-link {{Request::is('prodi')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar Program Studi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('prodi.create')}}" class="nav-link">
+                                    <a href="{{route('prodi.create')}}" class="nav-link {{Request::is('prodi/create')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Program Studi</p>
                                     </a>
@@ -118,8 +118,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         @endif
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link ">
+                        <li class="nav-item has-treeview {{Request::is('dosen')?'menu-open':''}} {{Request::is('dosen/create')?'menu-open':''}}">
+                            <a href="#" class="nav-link  ">
                                 <i class="nav-icon fas fa-chalkboard-teacher "></i>
                                 <p class="text text-bold">
                                     DOSEN
@@ -128,13 +128,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('dosen.index')}}" class="nav-link ">
+                                    <a href="{{route('dosen.index')}}" class="nav-link {{Request::is('dosen')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar Dosen</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('dosen.create')}}" class="nav-link">
+                                    <a href="{{route('dosen.create')}}" class="nav-link {{Request::is('dosen/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Dosen</p>
                                     </a>
@@ -142,9 +142,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview ">
+                        <li class="nav-item has-treeview {{Request::is('kelas')?'menu-open':''}} {{Request::is('kelas/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon far fa-file-alt"></i>
+                                <i class="nav-icon far fas fa-cube"></i>
                                 <p class="text text-bold">
                                     KELAS
                                     <i class="right fas fa-angle-left"></i>
@@ -152,13 +152,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('kelas.index')}}" class="nav-link ">
+                                    <a href="{{ route('kelas.index')}}" class="nav-link {{Request::is('kelas')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar Kelas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('kelas.create')}}" class="nav-link">
+                                    <a href="{{ route('kelas.create')}}" class="nav-link {{Request::is('kelas/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Kelas</p>
                                     </a>
@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview ">
+                        <li class="nav-item has-treeview {{Request::is('matkul')?'menu-open':''}} {{Request::is('matkul/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-book-open"></i>
                                 <p class="text text-bold">
@@ -176,13 +176,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('matkul.index')}}" class="nav-link ">
+                                    <a href="{{ route('matkul.index')}}" class="nav-link {{Request::is('matkul')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar Mata Kuliah</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('matkul.create')}}" class="nav-link">
+                                    <a href="{{ route('matkul.create')}}" class="nav-link {{Request::is('matkul/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Mata Kuliah</p>
                                     </a>
@@ -190,24 +190,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview ">
+                        <li class="nav-item has-treeview {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon far fa-copy"></i>
                                 <p class="text text-bold">
                                     SEBARAN
                                     <i class="right fas fa-angle-left"></i>
+                                    @if(Auth::user()->level == 'admin')
+                                    <span class="badge badge-danger right">
+                                        <?php $status = App\Sebaran::where('approved','0')->count(); ?> {{$status}}
+                                       
+                                    </span>
+                                    @endif
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('sebaran.index')}}" class="nav-link ">
+                                    <a href="{{ route('sebaran.index')}}" class="nav-link {{Request::is('sebaran')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar Sebaran</p>
                                     </a>
                                 </li>
                                 @if(Auth::user()->level == 'prodi')
                                 <li class="nav-item">
-                                    <a href="{{ route('sebaran.create')}}" class="nav-link">
+                                    <a href="{{ route('sebaran.create')}}" class="nav-link {{Request::is('sebaran/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Sebaran</p>
                                     </a>
@@ -216,8 +222,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         @if(Auth::user()->level == 'admin')
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
+                        <li class="nav-item has-treeview {{Request::is('rekap')?'menu-open':''}}">
+                            <a href="#" class="nav-link  ">
                                 <i class="nav-icon ion ion-stats-bars "></i>
                                 <p class="text text-bold">
                                     REKAPITULASI 
@@ -226,7 +232,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('rekap.index')}}" class="nav-link ">
+                                    <a href="{{ route('rekap.index')}}" class="nav-link {{Request::is('rekap')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Rekap Dosen</p>
                                     </a>
@@ -235,7 +241,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         @endif
                         @if(Auth::user()->level == 'admin')
-                        <li class="nav-item has-treeview ">
+                        <li class="nav-item has-treeview {{Request::is('users')?'menu-open':''}} {{Request::is('users/create')?'menu-open':''}} ">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p class="text text-bold">
@@ -245,13 +251,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index')}}" class="nav-link ">
+                                    <a href="{{ route('users.index')}}" class="nav-link {{Request::is('users')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daftar User</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('users.create')}}" class="nav-link">
+                                    <a href="{{ route('users.create')}}" class="nav-link {{Request::is('users/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create User</p>
                                     </a>
