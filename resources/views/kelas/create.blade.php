@@ -104,9 +104,9 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="tahun" class="offset-1 col-3 col-form-label">Tahun Ajaran</label>
+                        <label for="tahun" class="offset-1 col-3 col-form-label">Angkatan</label>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" name="tahun" placeholder="Tahun Ajaran" required>
+                            <input type="number" class="form-control" name="tahun" placeholder="Ex. 2016" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -116,6 +116,7 @@
                                 required>
                         </div>
                     </div>
+                  
                     <div class="form-group row">
                         <label for="keterangan" class="offset-1 col-3 col-form-label">Keterangan</label>
                         <div class="col-6">

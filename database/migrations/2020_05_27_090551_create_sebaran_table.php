@@ -15,19 +15,13 @@ class CreateSebaranTable extends Migration
     {
         Schema::create('sebaran', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_kelas');
-            $table->string('kelas');
-            $table->string('prodi');
-            $table->string('tahun');
+            $table->string('kd_kelas','10');
+            $table->string('prodi','20');
+            $table->string('tahun_akademik','20');
+            $table->string('mata_kuliah','30');
             $table->integer('semester');
-            $table->integer('mhs');
-            $table->string('mata_kuliah');
-            $table->integer('sks');
-            $table->integer('teori');
-            $table->integer('praktek');
-            $table->integer('jam');
-            $table->string('dosen_mengajar');
-            $table->string('dosen_pdpt');
+            $table->string('dosen_mengajar','30');
+            $table->string('dosen_pdpt','30');
             $table->integer('approved')->default(0);
             $table->timestamps();
         });

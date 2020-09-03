@@ -26,26 +26,28 @@
                     <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Input Sebaran
                     </h3>
                     <div class="card-tools ">
-                        <select name="tahun" class="custom-select my-1 mr-sm-2 col-md-4" id="tahun">
-                            <option selected disabled>Pilih Tahun Akademik</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
+                        <select name="kurikulum" class="custom-select my-1 mr-sm-2 col-md-4" id="kurikulum">
+                            <option selected disabled>Kurikulum</option>
+                            @foreach($kurikulum as $kurikulum)
+                            <option value="{{$kurikulum->nama}}">{{$kurikulum->nama}}</option>
+                            @endforeach
+                           
                         </select>
-                        <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester">
+                        <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester" disabled>
                             <option value="" selected disabled>Pilih Semester</option>
+                            <option value="ganjil">Ganjil</option>
+                            <option value="genap">Genap</option>
                         </select>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     {{ Form::open(['url'=>'sebaran'])}}
-                    <table class=" table table-bordered table table-striped">
+                    <table class="sebaran-table table table-bordered table table-striped" id="sebaran-table">
                         <thead>
                             <tr>
                                 <th>Kode Kelas</th>
                                 <th>Kelas</th>
-                                <th>Tahun Akademik</th>
+                                <th>Angkatan</th>
                                 <th>Semester</th>
                                 <th>Mhs</th>
                                 <th>Mata Kuliah</th>
@@ -55,13 +57,10 @@
                                 <th>Jam</th>
                                 <th>Dosen PDPT</th>
                                 <th>Dosen Mengajar</th>
-
                             </tr>
                         </thead>
                         <tbody id="create-sebaran">
-
                         </tbody>
-
                     </table>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info float-right">Input</button>
@@ -78,60 +77,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log('ini tahun')
-        console.log($('#tahun'))
-        $('#tahun').on('input', function () {
+        
+        console.log($('#kurikulum'))
+        $('#kurikulum').on('input', function () {
 
-            var kode = $(this).val();
-            console.log(kode)
-            $.ajax({
-                type: "GET",
-                url: "{{ route('sebaran.ajax_select') }}",
-                dataType: "JSON",
-                data: {
-                    tahun: kode
-                },
-                cache: false,
-                success: function (data) {
-                    console.log(data);
-                    $('#semester').empty()
-                    var option = ` <option value="">Pilih Semester</option>
-                        `
-                    $('#semester').append(option)
-                    var data = data.data;
-                    data.forEach(tahun => {
-                        var option = ` <option value="${tahun.semester}">${tahun.semester}</option>
-                        `
-                        $('#semester').append(option)
-
-                    })
-
-
-
-
-
-
-                }
-            });
-            return false;
+            $('#semester').prop('disabled',false)
+          
+            
         });
     });
-
 </script>
 
+
 <!-- AJAX KODE KELAS CREATE -->
+
 
 <script type="text/javascript">
     $(document).ready(function () {
         console.log($('#semester'))
         $('#semester').on('input', function () {
-            var get = $(this).val();
+            var semester = $(this).val();
+            var kurikulum = $('#kurikulum').val();
+            
             $.ajax({
                 type: "GET",
                 url: "{{ route('sebaran.ajax_create') }}",
                 dataType: "JSON",
                 data: {
-                    get: get
+                    semester: semester , kurikulum:kurikulum
                 },
                 cache: false,
                 success: function (data) {
@@ -210,12 +183,15 @@
                         </tr>
                     `
                         table.append(sebaran)
+                        $('#sebaran-table').DataTable();
+                        
                     })
                 }
             });
             return false;
         });
     });
+    
 
 </script>
 @endsection

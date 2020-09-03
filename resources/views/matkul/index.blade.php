@@ -29,13 +29,7 @@
                                 @endforeach
                             </select>
                             @endif
-                            <select name="tahun" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="inlineFormCustomSelectPref">
-                                <option selected disabled>Tahun Akademik</option>
-                                @foreach($cari_tahun as $matkul)
-                                <option value="{{$matkul->tahun}}">{{$matkul->tahun}}</option>
-                                @endforeach
-
-                            </select>
+                            
                             <select name="semester" class="custom-select my-1 mr-sm-2 col-md-2"
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Semester</option>
@@ -48,7 +42,7 @@
                         </div>
                     </div>
                         <div class="card-body table-responsive">
-                            <table class="table table-bordered " id="dosen">
+                            <table class="table table-bordered table-striped" id="matkul">
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
@@ -57,8 +51,6 @@
                                         <th>SKS</th>
                                         <th>Kurikulum</th>
                                         <th>Semester</th>
-                                        <th>Tahun Akademik</th>
-                                        <!-- <th>Prodi</th> -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -72,8 +64,6 @@
                                         <td>{{ $row->sks}}</td>
                                         <td>{{ $row->kurikulum}}</td>
                                         <td>{{ $row->semester}}</td>
-                                        <td>{{ $row->tahun}}</td>
-                                        <!-- <td>{{ $row->nama}}</td> -->
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('matkul.edit',$row->id) }}"
@@ -101,6 +91,7 @@
 
             </div>
 </section>
+
 
 
 @endsection()

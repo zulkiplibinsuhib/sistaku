@@ -54,14 +54,16 @@
                         <td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-10','required'])}}
                         </td>
                     </tr>
-                    <tr>
-                        <td><label class="offset-4">Tahun Akademik</label> </td>
-                        <td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-10','required'])}}
-                        </td>
-                    </tr>
+               
                     <tr>
                         <td><label class="offset-4">Kurikulum</label>
-                        <td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],'null',['class'=>'form-control col-10','required'])}}
+                        <td> <select name="kurikulum" class="form-control col-10" >
+                            <option selected disabled>Pilih Kurikulum</option>
+                            @foreach($kurikulum as $kurikulum)
+                            <option value="{{$kurikulum->nama}}">{{$kurikulum->nama}}</option>
+                            @endforeach
+                           
+                        </select>
                         </td>
                         </td>
                     </tr>
@@ -73,8 +75,6 @@
                     @if(empty(Auth::user()->prodi))
                     <tr>{{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control','required','readonly'])}}
                     </tr>
-
-
                     @endif
 
                 </table>

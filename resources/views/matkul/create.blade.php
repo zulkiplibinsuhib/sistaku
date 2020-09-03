@@ -63,14 +63,16 @@
                     </tr>
                     <tr>
                         <td><label for="kurikulum" class="offset-4">Kurikulum</label></td>
-                        <td>{{ Form::select('kurikulum',['2015'=>'2015','2016'=>'2016','2017'=>'2017','2018'=>'2018'],null,['class'=>'form-control col-10 offset-1','required'])}}
+                        <td> <select name="kurikulum" class="form-control offset-1 col-10" >
+                            <option selected disabled>Pilih Kurikulum</option>
+                            @foreach($kurikulum as $kurikulum)
+                            <option value="{{$kurikulum->nama}}">{{$kurikulum->nama}}</option>
+                            @endforeach
+                           
+                        </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td><label class="offset-4">Tahun Akademik</label> </td>
-                        <td>{{ Form::number('tahun',null,['placeholder'=>'masukkan tahun akademik','class'=>'form-control col-10 offset-1','required'])}}
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td><label for="semester" class="offset-4">Semester</label></td>
                         <td>

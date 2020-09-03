@@ -28,7 +28,6 @@
                 </h3>
             </div>
             <div class="card-body">
-
                 {{ Form::model($kelas,['url'=>'kelas/'.$kelas->id,'method'=>'put'])}}
                 <div class="form-group row">
                     <form class="form-horizontal">
@@ -38,9 +37,7 @@
                 <div class="form-group row">
                     <label for="kelas" class="offset-1 col-3 col-form-label">Nama Kelas</label>
                     {{ Form::text('kelas',null,['placeholder'=>'Nama Kelas','class'=>'form-control col-6','required'])}}
-
                 </div>
-
                 {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-md-7','name'=>'prodi',' readonly'])}}
                 <div class="form-group row">
                     <label for="semester" class="offset-1 col-3 col-form-label">Semester</label>
@@ -88,8 +85,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tahun" class="offset-1 col-3 col-form-label">Tahun Ajaran</label>
-                    {{ Form::number('tahun',null,['placeholder'=>'Masukkan tahun akademik','class'=>'form-control col-6','required'])}}
+                    <label for="tahun" class="offset-1 col-3 col-form-label">Angkatan </label>
+                    {{ Form::number('tahun',null,['placeholder'=>'Ex.2016','class'=>'form-control col-6','required'])}}
                 </div>
 
                 <div class="form-group row">

@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-body table-responsive">
 
-                    <table class="table table-bordered" id="prodi">
+                    <table class="table table-bordered table-striped" id="prodi">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -49,15 +49,13 @@
                                 <td>
                                     <div class="d-flex justify-content-center align">
                                         <a href="{{ route('prodi.edit',$row->id) }}"
-                                            class="btn btn-sm btn-warning fas fa-edit mr-2" width="30px"
-                                            height="30px title=" Edit"></a>
+                                            class="btn btn-sm btn-warning fas fa-edit mr-2" title=" Edit"></a>
                                         <form action="{{route('prodi.destroy',$row->id)}}" method="post" title="Hapus">
                                             @csrf
                                             @method('Delete')
                                             <button class="btn btn-danger btn-sm fas fa-trash-alt "
                                                 onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
                                         </form>
-
                                 </td>
                 </div>
                 </tr>
@@ -72,14 +70,3 @@
 </section>
 
 @endsection()
-
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
-
-</script>

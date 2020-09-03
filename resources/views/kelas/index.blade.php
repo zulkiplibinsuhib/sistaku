@@ -12,7 +12,6 @@
 @endif
 
 <section class="content">
-
     <div class="row">
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
@@ -51,15 +50,18 @@
                 </div>
 
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered " id="kelas">
+                    <table class="table table-bordered table-striped " id="kelas">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th> Kode Kelas</th>
+                                <th>Kode Kelas</th>
+                                <th>Kelas</th>
+                                @if(empty(Auth::user()->prodi))
                                 <th>Prodi</th>
+                                @endif
                                 <th>Semester</th>
                                 <th>Mahasiswa</th>
-                                <th>Tahun Akademik</th>
+                                <th>Angkatan</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
@@ -70,7 +72,10 @@
                             <tr class="text-center">
                                 <td>{{ $no++}} </td>
                                 <td>{{ $row->kode}}</td>
+                                <td>{{ $row->kelas}}</td>
+                                @if(empty(Auth::user()->prodi))
                                 <td>{{ $row->nama}}</td>
+                                @endif
                                 <td>{{ $row->semester}}</td>
                                 <td>{{ $row->mhs}}</td>
                                 <td>{{ $row->tahun}}</td>
@@ -82,7 +87,7 @@
                                         <form action="{{route('kelas.destroy',$row->id)}}" method="post" title="Hapus">
                                             @csrf
                                             @method('Delete')
-                                            <button class="btn btn-danger btn-sm fas fa-trash-alt "
+                                            <button class="btn btn-danger btn-sm fas fa-trash-alt mr-2 "
                                                 onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
                                         </form>
                                     </div>
@@ -90,22 +95,12 @@
                             </tr>
                             @endforeach
                         </tbody>
-
-
                     </table>
                     <a href="{{ route('home') }}" class="btn btn-danger">Back</a>
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </section>
-
-
-
-
-
 
 @endsection()

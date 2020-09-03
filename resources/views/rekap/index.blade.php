@@ -32,7 +32,7 @@
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Tahun Akademik</option>
                                 @foreach($cari_tahun as $dosen)
-                                <option value="{{$dosen->tahun}}">{{$dosen->tahun}}</option>
+                                <option value="{{$dosen->tahun_akademik}}">{{$dosen->tahun_akademik}}</option>
                                 @endforeach
                             </select>
 
@@ -66,9 +66,9 @@
                             
                         </div>
                     </div>
-                    <table class="table table-bordered" id="dosen">
+                    <table class="table table-bordered table table-striped" id="dosen">
                         <thead>
-                            <tr class="text-center">
+                            <tr class="text-center <?php?>">
                                 <th>No</th>
                                 <th>Nama Dosen</th>
                                 <th>NIDN</th>
@@ -88,12 +88,11 @@
                                 <td class="text-center">{{ $row->name}}</td>
                                 <td class="text-center">{{ $row->nidn}}</td>
                                 <!-- <td>{{ $row->nama}}</td> -->
-                                <!-- <td>{{ $row->tahun}}</td> -->
                                 <td class="text-center">{{ $row->bidang}}</td>
                                 <td class="text-center">{{ $row->jumlah_sks}}</td>
                                 <td class="text-center">{{ $row->jumlah_jam}}</td>
                                 <td> @foreach($row->matkul_diambil as $matkul) {{$row->no++}}.
-                                    {{ $matkul->mata_kuliah }} = {{ $matkul->nama }}
+                                    {{ $matkul->matkul }} = {{ $matkul->nama }}
                                     <br>@endforeach</td>
 
                             </tr>

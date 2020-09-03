@@ -18,12 +18,12 @@ class MatkulController extends Controller
     public function index()
     {
         $id = Auth::user()->prodi;
-        $cari_tahun = DB::table('matkul')->groupBy('tahun')->get();
+        
         $cari_semester = DB::table('matkul')->groupBy('semester')->get();
         $get_ProdiAndMatkul = DB::table('matkul')
                             ->join ('prodi', 'matkul.prodi', '=', 'prodi.id')
-                            ->select('matkul.tahun','matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','matkul.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','prodi.nama')
-                            ->groupBy('matkul');;
+                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','matkul.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','prodi.nama')
+                            ;
                              
         if($id){
             $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
@@ -33,10 +33,7 @@ class MatkulController extends Controller
                 $prodi = $_GET['prodi'];
                 $get_ProdiAndMatkul->where('prodi.id',$prodi);
               } 
-              if(!empty($_GET['tahun'])){
-                $tahun = $_GET['tahun'];
-                $get_ProdiAndMatkul->where('matkul.tahun',$tahun);
-              }
+             
               if(!empty($_GET['semester'])){
                 $semester = $_GET['semester'];
                 $get_ProdiAndMatkul->where('matkul.semester',$semester);
@@ -46,7 +43,7 @@ class MatkulController extends Controller
         $get_ProdiAndMatkul = $get_ProdiAndMatkul->get();
         $data['get_ProdiAndMatkul'] = $get_ProdiAndMatkul;
         $data['cari_semester'] = $cari_semester;          
-        $data['cari_tahun'] = $cari_tahun;
+        
         
         
         //$data_prodi = new Prodi();
@@ -63,8 +60,10 @@ class MatkulController extends Controller
      */
     public function create()
     {
+        $kurikulum = DB::table('kurikulum')->groupBy('nama')->get();
         $data_prodi = DB::table('prodi')->pluck('nama');
         $data['data_prodi'] = $data_prodi;
+        $data['kurikulum'] = $kurikulum ;
         return view('matkul.create',$data);
     }
  
@@ -84,8 +83,7 @@ class MatkulController extends Controller
             'jam_minggu' => 'required',
             'kurikulum' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
-            'prodi' => 'required',
+            
             
         ]);
         $all_prodi = $request->prodi;
@@ -100,7 +98,7 @@ class MatkulController extends Controller
                 'jam_minggu'=>$request->jam_minggu,
                 'kurikulum'=>$request->kurikulum,
                 'semester'=>$request->semester,
-                'tahun'=>$request->tahun,
+               
                 'prodi'=>$prodi->id ?? $request->user()->prodi ]);    
             } 
         }else{
@@ -112,7 +110,6 @@ class MatkulController extends Controller
             'jam_minggu'=>$request->jam_minggu,
             'kurikulum'=>$request->kurikulum,
             'semester'=>$request->semester,
-            'tahun'=>$request->tahun,
             'prodi'=>$request->prodi ?? $request->user()->prodi ]);    
         }
         
@@ -138,8 +135,10 @@ class MatkulController extends Controller
      */
     public function edit($id)
     {
+        $kurikulum = DB::table('kurikulum')->groupBy('nama')->get();
         $data_prodi = DB::table('prodi')->pluck('nama');
         $data['data_prodi'] = $data_prodi;
+        $data['kurikulum'] = $kurikulum ;
         $data['matkul'] = DB::table('matkul')->where('id',$id)->first();
         return view('matkul.edit',$data); 
     }
@@ -161,7 +160,8 @@ class MatkulController extends Controller
             'jam_minggu' => 'required',
             'kurikulum' => 'required',
             'semester' => 'required',
-            'tahun' => 'required',
+           
+            
             'prodi' => 'required',
             
         ]);
@@ -173,7 +173,7 @@ class MatkulController extends Controller
                                                         'jam_minggu'=>$request->jam_minggu,
                                                         'kurikulum'=>$request->kurikulum,
                                                         'semester'=>$request->semester,
-                                                        'tahun'=>$request->tahun,
+                                                    
                                                         'prodi'=>$request->prodi]);
                                                         return redirect('matkul')->with('status', 'Data updated successfully  .');
     }

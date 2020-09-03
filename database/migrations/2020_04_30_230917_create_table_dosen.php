@@ -15,12 +15,12 @@ class CreateTableDosen extends Migration
     {
         Schema::create('dosen', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
+            $table->string('name','20'); 
             $table->integer('nidn');
-            $table->string('jenis_kelamin');
-            $table->string('status');
-            $table->string('bidang');
-            $table->string('prodi');
+            $table->string('jenis_kelamin','20');
+            $table->string('status','20');
+            $table->string('bidang','20');
+            $table->string('prodi','30');
             $table->timestamps();
         });
     }

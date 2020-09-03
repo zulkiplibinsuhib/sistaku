@@ -41,12 +41,12 @@
                             <hr>
                             <strong><i class="fas fa-venus-mars mr-1"></i> Jenis Kelamin</strong>
                             <p class="text-muted">
-                            {{$dosen->jenis_kelamin}}
+                                {{$dosen->jenis_kelamin}}
                             </p>
                             <hr>
                             <strong><i class="fas fa-book mr-1"></i> Bidang</strong>
                             <p class="text-muted">
-                            {{$dosen->bidang}}
+                                {{$dosen->bidang}}
                             </p>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> Status Dosen</strong>
@@ -65,7 +65,20 @@
                                 <div class="card-header">
                                     <h3 class="card-title text-bold">Detail Mengajar
                                     </h3>
+                                    <div class="card-tools mr-1 ">
+                                        <form class="form-inline" action="" method="get">
+                                            <select name="tahun" class="custom-select " style="width: 200px;" id="inlineFormCustomSelectPref">
+                                                <option selected disabled>Tahun Akademik</option>
+                                                @foreach($cari_tahun as $row)
+                                                <option value="{{$row->tahun_akademik}}">{{$row->tahun_akademik}}</option>
+                                                @endforeach
+
+                                            </select>
+                                            <button type="submit" class="btn btn-primary my-1 ">Filter</button>
+                                        </form>
+                                    </div>
                                 </div>
+
                                 <div class="card-body">
                                     <form class="form-horizontal">
                                         <div class="form-group row">
@@ -91,6 +104,7 @@
                                                 <tr class="text-center">
                                                     <th>No</th>
                                                     <th>Prodi</th>
+                                                    <th>Kelas</th>
                                                     <th>Mata Kuliah</th>
                                                     <th>SKS</th>
                                                     <th>Jam</th>
@@ -103,7 +117,8 @@
                                                 <tr class="text-center">
                                                     <td>{{$no++}} </td>
                                                     <td>{{$row->nama}} </td>
-                                                    <td>{{$row->mata_kuliah}} </td>
+                                                    <td>{{$row->kode_kelas}} </td>
+                                                    <td>{{$row->matkul}} </td>
                                                     <td>{{$row->sks}} </td>
                                                     <td>{{$row->jam}} </td>
 

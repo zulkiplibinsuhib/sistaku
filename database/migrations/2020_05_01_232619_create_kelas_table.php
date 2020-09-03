@@ -15,13 +15,13 @@ class CreateKelasTable extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('kelas');
-            $table->string('prodi');
-            $table->string('semester');
+            $table->string('kode','10');
+            $table->string('kelas','20');
+            $table->string('prodi','20');
+            $table->string('semester','10');
             $table->integer('mhs');
-            $table->string('keterangan');
-            $table->string('tahun');
+            $table->string('keterangan','20');
+            $table->string('tahun','10');
             
             $table->timestamps();
         });

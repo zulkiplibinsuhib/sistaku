@@ -52,10 +52,7 @@ class DosenController extends Controller
                 }
                 
         $get_prodiAndDosen = $get_prodiAndDosen->get();
-        foreach($get_prodiAndDosen as &$dosen)
-        {
-            $dosen->jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->id)->sum('jam');
-        }
+        
      
         
             $data['get_prodiAndDosen'] = $get_prodiAndDosen;
@@ -94,7 +91,7 @@ class DosenController extends Controller
             'jenis_kelamin' => 'required',
             'status' => 'required',
             'bidang' => 'required',
-            'prodi' => 'required',
+            
             
         ]);
         $all_prodi = $request->prodi;
@@ -129,19 +126,43 @@ class DosenController extends Controller
      */
     public function show($id)
     {
+        $cari_tahun = DB::table('sebaran')->get();
+       
         $dosen = Dosen::find($id); 
-        $jumlah_sks = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->sum('sks');
-        $jumlah_jam = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->sum('jam');
+        
+        $jumlah_sks =DB::table('sebaran')
+                    ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
+                    ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
+                    ->select('dosen.name','dosen.nidn','dosen.bidang','matkul.jam_minggu','matkul.sks','matkul.teori','matkul.praktek','matkul.kurikulum','matkul.semester')
+                    ->where('dosen_mengajar',$dosen->nidn);
+        $jumlah_jam = DB::table('sebaran')
+                    ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
+                    ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
+                    ->select('dosen.name','dosen.nidn','dosen.bidang','matkul.jam_minggu','matkul.sks','matkul.teori','matkul.praktek','matkul.kurikulum','matkul.semester')
+                    ->where('dosen_mengajar',$dosen->nidn);
         $get_data = DB::table('sebaran')
                         ->join('prodi', 'prodi.id','=','sebaran.prodi')
-                        ->select('prodi.nama','sebaran.jam','sebaran.mata_kuliah','sebaran.sks')
-                        ->where('dosen_mengajar',$dosen->nidn)->get();
+                        ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
+                        ->join('kelas','sebaran.kd_kelas','=','kelas.id')
+                        ->select('prodi.nama','sebaran.mata_kuliah','matkul.sks','matkul.jam_minggu as jam','matkul.matkul','kelas.kode as kode_kelas')
+                        ->where('dosen_mengajar',$dosen->nidn);
+        if(!empty($_GET)){
+            if(!empty($_GET['tahun'])){
+                $tahun = $_GET['tahun'];
+                $get_data->where('sebaran.tahun_akademik',$tahun);
+                $jumlah_jam->where('sebaran.tahun_akademik',$tahun);
+                $jumlah_sks->where('sebaran.tahun_akademik',$tahun);
+                } 
+           
+        }
+        
        
        
         $data['dosen'] = $dosen ;
-        $data['jumlah_sks'] = $jumlah_sks ;
-        $data['jumlah_jam'] = $jumlah_jam ;
-        $data['get_data'] = $get_data ;
+        $data['jumlah_sks'] = $jumlah_sks->sum('sks') ;
+        $data['jumlah_jam'] = $jumlah_jam->sum('jam_minggu') ;
+        $data['get_data'] = $get_data ->get() ;
+        $data['cari_tahun'] = $cari_tahun ;
         
         return view('dosen.show',$data);
         

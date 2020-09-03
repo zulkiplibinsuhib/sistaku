@@ -28,7 +28,7 @@
                     </h3>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered" id="prodi">
+                    <table class="table table-bordered table-striped" id="prodi">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>

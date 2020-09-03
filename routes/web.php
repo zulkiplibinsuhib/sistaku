@@ -17,31 +17,48 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('sebaran/tambah_form', 'SebaranController@kurikulum_2019_ganjil')->name('sebaran.kurikulum_2019_ganjil');
 
 // AJAX REQUEST
+Route::get('sebaran/get_kelas', 'SebaranController@pilih_kelas')->name('sebaran.pilih_kelas');
 // Route::get('sebaran/send-form', 'SebaranController@send_form')->name('sebaran.send_form');
+
+//  SEBARAN
+Route::get('sebaran/kurikulum_2019_ganjil', 'SebaranController@create_kur2019_ganjil')->name('sebaran.create_kur2019_ganjil');
+Route::get('sebaran/kurikulum_2019_genap', 'SebaranController@create_kur2019_genap')->name('sebaran.create_kur2019_genap');
+Route::get('sebaran/kurikulum_2014_ganjil', 'SebaranController@create_kur2014_ganjil')->name('sebaran.create_kur2014_ganjil');
+Route::get('sebaran/kurikulum_2014_genap', 'SebaranController@create_kur2014_genap')->name('sebaran.create_kur2014_genap');
+Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
+Route::resource('sebaran', 'SebaranController');
 
 Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
+Route::get('sebaran/cetak_pdf', 'SebaranController@cetak_pdf')->name('cetak_pdf');
+Route::get('sebaran/sebaran_pdf', 'SebaranController@sebaran_pdf')->name('sebaran_pdf');
 
+
+
+//USERS
+Route::resource('users', 'UserController');
+
+//DOSEN
+Route::resource('dosen', 'DosenController'); 
+Route::get('dosen/export_excel', 'DosenController@export_excel')->name('exportdosen');
+
+//KURIKULUM
+Route::resource('kurikulum', 'KurikulumController'); 
+
+//MATKUL
+Route::resource('matkul', 'MatkulController'); 
 Route::get('sebaran/cari_matkul', 'SebaranController@ajax_select_matkul')->name('sebaran.ajax_select_matkul');
 Route::get('sebaran/cari_matkul_edit', 'SebaranController@ajax_select_matkul_edit')->name('sebaran.ajax_select_matkul_edit');
 
-Route::resource('users', 'UserController');
-Route::resource('dosen', 'DosenController'); 
-Route::get('dosen/export_excel', 'DosenController@export_excel')->name('exportdosen');;
-Route::resource('matkul', 'MatkulController'); 
+// PRODI
 Route::resource('prodi', 'ProdiController'); 
-Route::resource('sebaran', 'SebaranController');
+
+//REKAP
 Route::resource('rekap', 'RekapController');
-
-
-
-// APPROVE SEBARAN
-Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
-
 
 // KELAS
 Route::resource('kelas', 'KelasController'); 

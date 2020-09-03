@@ -31,54 +31,30 @@
 <table class="table table-borderless">
 
     <tr>
-        <td><label for="kd_kelas" class="offset-3">Kode Kelas</label></td>
-        <td>{{ Form::text('kd_kelas',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'kd_kelas',' readonly'])}}
+        <td><label for="kd_kelas" class="offset-3">Mata Kuliah</label></td>
+        <td><label for="" class="form-control col-10" readonly>{{$sebaran->kode_matkul}}</label> </td>
+            {{ Form::hidden('id_matkul',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'mata_kuliah','value'=>'id_matkul', 'readonly'])}}
     </tr>
     <tr>
-        <td><label for="kelas" class="offset-3">Kelas</label></td>
-        <td>{{ Form::text('kelas',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'kelas',' readonly'])}}
-        </td>
+        <td><label for="kd_kelas" class="offset-3">Kelas</label></td>
+        <td><label for="" class="form-control col-10" readonly>{{$sebaran->kode}}</label></td>
+            {{ Form::hidden('id_kelas',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'kd_kelas','value'=>'id_kelas',' readonly'])}} 
     </tr>
     <tr> 
         
        {{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'prodi',' readonly'])}}      
+       {{ Form::hidden('semester',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'semester',' readonly'])}}      
+       {{ Form::hidden('tahun_akademik',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'tahun_akademik',' readonly'])}}      
     </tr>
-    <tr>
-        <td><label class="offset-3">Tahun Akademik</label> </td>
-        <td>{{ Form::text('tahun',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'tahun','readonly'])}}
-        </td>
-    </tr>
-    <tr>
-        <td><label class="offset-3">Semester</label> </td>
-        <td>{{ Form::text('semester',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'semester','readonly'])}}
-        </td>
-    </tr>
-    <tr>
-        <td><label class="offset-3">Mahasiswa </label> </td>
-        <td>{{ Form::text('mhs',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'mhs','id'=>'mhs-sebaran','readonly'])}}
-        </td>
-    </tr>
-    <tr>
-    <td><label class="offset-3">Mata Kuliah</label> </td>
-        <td>{{ Form::text('mata_kuliah',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'mata_kuliah','id'=>'mhs-sebaran','readonly'])}}
-        </td>
-    </tr>
-    <tr>
-        <td><label class="offset-3">SKS</label> </td>
-        <td>{{ Form::text('sks',null,['placeholder'=>'','class'=>'form-control col-10','id'=>'sks-edit','readonly'])}}
-        </td>
-    </tr>
-    <tr>
-        <td><label class="offset-3">Jam</label> </td>
-        <td>{{ Form::text('jam',null,['placeholder'=>'Jumlah Jam Mengajar','class'=>'form-control col-10','readonly'])}}
-        </td>
+
+      
     </tr>
     <tr>
         <td><label class="offset-3" for="dosen">Dosen PDPT</label></td>
-        <td><select class="form-control col-10" name="dosen_mengajar" >
+        <td><select class="form-control col-10" name="dosen_pdpt" >
                 <option selected disabled >Pilih Dosen Kembali</option>
                 @foreach($data_dosen as $dosen)
-                <option value="{{ $dosen->id}}">{{ $dosen->name}} </option>
+                <option value="{{ $dosen->nidn}}">{{ $dosen->name}} </option>
                 @endforeach
             </select></td>
     </tr>
@@ -88,7 +64,7 @@
             <select class="form-control col-10" name="dosen_mengajar" >
                 <option selected disabled >Pilih Dosen Kembali</option>
                 @foreach($data_dosen as $dosen)
-                <option value="{{ $dosen->id}}">{{ $dosen->name}}</option>
+                <option value="{{ $dosen->nidn}}">{{ $dosen->name}}</option>
                 @endforeach
             </select></td>
     </tr>

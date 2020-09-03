@@ -38,8 +38,6 @@
                                     <option value="{{$dosen->bidang}}">{{$dosen->bidang}}</option>
                                     @endforeach
                                 </select>
-
-
                                 <button type="submit" class="btn btn-primary my-1 ">Filter</button>
                             </form>
                         </div>
