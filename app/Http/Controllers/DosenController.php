@@ -126,7 +126,7 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        $cari_tahun = DB::table('sebaran')->get();
+        $cari_tahun = DB::table('sebaran')->groupBy('tahun_akademik')->get();
        
         $dosen = Dosen::find($id); 
         

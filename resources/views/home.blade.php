@@ -1,16 +1,18 @@
 @extends('layout')
-@section('title')
+@section('title','BERANDA')
 @section('content')
 <!-- Small boxes (Stat box) -->
 <div class="row">
 <div>
-      <div class="callout callout-warning" style="margin:-15px 15px 15px 15px;">											
+      <div class="callout callout-warning col-12" style="margin:-15px 15px 15px 15px;">											
           <h4><i class=""></i> SISTEM INFORMASI PENENTUAN DOSEN PENGAMPU MATA KULIAH</h4>
-          Selamat Datang Operator di SISTAKU. Disini Anda Dapat melakukan pengelolaan data Akademik , seperti memanajemen data dosen, mata kuliah, kelas dan membuat sebaran mata kuliah. Salam dan Terimakasih
+          Selamat Datang Operator di SISTAKU. Disini Anda Dapat melakukan pengelolaan data Akademik , seperti mengelola data dosen, mata kuliah tiap kurikulum, kelas dan membuat sebaran mata kuliah serta menentukan dosen pengampu mata kuliah. 
+          Sistem informasi ini bertujuan untuk memudahkan proses membuat sebaran di setiap Program Studi dan memudahkan Akademik dalam merekap semua data sebaran serta dapat mengetahui jumlah jam mengajar setiap dosen pengampu mata kuliah. Dengan adanya sistem informasi ini, berharap
+          tidak terjadi lagi duplikasi mata kuliah .Salam dan Terimakasih
       </div>
   </div>
     @if(Auth::user()->level == 'admin')
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info text-center ">
             <div class="inner">
@@ -26,7 +28,7 @@
         </div>
     </div>
     @endif
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <div class="small-box bg-orange text-center">
             <div class="inner">
                 <h3>{{$dosen}}</h3>
@@ -40,7 +42,7 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box   -->
         <div class="small-box bg-success text-center">
             <div class="inner">
@@ -54,7 +56,7 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
 
         <div class="small-box bg-warning text-center">
@@ -71,7 +73,7 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <div class="small-box bg-danger text-center">
             <div class="inner">
                 <h3>{{$sebaran}}</h3>
@@ -84,7 +86,7 @@
         </div>
     </div>
     @if(Auth::user()->level == 'admin')
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info text-center ">
             <div class="inner">
@@ -101,7 +103,7 @@
     </div>
     @endif
     @if(Auth::user()->level == 'admin')
-    <div class="col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-success text-center ">
             <div class="inner">

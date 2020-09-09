@@ -99,7 +99,7 @@
                                     </form>
 
                                     <div>
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" id="show_dosen">
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>No</th>

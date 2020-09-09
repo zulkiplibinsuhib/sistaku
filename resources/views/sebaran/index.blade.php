@@ -30,7 +30,7 @@
                             @endif
                             <select name="tahun" class="custom-select my-1 mr-sm-2 " 
                                 id="inlineFormCustomSelectPref">
-                                <option selected disabled>Semester</option>
+                                <option selected disabled>Tahun Akademik</option>
                                 @foreach($cari_tahun as $tahun)
                                 <option value="{{$tahun->tahun_akademik}}">{{$tahun->tahun_akademik}}</option>
                                 @endforeach
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="sebaran table table-bordered table table-striped table-responsive" id="sebaran">
+                    <table class="sebaran table table-bordered table table-striped" id="sebaran">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -74,19 +74,19 @@
                             
                             <tr class="text-center">
                                 <td>{{ $no++}} </td>
-                                <td>{{ $row->kode}}</td> 
-                                <td>{{ $row->kelas}}</td>
+                                <td>{{empty($row->kode) ? 'Belum Memilih Kelas' : $row->kode}}</td> 
+                                <td>{{empty($row->kelas) ? 'Belum Memilih Kelas' : $row->kelas}}</td>
                                 <td>{{ $row->nama_prodi}}</td>
                                 <td>{{ $row->tahun_akademik}}</td>
                                 <td>{{ $row->semester}}</td>
-                                <td>{{ $row->mhs}}</td>
+                                <td>{{empty($row->kode) ? '0' : $row->mhs}}</td>
                                 <td>{{ $row->matkul}}</td>
                                 <td>{{ $row->sks}}</td>
                                 <td>{{ $row->teori}}</td>
                                 <td>{{ $row->praktek}}</td>
                                 <td>{{ $row->jam_minggu}}</td>
-                                <td>{{ $row->name}}</td>
-                                <td>{{ $row->dosen_pdpt}}</td>
+                                <td>{{empty($row->name) ? 'Belum Memilih Dosen' : $row->name}}</td>
+                                <td>{{empty($row->dosen_pdpt) ? 'Belum Memilih Dosen' : $row->dosen_pdpt}}</td>
                                 <td>{!! $row->approved ? '<span class="badge bg-primary" >Approved</span>' : '<span class="badge bg-danger">Pending</span>'!!}</td>
                                
                                 <td>

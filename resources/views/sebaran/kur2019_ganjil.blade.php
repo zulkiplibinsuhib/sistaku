@@ -33,11 +33,15 @@
                     {{ Form::open(['url'=>'sebaran'])}}
                     <table class="sebaran-table table table-bordered table table-striped" id="table-1">
                         <h4 class="text-center">Semester 1</h4>
-                       
+                        <select id="pilih_kelas" class="form-control col-2 ">
+                            <option selected value="">Pilih Kode Kelas</option>
+                            @foreach($pilih_kelas1 as $row)
+                            <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
+                            @endforeach
+                        </select>
                         <thead>
                             <tr class="text-center">
                                 <th>Mata Kuliah</th>
-                                <th>Kelas</th>
                                 <th>Dosen Mengajar</th>
                                 <th>Dosen PDPT</th>
                             </tr>
@@ -46,26 +50,20 @@
                         <tr class="text-center">
                             <td>{{$row1->matkul}} </td>
                             <input type="hidden" name="mata_kuliah[]" value="{{$row1->id}}">
-                            <td>
-                            <select name="kd_kelas[]" id="pilih_kelas" class="form-control">
-                                    <option disabled selected>Pilih Kode Kelas</option>
-                                    @foreach(App\Kelas::all() as $row)
-                                    <option value="{{$row->id}}">{{$row->kode}}</option>
-                                    @endforeach
-                                </select> </td>
+                            <input type="hidden" name="kd_kelas[]" class="kode">
                             <input type="hidden" name="semester[]" value="{{$row1->semester}}">
                             <input type="hidden" name="prodi[]" value="{{$row1->prodi}}">
                             <Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>
                             <td><select name="dosen_mengajar[]" id="" class="form-control">
-                                    <option selected value="111">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
                                     <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                             <td><select name="dosen_pdpt[]" id="" class="form-control">
-                                    <option selected value="111">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                         </tr>
@@ -79,10 +77,15 @@
                     <hr><br>
                     <table class="sebaran-table table table-bordered table table-striped" id="table-2">
                         <h4 class="text-center">Semester 3</h4>
+                        <select id="pilih_kelas3" class="form-control col-2 ">
+                            <option selected value="">Pilih Kode Kelas</option>
+                            @foreach($pilih_kelas3 as $row)
+                            <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
+                            @endforeach
+                        </select>
                         <thead>
                             <tr>
                                 <th>Mata Kuliah</th>
-                                <th>Kode Kelas</th>
                                 <th>Dosen Mengajar</th>
                                 <th>Dosen PDPT</th>
                             </tr>
@@ -91,25 +94,20 @@
                         <tr class="text-center">
                             <td>{{$row3->matkul}} </td>
                             <input type="hidden" name="mata_kuliah[]" value="{{$row3->id}}">
-                            <td><select name="kd_kelas[]" id="" class="form-control">
-                                    <option disabled selected>Pilih Kode Kelas</option>
-                                    @foreach(App\Kelas::all() as $row)
-                                    <option value="{{$row->id}}">{{$row->kode}}</option>
-                                    @endforeach
-                                </select> </td>
                             <input type="hidden" name="semester[]" value="{{$row3->semester}}">
+                            <input type="hidden" name="kd_kelas[]" class="kode3">
                             <input type="hidden" name="prodi[]" value="{{$row3->prodi}}">
-                            <Input type="hidden" name="tahun_akademik[]" value="{{$year}}"></Input>
+                            <Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>
                             <td><select name="dosen_mengajar[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                             <td><select name="dosen_pdpt[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                         </tr>
@@ -124,10 +122,15 @@
                     <hr><br>
                     <table class="sebaran-table table table-bordered table table-striped" id="table-3">
                         <h4 class="text-center">Semester 5</h4>
+                        <select id="pilih_kelas5" class="form-control col-2 ">
+                            <option selected value="">Pilih Kode Kelas</option>
+                            @foreach($pilih_kelas5 as $row)
+                            <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
+                            @endforeach
+                        </select>
                         <thead>
                             <tr>
                                 <th>Mata Kuliah</th>
-                                <th>Kode Kelas</th>
                                 <th>Dosen Mengajar</th>
                                 <th>Dosen PDPT</th>
                             </tr>
@@ -136,25 +139,20 @@
                         <tr class="text-center">
                             <td>{{$row5->matkul}} </td>
                             <input type="hidden" name="mata_kuliah[]" value="{{$row5->id}}">
-                            <td><select name="kd_kelas[]" id="" class="form-control">
-                                    <option disabled selected>Pilih Kode Kelas</option>
-                                    @foreach(App\Kelas::all() as $row)
-                                    <option value="{{$row->id}}">{{$row->kode}}</option>
-                                    @endforeach
-                                </select> </td>
+                            <input type="hidden" name="kd_kelas[]" class="kode5">
                             <input type="hidden" name="semester[]" value="{{$row5->semester}}">
                             <input type="hidden" name="prodi[]" value="{{$row5->prodi}}">
-                            <Input type="hidden" name="tahun_akademik[]" value="{{$year}}"></Input>
+                            <Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>
                             <td><select name="dosen_mengajar[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                             <td><select name="dosen_pdpt[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                         </tr>
@@ -169,10 +167,15 @@
                     <hr><br>
                     <table class="sebaran-table table table-bordered table table-striped" id="table-4">
                         <h4 class="text-center">Semester 7</h4>
+                        <select id="pilih_kelas7" class="form-control col-2 ">
+                            <option selected value="">Pilih Kode Kelas</option>
+                            @foreach($pilih_kelas7 as $row)
+                            <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
+                            @endforeach
+                        </select>
                         <thead>
                             <tr>
                                 <th>Mata Kuliah</th>
-                                <th>Kode Kelas</th>
                                 <th>Dosen Mengajar</th>
                                 <th>Dosen PDPT</th>
                             </tr>
@@ -181,24 +184,21 @@
                         <tr class="text-center">
                             <td>{{$row7->matkul}} </td>
                             <input type="hidden" name="mata_kuliah[]" value="{{$row7->id}}">
-                            <td><select name="kd_kelas[]" id="" class="form-control">
-                                    <option disabled selected>Pilih Kode Kelas</option>
-                                    @foreach(App\Kelas::all() as $row)
-                                    <option value="{{$row->id}}">{{$row->kode}}</option>
-                                    @endforeach
-                                </select> </td>
+                            <input type="hidden" name="kd_kelas[]" class="kode7">
+
                             <input type="hidden" name="semester[]" value="{{$row7->semester}}">
                             <input type="hidden" name="prodi[]" value="{{$row7->prodi}}">
+                            <Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>
                             <td><select name="dosen_mengajar[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                             <td><select name="dosen_pdpt[]" id="" class="form-control">
-                                    <option selected value="Belum Memilih Dosen">Pilih Dosen</option>
+                                    <option selected value="">Pilih Dosen</option>
                                     @foreach($data_dosen as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    <option value="{{$row->nidn}}">{{$row->name}}</option>
                                     @endforeach
                                 </select></td>
                         </tr>
@@ -240,62 +240,63 @@
                         console.log(dosens)
                         var data = data.data;
                         var sebaran =
-                        `
-                        <table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add1">` +
+                            `
+                            <div id="table-add1"><table class="sebaran sebaran-table table table-bordered table table-striped" >`+
                             '<thead>' +
-                                '<tr class="text-center">' +
-                                    '<th>Mata Kuliah</th>' +
-                                    '<th>Kode Kelas</th>' +
-                                    '<th>Dosen Mengajar</th>' +
-                                    '<th>Dosen PDPT</th>' +
-                                    '<th><a class="btn btn-danger btn-sm" id="hapus-table" title="Hapus table">X</a></th>' +
-                                '</tr>' +
+                            '<div >'+
+                            '<select id="pilih_kelas_ajax" class="form-control col-2 float float-left ">'+
+                            '<option selected value="">Pilih Kode Kelas</option>'+
+                            '@foreach($pilih_kelas1 as $row)'+
+                            ' <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>'+
+                            ' @endforeach'+
+                            '</select>'+
+                            '<button type="button" class="btn btn-outline-danger float-right" title="Hapus Tabel" " id="hapus-table">X</button>'+
+                            '</div>'+
+                            '<tr class="text-center">' +
+                            '<th>Mata Kuliah</th>' +
+                            '<th>Dosen Mengajar</th>' +
+                            '<th>Dosen PDPT</th>' +
+                            '</tr>' +
                             '</thead>' +
-
                             '<tbody>' +
-                                '@foreach ($semester1 as $row1)' +
-                                '<tr class="text-center">' +
-                                    '<td>{{$row1->matkul}} ' +
-                                    '<input type="hidden" name="mata_kuliah[]" value="{{$row1->id}}"</td>' +
-                                    '<td><select name="kd_kelas[]" id="" class="form-control">' +
-                                    '<option disabled selected>Pilih Kode Kelas</option>' +
-                                    '@foreach(App\Kelas::all() as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->kode}}</option>' +
-                                    '@endforeach' +
-                                    '</select> </td>' +
-                                    '<input type="hidden" name="semester[]" value="{{$row1->semester}}">' +
-                                    '<input type="hidden" name="prodi[]" value="{{$row1->prodi}}">' +
-                                    '<Input type="hidden" name="tahun_akademik[]" value="{{$year}}"></Input>'+
-                                    '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                    '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                '</tr>' +
-                                '@endforeach' +
+                            '@foreach ($semester1 as $row1)' +
+                            '<tr class="text-center">' +
+                            '<td>{{$row1->matkul}} ' +
+                            '<input type="hidden" name="mata_kuliah[]" value="{{$row1->id}}"</td>' +
+                            '<input type="hidden" name="kd_kelas[]" class="kode_ajax">'+
+                            '<input type="hidden" name="semester[]" value="{{$row1->semester}}">' +
+                            '<input type="hidden" name="prodi[]" value="{{$row1->prodi}}">' +
+                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>' +
+                            '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->nidn}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->id}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '</tr>' +
+                            '@endforeach' +
                             '</tbody>' +
-                            '</table>' +
-
+                            '</table></div>'
                             console.log($('#table-1'))
-                            $('#table-1').after(sebaran)
+                        $('#table-1').after(sebaran)
                     }
                 });
                 return false;
             });
             $('body').on('click', '#hapus-table', function () {
-                console.log('delee')
+
                 console.log($(`#table-add1`))
-                $(`#table-add1`).remove()
+                $('#table-add1').remove()
             })
 
         })
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -317,51 +318,52 @@
                         console.log(dosens)
                         var data = data.data;
                         var sebaran =
-                        `
-                        <table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add2">` +
+                            `
+                            <div id="table-add2"><table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add2">` +
+                            '<div >'+
+                            '<select id="pilih_kelas_ajax3" class="form-control col-2 float float-left ">'+
+                            '<option selected value="">Pilih Kode Kelas</option>'+
+                            '@foreach($pilih_kelas3 as $row)'+
+                            ' <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>'+
+                            ' @endforeach'+
+                            '</select>'+
+                            '<button type="button" class="btn btn-outline-danger float-right" title="Hapus Tabel" " id="hapus-table2">X</button>'+
+                            '</div>'+
                             '<thead>' +
-                                '<tr class="text-center">' +
-                                    '<th>Mata Kuliah</th>' +
-                                    '<th>Kode Kelas</th>' +
-                                    '<th>Dosen Mengajar</th>' +
-                                    '<th>Dosen PDPT</th>' +
-                                    '<th><a class="btn btn-danger btn-sm" id="hapus-table2" title="Hapus table">X</a></th>' +
-                                '</tr>' +
+                            '<tr class="text-center">' +
+                            '<th>Mata Kuliah</th>' +
+                            '<th>Dosen Mengajar</th>' +
+                            '<th>Dosen PDPT</th>' +
+                            '</tr>' +
                             '</thead>' +
-
                             '<tbody>' +
-                                '@foreach ($semester3 as $row3)' +
-                                '<tr class="text-center">' +
-                                    '<td>{{$row3->matkul}} ' +
-                                    '<input type="hidden" name="mata_kuliah[]" value="{{$row3->id}}"</td>' +
-                                    '<td><select name="kd_kelas[]" id="" class="form-control">' +
-                                    '<option disabled selected>Pilih Kode Kelas</option>' +
-                                    '@foreach(App\Kelas::all() as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->kode}}</option>' +
-                                    '@endforeach' +
-                                    '</select> </td>' +
-                                    '<input type="hidden" name="semester[]" value="{{$row3->semester}}">' +
-                                    '<input type="hidden" name="prodi[]" value="{{$row3->prodi}}">' +
-                                    '<Input type="hidden" name="tahun_akademik[]" value="{{$year}}"></Input>'+
-                                    '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                    '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                '</tr>' +
-                                '@endforeach' +
+                            '@foreach ($semester3 as $row3)' +
+                            '<tr class="text-center">' +
+                            '<td>{{$row3->matkul}} ' +
+                            '<input type="hidden" name="mata_kuliah[]" value="{{$row3->id}}"</td>' +
+                            '<input type="hidden" name="kd_kelas[]" class="kode_ajax3">'+
+                            '<input type="hidden" name="semester[]" value="{{$row3->semester}}">' +
+                            '<input type="hidden" name="prodi[]" value="{{$row3->prodi}}">' +
+                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>' +
+                            '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->nidn}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->id}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '</tr>' +
+                            '@endforeach' +
                             '</tbody>' +
-                            '</table>' +
+                            '</table></div>'
 
                             console.log($('#table-2'))
-                            $('#table-2').after(sebaran)
+                        $('#table-2').after(sebaran)
                     }
                 });
                 return false;
@@ -395,50 +397,52 @@
                         console.log(dosens)
                         var data = data.data;
                         var sebaran =
-                        `
-                        <table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add3">` +
+                            `
+                            <div id="table-add3"><table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add3">` +
+                            '<div >'+
+                            '<select id="pilih_kelas_ajax5" class="form-control col-2 float float-left ">'+
+                            '<option selected value="">Pilih Kode Kelas</option>'+
+                            '@foreach($pilih_kelas5 as $row)'+
+                            ' <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>'+
+                            ' @endforeach'+
+                            '</select>'+
+                            '<button type="button" class="btn btn-outline-danger float-right" title="Hapus Tabel" " id="hapus-table3">X</button>'+
+                            '</div>'+
                             '<thead>' +
-                                '<tr class="text-center">' +
-                                    '<th>Mata Kuliah</th>' +
-                                    '<th>Kode Kelas</th>' +
-                                    '<th>Dosen Mengajar</th>' +
-                                    '<th>Dosen PDPT</th>' +
-                                    '<th><a class="btn btn-danger btn-sm" id="hapus-table3" title="Hapus table">X</a></th>' +
-                                '</tr>' +
+                            '<tr class="text-center">' +
+                            '<th>Mata Kuliah</th>' +
+                            '<th>Dosen Mengajar</th>' +
+                            '<th>Dosen PDPT</th>' +
+                            '</tr>' +
                             '</thead>' +
-
                             '<tbody>' +
-                                '@foreach ($semester5 as $row5)' +
-                                '<tr class="text-center">' +
-                                    '<td>{{$row5->matkul}} ' +
-                                    '<input type="hidden" name="mata_kuliah[]" value="{{$row5->id}}"</td>' +
-                                    '<td><select name="kd_kelas[]" id="" class="form-control">' +
-                                    '<option disabled selected>Pilih Kode Kelas</option>' +
-                                    '@foreach(App\Kelas::all() as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->kode}}</option>' +
-                                    '@endforeach' +
-                                    '</select> </td>' +
-                                    '<input type="hidden" name="semester[]" value="{{$row5->semester}}">' +
-                                    '<input type="hidden" name="prodi[]" value="{{$row5->prodi}}">' +
-                                    '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                    '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                '</tr>' +
-                                '@endforeach' +
+                            '@foreach ($semester5 as $row5)' +
+                            '<tr class="text-center">' +
+                            '<td>{{$row5->matkul}} ' +
+                            '<input type="hidden" name="mata_kuliah[]" value="{{$row5->id}}"</td>' +
+                            '<input type="hidden" name="kd_kelas[]" class="kode_ajax5">'+
+                            '<input type="hidden" name="semester[]" value="{{$row5->semester}}">' +
+                            '<input type="hidden" name="prodi[]" value="{{$row5->prodi}}">' +
+                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>' +
+                            '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->nidn}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->id}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '</tr>' +
+                            '@endforeach' +
                             '</tbody>' +
-                            '</table>' +
+                            '</table></div>'
 
                             console.log($('#table-3'))
-                            $('#table-3').after(sebaran)
+                        $('#table-3').after(sebaran)
                     }
                 });
                 return false;
@@ -472,51 +476,53 @@
                         console.log(dosens)
                         var data = data.data;
                         var sebaran =
-                        `
-                        <table class="sebaran sebaran-table table table-bordered table table-striped" id="table-add4">` +
+                            `
+                            <div id="table-add4"><table class="sebaran sebaran-table table table-bordered table table-striped" >` +
+                            '<div >'+
+                            '<select id="pilih_kelas_ajax7" class="form-control col-2 float float-left ">'+
+                            '<option selected value="">Pilih Kode Kelas</option>'+
+                            '@foreach($pilih_kelas7 as $row)'+
+                            ' <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>'+
+                            ' @endforeach'+
+                            '</select>'+
+                            '<button type="button" class="btn btn-outline-danger float-right" title="Hapus Tabel" " id="hapus-table4">X</button>'+
+                            '</div>'+
                             '<thead>' +
-                                '<tr class="text-center">' +
-                                    '<th>Mata Kuliah</th>' +
-                                    '<th>Kode Kelas</th>' +
-                                    '<th>Dosen Mengajar</th>' +
-                                    '<th>Dosen PDPT</th>' +
-                                    '<th><a class="btn btn-danger btn-sm" id="hapus-table4" title="Hapus table">X</a></th>' +
-                                '</tr>' +
+                            '<tr class="text-center">' +
+                            '<th>Mata Kuliah</th>' +
+                            '<th>Dosen Mengajar</th>' +
+                            '<th>Dosen PDPT</th>' +
+                            '</tr>' +
                             '</thead>' +
-
                             '<tbody>' +
-                                '@foreach ($semester7 as $row7)' +
-                                '<tr class="text-center">' +
-                                    '<td>{{$row7->matkul}} ' +
-                                    '<input type="hidden" name="mata_kuliah[]" value="{{$row7->id}}"</td>' +
-                                    '<td><select name="kd_kelas[]" id="" class="form-control">' +
-                                    '<option disabled selected>Pilih Kode Kelas</option>' +
-                                    '@foreach(App\Kelas::all() as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->kode}}</option>' +
-                                    '@endforeach' +
-                                    '</select> </td>' +
-                                    '<input type="hidden" name="semester[]" value="{{$row7->semester}}">' +
-                                    '<input type="hidden" name="prodi[]" value="{{$row7->prodi}}">' +
-                                    '<td> <Input class="form-control" name="tahun_akademik[]" placeholder="Ex. 2016" required></Input> </td>' +
-                                    '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                    '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
-                                    '<option selected value="Belum Memilih Dosen">Pilih Dosen</option>' +
-                                    '@foreach($data_dosen as $row)' +
-                                    '<option value="{{$row->id}}">{{$row->name}}</option>' +
-                                    '@endforeach' +
-                                    '</select></td>' +
-                                '</tr>' +
-                                '@endforeach' +
+                            '@foreach ($semester7 as $row7)' +
+                            '<tr class="text-center">' +
+                            '<td>{{$row7->matkul}} ' +
+                            '<input type="hidden" name="mata_kuliah[]" value="{{$row7->id}}"</td>' +
+                            '<input type="hidden" name="kd_kelas[]" class="kode_ajax7">'+
+                            '<input type="hidden" name="semester[]" value="{{$row7->semester}}">' +
+                            '<input type="hidden" name="prodi[]" value="{{$row7->prodi}}">' +
+                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year}} / {{$year1}}"></Input>' +
+                            '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->nidn}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '<td><select name="dosen_pdpt[]" id="" class="form-control">' +
+                            '<option selected value="">Pilih Dosen</option>' +
+                            '@foreach($data_dosen as $row)' +
+                            '<option value="{{$row->id}}">{{$row->name}}</option>' +
+                            '@endforeach' +
+                            '</select></td>' +
+                            '</tr>' +
+                            '@endforeach' +
                             '</tbody>' +
                             '</table>' +
+                            '</div></div>'
 
                             console.log($('#table-4'))
-                            $('#table-4').after(sebaran)
+                        $('#table-4').after(sebaran)
                     }
                 });
                 return false;
@@ -548,10 +554,189 @@
                         var json = data;
                         var kode = json.kode;
                         console.log(kode);
-                        
-                        $('#kode').val(kode);
-                       
+                        kelas = $('.kode').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
 
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas3'))
+            $('#pilih_kelas3').on('input', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode3').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas5'))
+            $('#pilih_kelas5').on('input', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode5').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas7'))
+            $('#pilih_kelas7').on('input', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode7').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas_ajax'))
+            $('body').on('input','#pilih_kelas_ajax', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode_ajax').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas_ajax3'))
+            $('body').on('input','#pilih_kelas_ajax3', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode_ajax3').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas_ajax5'))
+            $('body').on('input','#pilih_kelas_ajax5', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode_ajax5').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas_ajax7'))
+            $('body').on('input','#pilih_kelas_ajax7', function () {
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode_ajax7').val(kode);
                     }
                 });
                 return false;

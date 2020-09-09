@@ -32,13 +32,17 @@
 
     <tr>
         <td><label for="kd_kelas" class="offset-3">Mata Kuliah</label></td>
-        <td><label for="" class="form-control col-10" readonly>{{$sebaran->kode_matkul}}</label> </td>
-            {{ Form::hidden('id_matkul',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'mata_kuliah','value'=>'id_matkul', 'readonly'])}}
+        <td><label for="" class="form-control col-10" readonly>{{$sebaran->matkul}}</label> </td>
+            {{ Form::hidden('id_matkul',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'mata_kuliah', 'readonly'])}}
     </tr>
     <tr>
-        <td><label for="kd_kelas" class="offset-3">Kelas</label></td>
-        <td><label for="" class="form-control col-10" readonly>{{$sebaran->kode}}</label></td>
-            {{ Form::hidden('id_kelas',null,['placeholder'=>'','class'=>'form-control col-10','name'=>'kd_kelas','value'=>'id_kelas',' readonly'])}} 
+        <td><label class="offset-3" for="kode">Kode Kelas</label></td>
+        <td><select class="form-control col-10" name="kd_kelas" >
+                <option selected value="{{$sebaran->id_kelas}}" >{{empty($sebaran->kode)  ? 'Pilih Kelas' :$sebaran->kode}}</option>
+                @foreach(App\Kelas::all() as $kelas)
+                <option value="{{ $kelas->id}}">{{ $kelas->kode}} - {{ $kelas->tahun}} </option>
+                @endforeach
+            </select></td>
     </tr>
     <tr> 
         
@@ -52,7 +56,7 @@
     <tr>
         <td><label class="offset-3" for="dosen">Dosen PDPT</label></td>
         <td><select class="form-control col-10" name="dosen_pdpt" >
-                <option selected disabled >Pilih Dosen Kembali</option>
+                <option selected  value="{{ $sebaran->nidn}}">{{empty($sebaran->name) ? 'Pilih Dosen' :$sebaran->name}}</option>
                 @foreach($data_dosen as $dosen)
                 <option value="{{ $dosen->nidn}}">{{ $dosen->name}} </option>
                 @endforeach
@@ -62,7 +66,7 @@
         <td><label class="offset-3" for="dosen">Dosen Mengajar</label></td>
         <td>
             <select class="form-control col-10" name="dosen_mengajar" >
-                <option selected disabled >Pilih Dosen Kembali</option>
+                <option selected value="{{ $sebaran->nidn_pdpt}}" >{{empty($sebaran->dosen_pdpt) ? 'Pilih Dosen' : $sebaran->dosen_pdpt}}</option>
                 @foreach($data_dosen as $dosen)
                 <option value="{{ $dosen->nidn}}">{{ $dosen->name}}</option>
                 @endforeach

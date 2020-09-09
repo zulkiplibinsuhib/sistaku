@@ -12,6 +12,7 @@ use App\Prodi;
 use PDF;
 
 use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class SebaranController extends Controller
 {
@@ -27,17 +28,15 @@ class SebaranController extends Controller
         $cari_semester = DB::table('sebaran')->orderBy('semester')->groupBy('semester')->get();
         $cari_tahun = DB::table('sebaran')->orderBy('tahun_akademik')->groupBy('tahun_akademik')->get();
         $sebaran = DB::table('sebaran')
-                             ->join('prodi','sebaran.prodi', '=', 'prodi.id')
-                             ->join('kelas','sebaran.kd_kelas','=','kelas.id')
-                             ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
-                             ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
-                             ->join('table_dosen','sebaran.dosen_pdpt','=','table_dosen.nidn')
+                             ->leftJoin('prodi','sebaran.prodi', '=', 'prodi.id')
+                             ->leftJoin('kelas','sebaran.kd_kelas','=','kelas.id')
+                             ->leftJoin('matkul','sebaran.mata_kuliah','=','matkul.id')
+                             ->leftJoin('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
+                             ->leftJoin('table_dosen','sebaran.dosen_pdpt','=','table_dosen.nidn')
                              ->select('table_dosen.id','table_dosen.name as dosen_pdpt','dosen.nidn','dosen.id','dosen.name','sebaran.id as id_sebaran','kelas.id','kelas.kode','kelas.kelas','prodi.nama as nama_prodi','sebaran.tahun_akademik','matkul.semester','kelas.mhs','matkul.matkul','matkul.sks',
                              'matkul.teori','matkul.praktek','matkul.jam_minggu','sebaran.dosen_mengajar','sebaran.approved','prodi.id')->orderBy('semester');
                             
-        if($id){
-        $sebaran = $sebaran->where('sebaran.prodi',$id);
-       } 
+        if($id){$sebaran = $sebaran->where('sebaran.prodi',$id);} 
        
        if(!empty($_GET)){
           if(!empty($_GET['prodi'])){
@@ -63,7 +62,12 @@ class SebaranController extends Controller
     public function kurikulum_2019_ganjil(Request $request)
     {
         $id =  Auth::user()->prodi;
+        $data['pilih_kelas1'] = DB::table('kelas')->where('semester',1)->orderBy('tahun')->get();
+        $data['pilih_kelas3'] = DB::table('kelas')->where('semester',3)->orderBy('tahun')->get();
+        $data['pilih_kelas5'] = DB::table('kelas')->where('semester',5)->orderBy('tahun')->get();
+        $data['pilih_kelas7'] = DB::table('kelas')->where('semester',7)->orderBy('tahun')->get();
         $year = date('Y');
+        $year1 = $year++ ;
         $semester1 = $request->semester1;
         $semester3 = $request->semester3;
         $semester5 = $request->semester5;
@@ -80,63 +84,57 @@ class SebaranController extends Controller
             $data_semester7 = $data_semester7->where('prodi',$id)->get();
           }
           $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
-          $data_kelas = DB::table('kelas')->where('prodi',Auth::user()->prodi)->pluck('kelas');
+          
          
-          return response()->json(['data'=>$data_semester1,$data_dosen,$data_kelas,$data_semester3,$data_semester5,$data_semester7,$year]);
+          return response()->json(['data'=>$data,$data_semester1,$data_dosen,$year1,$data_semester3,$data_semester5,$data_semester7,$year]);
     }
 
     public function ajax_create(Request $request)
     {
+        $year =  date('Y')   ;
+        $year1 = $year++ ;
         $id =  Auth::user()->prodi;
         $kurikulum = $request->kurikulum;
         $semester = $request->semester;
-        if($semester == 'ganjil'){
-            $semester = [1,3,5,7];
-        }else{
-            $semester = [2,4,6,8];
-        }
-        $get_data = DB::table('matkul')
-                            ->join ('kelas', 'matkul.semester', '=', 'kelas.semester')
-                            ->select('matkul.jam_minggu','matkul.teori','matkul.praktek','matkul.kode_matkul'
-                            ,'matkul.matkul','matkul.sks','matkul.semester'
-                            ,'matkul.kurikulum as kurikulum','kelas.semester as semester'
-                            ,'kelas.kode as kode','kelas.mhs','kelas.kelas','kelas.prodi','kelas.tahun')
-                            ->whereIn('matkul.semester',$semester);
+       
+        $get_data = DB::table('matkul')->where('semester',$semester)->where('kurikulum',$kurikulum);
       
       if($id){
-        $get_data = $get_data->where('kelas.prodi',$id)->where('matkul.prodi',$id)->get();
+        $get_data = $get_data->where('prodi',$id)->get();
       }
+     
       $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
-      return response()->json(['data'=>$get_data,$data_dosen]);
-        }
-      public function ajax_select(Request $request)
-      {
+      
+      return response()->json(['data'=>$get_data,$data_dosen,$year,$year1]);
+    }
+
+    public function ajax_select(Request $request)
+    {
         $ganjil = DB::table('matkul')->where('semester',1);
         $genap = DB::table('matkul')->where('semester',2,4,6,8);
         $data['ganjil'] = $ganjil;
         $data['genap'] = $genap;
+        $kurikulum = $request->kurikulum;
+        $get_data = DB::table('matkul')->where('kurikulum',$kurikulum)->groupBy('semester')->get();
+            
+        return response()->json(['data'=>$get_data]);
+    }
 
-       $kurikulum = $request->kurikulum;
-       $get_data = DB::table('matkul')->where('kurikulum',$kurikulum)->groupBy('semester')->get();
-           
-           return response()->json(['data'=>$get_data]);
-        }
-        public function pilih_kelas(Request $request){
-            $get = $request->get;
-            $kelas= Kelas::where('id','=',$get)->first();
-            if(isset($kelas)){
-                $data = array(
-                    
-                    'kode' => $kelas['kode'],
-                    
-                ); 
-            return response()->json($data);
+    public function pilih_kelas(Request $request){
+        $get = $request->get;
+        $kelas= Kelas::where('id','=',$get)->first();
+        if(isset($kelas)){
+            $data = array(
+                
+                'kode' => $kelas['id'],
+                
+            ); 
+        return response()->json($data);
           
       }
     }
 
-    public function approve(Request $request, $id)
-    {
+    public function approve(Request $request, $id){
         $sebaran = DB::table('sebaran')->where('id',$id)->update(['approved'=>1]);
         return redirect()->back();
     }
@@ -147,6 +145,9 @@ class SebaranController extends Controller
      */
     public function create()
     {
+        $year =  date('Y')   ;
+        $year1 = $year++ ;
+        $semester = DB::table('matkul')->where('prodi',Auth::user()->prodi)->groupBy('semester')->get();
         $semester1 = DB::table('matkul')->where('semester',1)->get();
         $semester2 = DB::table('matkul')->where('semester',2)->get();
         $semester3 = DB::table('matkul')->where('semester',3)->get();
@@ -162,32 +163,27 @@ class SebaranController extends Controller
         $data['semester5'] = $semester5;
         $data['semester6'] = $semester6;
         $data['semester7'] = $semester7;
-        $data['semester8'] = $semester8;
+        $data['year'] = $year;
+        $data['year1'] = $year1;
         $matkul_kur2019 = DB::table('matkul')->where('kurikulum',2019)->get();
-        $ganjil = DB::table('matkul')->where('semester',1,3,5,7);
-        $genap = DB::table('matkul')->where('semester',2,4,6,8);
-        $data['ganjil'] = $ganjil;
-        $data['genap'] = $genap;
         $kurikulum = DB::table('kurikulum')->groupBy('nama')->get();
-        $data['get_data'] = Dosen::all();
-        $data['sebaran'] = DB::table('sebaran')->get();
-        $data_prodi = DB::table('prodi')->pluck('nama');
-        $data_kode = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
-        $data_kelas = DB::table('kelas')->pluck('kelas');
-        $data_matkul = DB::table('matkul')->where('prodi',Auth::user()->prodi)->get();
+        $data['get_dosen'] = Dosen::all();
+        $data_kelas = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
         $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
         $data['kurikulum'] = $kurikulum;
-        $data['data_prodi'] = $data_prodi;
-        $data['data_kode'] = $data_kode;
         $data['data_kelas'] = $data_kelas;
-        $data['data_matkul'] = $data_matkul;
         $data['data_dosen'] = $data_dosen;
         $data['matkul_kur2019'] = $matkul_kur2019;
+        $data['semester'] = $semester;
         return view('sebaran.create',$data);
     }
     public function create_kur2019_ganjil(){
         $year =  date('Y')   ;
         $year1 = $year++ ;
+        $data['pilih_kelas1'] = DB::table('kelas')->where('semester',1)->orderBy('tahun')->get();
+        $data['pilih_kelas3'] = DB::table('kelas')->where('semester',3)->orderBy('tahun')->get();
+        $data['pilih_kelas5'] = DB::table('kelas')->where('semester',5)->orderBy('tahun')->get();
+        $data['pilih_kelas7'] = DB::table('kelas')->where('semester',7)->orderBy('tahun')->get();
         $semester1 = DB::table('matkul')->where('semester',1)->where('kurikulum',2019)->get();
         $semester3 = DB::table('matkul')->where('semester',3)->where('kurikulum',2019)->get();
         $semester5 = DB::table('matkul')->where('semester',5)->where('kurikulum',2019)->get();
@@ -255,6 +251,17 @@ class SebaranController extends Controller
      */
     public function store(Request $request)
     {
+        
+        for($x=0;$x<count($request->kd_kelas);$x++){
+        $data = DB::table('sebaran')
+        ->join('kelas','kelas.id','=','sebaran.kd_kelas')
+        ->select('kelas.kode','sebaran.tahun_akademik','sebaran.semester')
+        ->where('sebaran.semester',$request->semester[$x])->where('tahun_akademik',$request->tahun_akademik[$x])->where('kd_kelas',$request->kd_kelas[$x])->where('sebaran.prodi',$request->prodi[$x])->first();
+     
+        if(!empty($data)){
+            return redirect()->back()->withErrors("Warning !!! <br> Data Sebaran Kelas {$data->kode} Semester {$data->semester} Tahun {$data->tahun_akademik} telah diisi sebelumnya .<br> Silahkan isi Data sebaran yang lain :)");
+        }
+    }
         // $get = DB::table('sebaran')->where('tahun',$request->tahun[0])->where('semester',$request->semester[0])->where('prodi',Auth::user()->prodi) ->first();
         // if(!empty($get)){
         //     return redirect()->back()->withErrors(["Warning !!! <br> Data Sebaran Semester {$request->semester[0]} Tahun {$request->tahun[0]} telah diisi sebelumnya .<br> Silahkan isi Data sebaran yang lain :)"]);
@@ -267,17 +274,19 @@ class SebaranController extends Controller
             'dosen_pdpt' => 'required',
             'dosen_mengajar' => 'required'
         ]);
-            
         for($x=0;$x<count($request->kd_kelas);$x++){
-            DB::table('sebaran')->insert(['kd_kelas'=>$request->kd_kelas[$x],
-            'prodi'=>$request->prodi[$x] ?? $request->user()->prodi,
-            'semester'=>$request->semester[$x],
-            'mata_kuliah'=>$request->mata_kuliah[$x],
-            'tahun_akademik'=>$request->tahun_akademik[$x],
-            'dosen_pdpt'=>$request->dosen_pdpt[$x],
-            'dosen_mengajar'=>$request->dosen_mengajar[$x]
-            ]);
+            if(!empty($request->kd_kelas[$x])){
+                DB::table('sebaran')->insert(['kd_kelas'=>$request->kd_kelas[$x],
+                'prodi'=>$request->prodi[$x] ?? $request->user()->prodi,
+                'semester'=>$request->semester[$x],
+                'mata_kuliah'=>$request->mata_kuliah[$x],
+                'tahun_akademik'=>$request->tahun_akademik[$x],
+                'dosen_pdpt'=>$request->dosen_pdpt[$x],
+                'dosen_mengajar'=>$request->dosen_mengajar[$x]
+                ]);
+            }
         }
+        
         return redirect('sebaran')->with('status', 'Data added successfully, please add new data .');
     }
     /**
@@ -312,13 +321,16 @@ class SebaranController extends Controller
     {
         $sebaran = DB::table('sebaran')
                     ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
-                    ->join('kelas','sebaran.kd_kelas','=','kelas.id')
-                    ->select('sebaran.id','sebaran.mata_kuliah as id_matkul','sebaran.kd_kelas as id_kelas','kelas.kode','matkul.kode_matkul','sebaran.prodi','sebaran.semester','sebaran.tahun_akademik')->first();
+                    ->leftJoin('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
+                    ->leftJoin('table_dosen','sebaran.dosen_pdpt','=','table_dosen.nidn')
+                    ->leftJoin('kelas','sebaran.kd_kelas','=','kelas.id')
+                    ->select('kelas.tahun','dosen.name','dosen.nidn','table_dosen.name as dosen_pdpt','table_dosen.nidn as nidn_pdpt','sebaran.id','sebaran.mata_kuliah as id_matkul','sebaran.dosen_mengajar','sebaran.kd_kelas as id_kelas','kelas.kode','matkul.kode_matkul','matkul.matkul','sebaran.prodi','sebaran.semester','sebaran.tahun_akademik')
+                    ->where('sebaran.id',$id)->first();
                     
         $data['sebaran'] = $sebaran ;
-        
+    
         $data_dosen = DB::table('dosen')
-                        ->where('dosen.prodi',$data['sebaran']->prodi)
+                        ->where('prodi',$data['sebaran']->prodi)
                         ->get();
 
         $data['data_dosen'] = $data_dosen;

@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('sebaran/tambah_form', 'SebaranController@kurikulum_2019_ganjil')->name('sebaran.kurikulum_2019_ganjil');
 
 // AJAX REQUEST
+Route::get('rekap/get_dosen', 'RekapController@ajax_dosen')->name('rekap.ajax_dosen');
+
+Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/get_kelas', 'SebaranController@pilih_kelas')->name('sebaran.pilih_kelas');
 // Route::get('sebaran/send-form', 'SebaranController@send_form')->name('sebaran.send_form');
 
@@ -32,7 +35,6 @@ Route::get('sebaran/kurikulum_2014_genap', 'SebaranController@create_kur2014_gen
 Route::get('sebaran/{id}/approve','SebaranController@approve')->name('sebaran.approve');
 Route::resource('sebaran', 'SebaranController');
 
-Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/cari', 'SebaranController@ajax_select')->name('sebaran.ajax_select');
 Route::get('sebaran/cetak_pdf', 'SebaranController@cetak_pdf')->name('cetak_pdf');
 Route::get('sebaran/sebaran_pdf', 'SebaranController@sebaran_pdf')->name('sebaran_pdf');

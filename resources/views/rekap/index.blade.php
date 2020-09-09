@@ -20,7 +20,8 @@
                     </h3>
                     <div class="card-tools ">
                         <form class="form-inline" action="" method="get">
-                            <select name="prodi" class="custom-select my-1 mr-sm-2 style=" width: 200px;""
+                           
+                            <select name="prodi" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
@@ -28,7 +29,7 @@
                                 @endforeach
                             </select>
 
-                            <select name="tahun" class="custom-select my-1 mr-sm-2 style=" width: 200px;""
+                            <select name="tahun" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Tahun Akademik</option>
                                 @foreach($cari_tahun as $dosen)
@@ -45,38 +46,58 @@
                 <div class="card-body table-responsive">
                     <div class="card" style="width: 30rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Notes</h5>
+                            <div class="card-header">
+                                <h5 class="card-title">Filter Dosen </h5>
+                                
+                            </div>
+                            <div class="card-body">
+                            <form class="form-inline" action="" method="get">
+                                    <input type="text" class="form-control card-tools mr-sm-2" style=" width: 100px;" name="jam"
+                                        id="jam" placeholder="Maks. Jam">
+                                        <button type="submit" class="btn btn-primary my-2 ">Cari</button>
+                            </form>
+                            
+                                </div>
+
                             <p class="card-text">Dosen-dosen memiliki jam mengajar lebih dari yang ditentukan : </p>
                             <?php $nol = false;
                                 $no = 1 ;
-                            ?>  
+                            ?>
                             @foreach ($get_prodiAndDosen as $row)
-                            @if($row->jumlah_jam > 16 ) <?php $nol = true?> {{$no++}}. {{$row->name}}  <br> 
-                             
+                            @if($row->total_jam > $jam ) <?php $nol = true?> {{$no++}}. {{$row->name}} <br>
+
                             @endif
-                           
-                            @endforeach 
-                            
+
+                            @endforeach
+
                             @if(!$nol)
-                            Tidak ada 
+                            Tidak ada
                             @endif
                             <br>
                             <br>
-                           
-                            
                         </div>
                     </div>
                     <table class="table table-bordered table table-striped" id="dosen">
                         <thead>
                             <tr class="text-center <?php?>">
-                                <th>No</th>
-                                <th>Nama Dosen</th>
-                                <th>NIDN</th>
-                                <th>Bidang</th>
-                                <th>Jumlah SKS</th>
+                                <th rowspan="2" class="align-middle">No</th>
+                                <th rowspan="2" class="align-middle">Nama Dosen </th>
+                                <th rowspan="2" class="align-middle">NIDN</th>
+                                <th rowspan="2" class="align-middle">Bidang</th>
+                                <th colspan="2">Reguler</th>
+                                <th colspan="2">Karyawan</th>
+                                <th colspan="2">Total</th>
+                                <th rowspan="2" class="align-middle">Mata Kuliah Diambil</th>
                                 <!-- <th>Prodi</th> -->
-                                <th>Jumlah Jam Mengajar</th>
-                                <th>Mata Kuliah Diambil</th>
+                            </tr>
+                            <tr class="text-center <?php?>">
+                                <th>SKS</th>
+                                </th>
+                                <th>JAM</th>
+                                <th>SKS</th>
+                                <th>Jam</th>
+                                <th>SKS</th>
+                                <th>Jam</th>
 
                             </tr>
                         </thead>
@@ -91,6 +112,10 @@
                                 <td class="text-center">{{ $row->bidang}}</td>
                                 <td class="text-center">{{ $row->jumlah_sks}}</td>
                                 <td class="text-center">{{ $row->jumlah_jam}}</td>
+                                <td class="text-center">{{ $row->jumlah_sks_karyawan}}</td>
+                                <td class="text-center">{{ $row->jumlah_jam_karyawan}}</td>
+                                <td class="text-center">{{ $row->total_sks}}</td>
+                                <td class="text-center">{{ $row->total_jam}}</td>
                                 <td> @foreach($row->matkul_diambil as $matkul) {{$row->no++}}.
                                     {{ $matkul->matkul }} = {{ $matkul->nama }}
                                     <br>@endforeach</td>

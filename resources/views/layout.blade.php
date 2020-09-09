@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a class="nav-link text-light" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item  d-sm-inline-block ">
-                <a href="{{route('home')}}" class="nav-link text-light text-bold ">HOME</a>
+                <a href="{{route('home')}}" class="nav-link text-light  ">HOME</a>
             </li>
 
             </ul>
@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-sm-inline-block ">
 
-                    <a class="nav-link fas fa-sign-out-alt text-light text-bold " href="{{ route('logout') }}"
+                    <a class="nav-link fas fa-sign-out-alt text-light  " href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                               document.getElementById('logout-form').submit(); confirm('Apakah {{ Auth::user()->name }} mau keluar ?')" type="submit">
                         {{ __('Logout') }}
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item">
                             <a href="{{route('home')}}" class="nav-link {{Request::is('home')?'active':''}} ">
                                 <i class="nav-icon fas fa-home"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     BERANDA
                                 </p>
                             </a>
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('prodi')?'menu-open':''}} {{Request::is('prodi/create')?'menu-open':''}}">
                             <a href="#" class="nav-link  ">
                                 <i class="nav-icon far fa-file-alt"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     PROGRAM STUDI
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('kurikulum')?'menu-open':''}} {{Request::is('kurikulum/create')?'menu-open':''}}">
                             <a href="#" class="nav-link  ">
                                 <i class="nav-icon far fa-file-alt"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     KURIKULUM
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('dosen')?'menu-open':''}} {{Request::is('dosen/create')?'menu-open':''}}">
                             <a href="#" class="nav-link  ">
                                 <i class="nav-icon fas fa-chalkboard-teacher "></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     DOSEN
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('kelas')?'menu-open':''}} {{Request::is('kelas/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon far fas fa-cube"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     KELAS
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -208,7 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('matkul')?'menu-open':''}} {{Request::is('matkul/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-book-open"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     MATA KULIAH
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -232,10 +232,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <li
-                            class="nav-item has-treeview {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_genap')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2019_ganjil')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2019_genap')?'menu-open':''}} ">
+                            class="nav-item has-treeview {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_genap')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2019_ganjil')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2019_genap')?'menu-open':''}} {{Request::is('sebaran/create')?'menu-open':''}}">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon far fa-copy"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     SEBARAN
                                     <i class="right fas fa-angle-left"></i>
                                     @if(Auth::user()->level == 'admin')
@@ -257,11 +257,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 @if(Auth::user()->level == 'prodi')
                                 <li class="nav-item has-treeview menu-open">
                                     <a href="#"
-                                        class="nav-link {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}}">
+                                        class="nav-link {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}} ">
                                         <i class="far fa-circle nav-icon "></i>
                                         <p>Input Sebaran</p>
                                     </a>
                                     <ul class="nav nav-treeview">
+                                    <li class="nav-item ">
+                                            <a href="{{ route('sebaran.create')}}" class="nav-link {{Request::is('sebaran/create')?'active':''}}">
+                                                <i class="far fa-dot-circle nav-icon  "></i>
+                                                <p>Sebaran / Kelas</p>
+                                            </a>
+                                        </li>
                                         <li class="nav-item ">
                                             <a href="{{ route('sebaran.create_kur2014_ganjil')}}" class="nav-link {{Request::is('sebaran/kurikulum_2014_ganjil')?'active':''}}">
                                                 <i class="far fa-dot-circle nav-icon  "></i>
@@ -295,7 +301,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item has-treeview {{Request::is('rekap')?'menu-open':''}}">
                             <a href="#" class="nav-link  ">
                                 <i class="nav-icon ion ion-stats-bars "></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     REKAPITULASI
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -316,7 +322,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="nav-item has-treeview {{Request::is('users')?'menu-open':''}} {{Request::is('users/create')?'menu-open':''}} ">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p class="text text-bold">
+                                <p class="text ">
                                     USERS
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -473,8 +479,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         $(document).ready(function () {
             $('#dosen ').DataTable({
-
-
+            });
+            $('#show_dosen ').DataTable({
             });
         });
 
@@ -482,10 +488,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         $(document).ready(function () {
             $('.sebaran').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
+             
+               
             });
         });
 

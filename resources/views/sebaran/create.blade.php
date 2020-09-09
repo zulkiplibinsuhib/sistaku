@@ -35,28 +35,26 @@
                         </select>
                         <select name="semester" class="custom-select my-1 mr-sm-2 col-md-4" id="semester" disabled>
                             <option value="" selected disabled>Pilih Semester</option>
-                            <option value="ganjil">Ganjil</option>
-                            <option value="genap">Genap</option>
+                            @foreach ($semester as $semester)
+                            <option value="{{$semester->semester}}">{{$semester->semester}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="card-body table-responsive">
                     {{ Form::open(['url'=>'sebaran'])}}
                     <table class="sebaran-table table table-bordered table table-striped" id="sebaran-table">
+                    <select id="pilih_kelas" class="form-control col-2 " disabled>
+                            <option selected value="" disabled>Pilih Kode Kelas</option>
+                            @foreach(App\Kelas::all() as $row)
+                            <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
+                            @endforeach
+                        </select>
                         <thead>
-                            <tr>
-                                <th>Kode Kelas</th>
-                                <th>Kelas</th>
-                                <th>Angkatan</th>
-                                <th>Semester</th>
-                                <th>Mhs</th>
+                            <tr class="text-center">
                                 <th>Mata Kuliah</th>
-                                <th>SKS</th>
-                                <th>T</th>
-                                <th>P</th>
-                                <th>Jam</th>
-                                <th>Dosen PDPT</th>
                                 <th>Dosen Mengajar</th>
+                                <th>Dosen PDPT</th>
                             </tr>
                         </thead>
                         <tbody id="create-sebaran">
@@ -70,35 +68,30 @@
             </div>
         </div>
     </div>
-
-
-
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Disable -->
 <script type="text/javascript">
     $(document).ready(function () {
-        
         console.log($('#kurikulum'))
         $('#kurikulum').on('input', function () {
-
             $('#semester').prop('disabled',false)
-          
-            
+        });
+        $('#semester').on('input', function () {
+            $('#pilih_kelas').prop('disabled',false)
         });
     });
 </script>
 
-
 <!-- AJAX KODE KELAS CREATE -->
-
 
 <script type="text/javascript">
     $(document).ready(function () {
         console.log($('#semester'))
         $('#semester').on('input', function () {
+            $('#semester').prop('disabled',false)
             var semester = $(this).val();
             var kurikulum = $('#kurikulum').val();
-            
             $.ajax({
                 type: "GET",
                 url: "{{ route('sebaran.ajax_create') }}",
@@ -118,50 +111,15 @@
                     data.forEach(row => {
                         sebaran = `
                         <tr class="data-sebaran">
-                            <td id="kode">${row.kode}
-                                <input type="hidden" name="kd_kelas[]" value="${row.kode}">
-                            </td>
-                            <td id="kelas">${row.kelas}
-                                <input type="hidden" name="kelas[]" value="${row.kelas}">
-                            </td>
-                                <input type="hidden" name="prodi[]" value="${row.prodi}">
-                            </td>
-                            
-                            <td id="tahun">${row.tahun}
-                                <input type="hidden" name="tahun[]" value="${row.tahun}">
-                            </td>
-                            
-                            <td id="semester">${row.semester}
-                             <input type="hidden" name="semester[]" value="${row.semester}">
-                            </td>
-                            
-                            <td id="mhs">${row.mhs}
-                                <input type="hidden" name="mhs[]" value="${row.mhs}">
-                            </td>
-                            
-                            <td id="matkul">${row.matkul}
-                            <input type="hidden" name="mata_kuliah[]" value="${row.matkul}">
-                            </td>
-                            
-                            <td id="sks">${row.sks}
-                            <input type="hidden" name="sks[]" value="${row.sks}">
-                            </td>
-                            
-                            <td id="teori">${row.teori}
-                            <input type="hidden" name="teori[]" value="${row.teori}">
-                            </td>
-                            
-                            <td id="praktek">${row.praktek}
-                            <input type="hidden" name="praktek[]" value="${row.praktek}">
-                            </td>
-                            
-                            <td id="jam_minggu">${row.jam_minggu}
-                            <input type="hidden" name="jam[]" value="${row.jam_minggu}">
-                            </td>
+                        <td>${row.matkul} </td>
+                            <input type="hidden" name="mata_kuliah[]" value="${row.id}">
+                            <input type="hidden" name="kd_kelas[]" class="kode">
+                            <input type="hidden" name="semester[]" value="${row.semester}">
+                            <input type="hidden" name="prodi[]" value="${row.prodi}">
+                            <Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>
 
                             <td>  <select class="form-control" name="dosen_pdpt[]">
-                                <option selected disabled>Pilih Dosen</option>
-
+                                <option selected value="">Pilih Dosen</option>
                     `
                         dosens.forEach(dosen => {
                             sebaran +=
@@ -172,7 +130,7 @@
                     
                             
                             <td>  <select class="form-control" name="dosen_mengajar[]">
-                                <option selected disabled>Pilih Dosen</option>
+                                <option selected value="" >Pilih Dosen</option>
                     `
                         dosens.forEach(dosen => {
                             sebaran +=
@@ -183,15 +141,42 @@
                         </tr>
                     `
                         table.append(sebaran)
-                        $('#sebaran-table').DataTable();
+                        
                         
                     })
                 }
             });
-            return false;
+                
         });
     });
     
 
 </script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            console.log($('#pilih_kelas'))
+            $('body').on('input','#pilih_kelas', function () {
+
+                var get = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sebaran.pilih_kelas') }}",
+                    dataType: "JSON",
+                    data: {
+                        get: get
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        var json = data;
+                        var kode = json.kode;
+                        console.log(kode);
+                        kelas = $('.kode').val(kode);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
 @endsection
