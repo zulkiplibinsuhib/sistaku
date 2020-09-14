@@ -17,8 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('sebaran/export_excel', 'SebaranController@export_excel')->name('sebaran.export');
+Route::get('sebaran/export_excel/prodi', 'SebaranController@export_excel_prodi')->name('sebaran.export.prodi');
+Route::get('/export', 'RekapController@export')->name('.export');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('sebaran/tambah_form', 'SebaranController@kurikulum_2019_ganjil')->name('sebaran.kurikulum_2019_ganjil');
+Route::get('sebaran/tambah_form1', 'SebaranController@kurikulum_2019_ganjil')->name('sebaran.kurikulum_2019_ganjil');
+Route::get('sebaran/tambah_form2', 'SebaranController@kurikulum_2019_genap')->name('sebaran.kurikulum_2019_genap');
+Route::get('sebaran/tambah_form3', 'SebaranController@kurikulum_2014_ganjil')->name('sebaran.kurikulum_2014_ganjil');
+Route::get('sebaran/tambah_form4', 'SebaranController@kurikulum_2014_genap')->name('sebaran.kurikulum_2014_genap');
+
+
 
 // AJAX REQUEST
 Route::get('rekap/get_dosen', 'RekapController@ajax_dosen')->name('rekap.ajax_dosen');

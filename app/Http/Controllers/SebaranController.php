@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use DB;
 use App\Kelas;
 use App\Matkul;
@@ -10,7 +11,9 @@ use App\Sebaran;
 use App\Dosen;
 use App\Prodi;
 use PDF;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SebaranExport;
+use App\Exports\SebaranProdiExport;
 use Illuminate\Support\Facades\Auth;
 use PDO;
 
@@ -87,6 +90,93 @@ class SebaranController extends Controller
           
          
           return response()->json(['data'=>$data,$data_semester1,$data_dosen,$year1,$data_semester3,$data_semester5,$data_semester7,$year]);
+    }
+    public function kurikulum_2019_genap(Request $request)
+    {
+        $id =  Auth::user()->prodi;
+        $data['pilih_kelas2'] = DB::table('kelas')->where('semester',2)->orderBy('tahun')->get();
+        $data['pilih_kelas4'] = DB::table('kelas')->where('semester',4)->orderBy('tahun')->get();
+        $data['pilih_kelas6'] = DB::table('kelas')->where('semester',6)->orderBy('tahun')->get();
+        $data['pilih_kelas8'] = DB::table('kelas')->where('semester',8)->orderBy('tahun')->get();
+        $year = date('Y');
+        $year1 = $year++ ;
+        $semester2 = $request->semester2;
+        $semester4 = $request->semester4;
+        $semester6 = $request->semester6;
+        $semester8 = $request->semester8;
+        $data_semester2 = DB::table('matkul')->where('kurikulum',2019)->where('semester',$semester2)->orderBy('matkul');
+        $data_semester4 = DB::table('matkul')->where('kurikulum',2019)->where('semester',$semester4)->orderBy('matkul');
+        $data_semester6 = DB::table('matkul')->where('kurikulum',2019)->where('semester',$semester6)->orderBy('matkul');
+        $data_semester8 = DB::table('matkul')->where('kurikulum',2019)->where('semester',$semester8)->orderBy('matkul');
+
+        if($id){
+            $data_semester1 = $data_semester2->where('prodi',$id)->get();
+            $data_semester3 = $data_semester4->where('prodi',$id)->get();
+            $data_semester5 = $data_semester6->where('prodi',$id)->get();
+            $data_semester7 = $data_semester8->where('prodi',$id)->get();
+          }
+          $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
+          
+         
+          return response()->json(['data'=>$data,$data_semester2,$data_dosen,$year1,$data_semester4,$data_semester6,$data_semester8,$year]);
+    }
+    public function kurikulum_2014_ganjil(Request $request)
+    {
+        $id =  Auth::user()->prodi;
+        $data['pilih_kelas1'] = DB::table('kelas')->where('semester',1)->orderBy('tahun')->get();
+        $data['pilih_kelas3'] = DB::table('kelas')->where('semester',3)->orderBy('tahun')->get();
+        $data['pilih_kelas5'] = DB::table('kelas')->where('semester',5)->orderBy('tahun')->get();
+        $data['pilih_kelas7'] = DB::table('kelas')->where('semester',7)->orderBy('tahun')->get();
+        $year = date('Y');
+        $year1 = $year++ ;
+        $semester1 = $request->semester1;
+        $semester3 = $request->semester3;
+        $semester5 = $request->semester5;
+        $semester7 = $request->semester7;
+        $data_semester1 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester1)->orderBy('matkul');
+        $data_semester3 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester3)->orderBy('matkul');
+        $data_semester5 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester5)->orderBy('matkul');
+        $data_semester7 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester7)->orderBy('matkul');
+
+        if($id){
+            $data_semester1 = $data_semester1->where('prodi',$id)->get();
+            $data_semester3 = $data_semester3->where('prodi',$id)->get();
+            $data_semester5 = $data_semester5->where('prodi',$id)->get();
+            $data_semester7 = $data_semester7->where('prodi',$id)->get();
+          }
+          $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
+          
+         
+          return response()->json(['data'=>$data,$data_semester1,$data_dosen,$year1,$data_semester3,$data_semester5,$data_semester7,$year]);
+    }
+    public function kurikulum_2014_genap(Request $request)
+    {
+        $id =  Auth::user()->prodi;
+        $data['pilih_kelas2'] = DB::table('kelas')->where('semester',2)->orderBy('tahun')->get();
+        $data['pilih_kelas4'] = DB::table('kelas')->where('semester',4)->orderBy('tahun')->get();
+        $data['pilih_kelas6'] = DB::table('kelas')->where('semester',6)->orderBy('tahun')->get();
+        $data['pilih_kelas8'] = DB::table('kelas')->where('semester',8)->orderBy('tahun')->get();
+        $year = date('Y');
+        $year1 = $year++ ;
+        $semester2 = $request->semester2;
+        $semester4 = $request->semester4;
+        $semester6 = $request->semester6;
+        $semester8 = $request->semester8;
+        $data_semester2 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester2)->orderBy('matkul');
+        $data_semester4 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester4)->orderBy('matkul');
+        $data_semester6 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester6)->orderBy('matkul');
+        $data_semester8 = DB::table('matkul')->where('kurikulum',2014)->where('semester',$semester8)->orderBy('matkul');
+
+        if($id){
+            $data_semester1 = $data_semester2->where('prodi',$id)->get();
+            $data_semester3 = $data_semester4->where('prodi',$id)->get();
+            $data_semester5 = $data_semester6->where('prodi',$id)->get();
+            $data_semester7 = $data_semester8->where('prodi',$id)->get();
+          }
+          $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
+          
+         
+          return response()->json(['data'=>$data,$data_semester2,$data_dosen,$year1,$data_semester4,$data_semester6,$data_semester8,$year]);
     }
 
     public function ajax_create(Request $request)
@@ -204,43 +294,77 @@ class SebaranController extends Controller
         return view('sebaran.kur2019_ganjil',$data);
     }
     public function create_kur2019_genap(){
+        $year =  date('Y')   ;
+        $year1 = $year++ ;
+        $data['pilih_kelas2'] = DB::table('kelas')->where('semester',2)->orderBy('tahun')->get();
+        $data['pilih_kelas4'] = DB::table('kelas')->where('semester',4)->orderBy('tahun')->get();
+        $data['pilih_kelas6'] = DB::table('kelas')->where('semester',6)->orderBy('tahun')->get();
+        $data['pilih_kelas8'] = DB::table('kelas')->where('semester',8)->orderBy('tahun')->get();
         $semester2 = DB::table('matkul')->where('semester',2)->where('kurikulum',2019)->get();
         $semester4 = DB::table('matkul')->where('semester',4)->where('kurikulum',2019)->get();
         $semester6 = DB::table('matkul')->where('semester',6)->where('kurikulum',2019)->get();
         $semester8 = DB::table('matkul')->where('semester',8)->where('kurikulum',2019)->get();
+        $data_kelas = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
         $data['semester2'] = $semester2;
         $data['semester4'] = $semester4;
         $data['semester6'] = $semester6;
         $data['semester8'] = $semester8;
         $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
         $data['data_dosen'] = $data_dosen;
+        $data['year'] = $year;
+        $data['year1'] = $year1;
+        $data['data_kelas'] = $data_kelas;
+        
         return view('sebaran.kur2019_genap',$data);
     }
     public function create_kur2014_ganjil(){
+        $year =  date('Y')   ;
+        $year1 = $year++ ;
+        $data['pilih_kelas1'] = DB::table('kelas')->where('semester',1)->orderBy('tahun')->get();
+        $data['pilih_kelas3'] = DB::table('kelas')->where('semester',3)->orderBy('tahun')->get();
+        $data['pilih_kelas5'] = DB::table('kelas')->where('semester',5)->orderBy('tahun')->get();
+        $data['pilih_kelas7'] = DB::table('kelas')->where('semester',7)->orderBy('tahun')->get();
         $semester1 = DB::table('matkul')->where('semester',1)->where('kurikulum',2014)->get();
         $semester3 = DB::table('matkul')->where('semester',3)->where('kurikulum',2014)->get();
         $semester5 = DB::table('matkul')->where('semester',5)->where('kurikulum',2014)->get();
         $semester7 = DB::table('matkul')->where('semester',7)->where('kurikulum',2014)->get();
+        $data_kelas = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
+
         $data['semester1'] = $semester1;
         $data['semester3'] = $semester3;
         $data['semester5'] = $semester5;
         $data['semester7'] = $semester7;
+        $data['data_kelas'] = $data_kelas;
+        $data['year'] = $year;
+        $data['year1'] = $year1;
+        
+        
         $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
         $data['data_dosen'] = $data_dosen;
-
         return view('sebaran.kur2014_ganjil',$data);
     }
     public function create_kur2014_genap(){
+        $year =  date('Y')   ;
+        $year1 = $year++ ;
+        $data['pilih_kelas2'] = DB::table('kelas')->where('semester',2)->orderBy('tahun')->get();
+        $data['pilih_kelas4'] = DB::table('kelas')->where('semester',4)->orderBy('tahun')->get();
+        $data['pilih_kelas6'] = DB::table('kelas')->where('semester',6)->orderBy('tahun')->get();
+        $data['pilih_kelas8'] = DB::table('kelas')->where('semester',8)->orderBy('tahun')->get();
         $semester2 = DB::table('matkul')->where('semester',2)->where('kurikulum',2014)->get();
         $semester4 = DB::table('matkul')->where('semester',4)->where('kurikulum',2014)->get();
         $semester6 = DB::table('matkul')->where('semester',6)->where('kurikulum',2014)->get();
         $semester8 = DB::table('matkul')->where('semester',8)->where('kurikulum',2014)->get();
+        $data_kelas = DB::table('kelas')->where('prodi',Auth::user()->prodi)->get();
         $data['semester2'] = $semester2;
         $data['semester4'] = $semester4;
         $data['semester6'] = $semester6;
         $data['semester8'] = $semester8;
         $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
         $data['data_dosen'] = $data_dosen;
+        $data['year'] = $year;
+        $data['year1'] = $year1;
+        $data['data_kelas'] = $data_kelas;
+        
         return view('sebaran.kur2014_genap',$data);
     }
     /**
@@ -251,17 +375,25 @@ class SebaranController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $arr = [];
         for($x=0;$x<count($request->kd_kelas);$x++){
         $data = DB::table('sebaran')
         ->join('kelas','kelas.id','=','sebaran.kd_kelas')
         ->select('kelas.kode','sebaran.tahun_akademik','sebaran.semester')
         ->where('sebaran.semester',$request->semester[$x])->where('tahun_akademik',$request->tahun_akademik[$x])->where('kd_kelas',$request->kd_kelas[$x])->where('sebaran.prodi',$request->prodi[$x])->first();
+        
      
         if(!empty($data)){
-            return redirect()->back()->withErrors("Warning !!! <br> Data Sebaran Kelas {$data->kode} Semester {$data->semester} Tahun {$data->tahun_akademik} telah diisi sebelumnya .<br> Silahkan isi Data sebaran yang lain :)");
+            array_push($arr,"Data Sebaran Kelas {$data->kode} Semester {$data->semester} Tahun {$data->tahun_akademik} telah diisi sebelumnya . Silahkan isi Data sebaran yang lain .");
+            }
         }
-    }
+        
+        if(!empty($arr)){
+            $arr = array_unique($arr);
+            return redirect()->back()->withErrors($arr);
+        }
+
+    
         // $get = DB::table('sebaran')->where('tahun',$request->tahun[0])->where('semester',$request->semester[0])->where('prodi',Auth::user()->prodi) ->first();
         // if(!empty($get)){
         //     return redirect()->back()->withErrors(["Warning !!! <br> Data Sebaran Semester {$request->semester[0]} Tahun {$request->tahun[0]} telah diisi sebelumnya .<br> Silahkan isi Data sebaran yang lain :)"]);
@@ -375,4 +507,16 @@ class SebaranController extends Controller
         DB::table('sebaran')->where('id',$id)->delete();
         return redirect('sebaran')->with('status', 'Data deleted successfully .');
     }
+    public function export_excel(Request $request)
+	{
+        $pilih_prodi = $request->pilih_prodi;
+            
+        $data['pilih_prodi']=$pilih_prodi;
+            return Excel::download(new SebaranExport($pilih_prodi), 'sebaran.xlsx');
+        
+    }
+    public function export_excel_prodi(Request $request)
+	{
+		return Excel::download(new SebaranProdiExport, 'sebaran.xlsx');
+	}
 }

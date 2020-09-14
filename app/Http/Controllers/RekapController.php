@@ -14,8 +14,8 @@ class RekapController extends Controller
 {
     public function index(Request $request) 
     {
+        
         $jam = $request->jam ; 
-
         $data['dosen'] = DB::table('dosen');
         $id = Auth::user()->prodi;
         $cari_dosen = DB::table('dosen')->groupBy('name')->get();
@@ -27,7 +27,7 @@ class RekapController extends Controller
                             ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
                             ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang')
                             ->groupBy('nidn');
-                            
+                                     
         if(!empty($id)){
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
         }
@@ -49,9 +49,10 @@ class RekapController extends Controller
         } 
     
         $get_prodiAndDosen = $get_prodiAndDosen->get();
-        
+       
         foreach($get_prodiAndDosen as &$dosen)
         {
+            $arr = [];
             $dosen->jumlah_jam = DB::table('sebaran')
                                 ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')
                                 ->join('matkul','sebaran.mata_kuliah','=','matkul.id')
@@ -96,10 +97,12 @@ class RekapController extends Controller
                                     ->where('dosen_mengajar',$dosen->nidn);
             $dosen->prodi_diambil = DB::table('sebaran')->where('dosen_mengajar',$dosen->nidn)->select('prodi')->get();
             $dosen->no = 1 ;
-
+           
             
-         
-        }
+            }
+            
+               
+        
       
       
       
@@ -124,5 +127,9 @@ class RekapController extends Controller
         return response()->json($data);
           
       }
+    }
+    public function export(Submission $id)
+    {
+        return Excel::download(new RealizationExport($id), strtotime('now') . '.xlsx');
     }
 }

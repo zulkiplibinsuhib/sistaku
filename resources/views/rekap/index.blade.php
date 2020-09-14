@@ -20,9 +20,11 @@
                     </h3>
                     <div class="card-tools ">
                         <form class="form-inline" action="" method="get">
-                           
+                        <input type="text" class="form-control card-tools mr-sm-2" style=" width: 100px;" name="jam"
+                                        id="jam" placeholder="Maks. Jam">
                             <select name="prodi" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
                                 id="inlineFormCustomSelectPref">
+                                
                                 <option selected disabled>Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
@@ -44,39 +46,10 @@
                 </div>
 
                 <div class="card-body table-responsive">
-                    <div class="card" style="width: 30rem;">
-                        <div class="card-body">
-                            <div class="card-header">
-                                <h5 class="card-title">Filter Dosen </h5>
-                                
-                            </div>
-                            <div class="card-body">
-                            <form class="form-inline" action="" method="get">
-                                    <input type="text" class="form-control card-tools mr-sm-2" style=" width: 100px;" name="jam"
-                                        id="jam" placeholder="Maks. Jam">
-                                        <button type="submit" class="btn btn-primary my-2 ">Cari</button>
-                            </form>
-                            
-                                </div>
-
-                            <p class="card-text">Dosen-dosen memiliki jam mengajar lebih dari yang ditentukan : </p>
-                            <?php $nol = false;
-                                $no = 1 ;
-                            ?>
-                            @foreach ($get_prodiAndDosen as $row)
-                            @if($row->total_jam > $jam ) <?php $nol = true?> {{$no++}}. {{$row->name}} <br>
-
-                            @endif
-
-                            @endforeach
-
-                            @if(!$nol)
-                            Tidak ada
-                            @endif
-                            <br>
-                            <br>
-                        </div>
-                    </div>
+                <a href="{{ route('.export') }}"
+                                           class="btn btn-secondary" target="_blank">
+                                            <i class="fas fa-download"></i>
+                                        </a>
                     <table class="table table-bordered table table-striped" id="dosen">
                         <thead>
                             <tr class="text-center <?php?>">
@@ -102,8 +75,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no=1?>
+                            <?php 
+                            
+                            $no=1?>
+                            
                             @foreach ($get_prodiAndDosen as $row)
+                            @if($row->total_jam > $jam )
                             <tr>
                                 <td class="text-center">{{ $no++}} </td>
                                 <td class="text-center">{{ $row->name}}</td>
@@ -121,7 +98,9 @@
                                     <br>@endforeach</td>
 
                             </tr>
+                            @endif
                             @endforeach
+                            
                         </tbody>
                     </table>
                     <a href="{{ route('home') }}" class="btn btn-danger">Back</a>

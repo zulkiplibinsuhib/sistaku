@@ -502,7 +502,7 @@
                             '<input type="hidden" name="kd_kelas[]" class="kode_ajax7">'+
                             '<input type="hidden" name="semester[]" value="{{$row7->semester}}">' +
                             '<input type="hidden" name="prodi[]" value="{{$row7->prodi}}">' +
-                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year}} / {{$year1}}"></Input>' +
+                            '<Input type="hidden" name="tahun_akademik[]" value="{{$year1}} / {{$year}}"></Input>' +
                             '<td><select name="dosen_mengajar[]" id="" class="form-control">' +
                             '<option selected value="">Pilih Dosen</option>' +
                             '@foreach($data_dosen as $row)' +

@@ -1,6 +1,15 @@
 @extends('layout')
 @section('title','Sebaran Politeknik TEDC Bandung')
 @section('content')
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{!! $error !!}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
     {{ session('status') }}
@@ -10,11 +19,10 @@
 </div>
 @endif
 <section class="content">
-
     <div class="row">
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
-        
+           
                 <div class="card-header">
                     <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Sebaran
                     </h3>
@@ -46,7 +54,33 @@
                         </form>
                     </div>
                 </div>
+               
                 <div class="card-body table-responsive">
+                 @if(Auth::user()->level == 'prodi')
+                    <form action="/sebaran/export_excel/prodi" autocomplete="off" class="form-inline input-daterange">
+                        <div class="form-group mx-sm-1 mb-2">
+                            
+                            <button type="submit" name="cetak" id="cetak" class="btn btn-info ml-1"><i class="fa fa-print"></i> Cetak Sebaran</a>
+                        </div>
+                    </form>
+                    @endif
+                    @if(Auth::user()->level == 'admin')
+                    <form action="/sebaran/export_excel" autocomplete="off" class="form-inline input-daterange">
+                        <div class="form-group mb-2">
+                        <select name="pilih_prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="inlineFormCustomSelectPref">
+                                <option selected disabled>Prodi</option>
+                                @foreach(App\Prodi::all() as $prodi)
+                                <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-1 mb-2">
+                            <div>
+                            </div>
+                            <button type="submit" name="cetak" id="cetak" class="btn btn-info ml-1"><i class="fa fa-print"></i> Cetak Sebaran</a>
+                        </div>
+                    </form>
+                    @endif
                     <table class="sebaran table table-bordered table table-striped" id="sebaran">
                         <thead>
                             <tr class="text-center">
