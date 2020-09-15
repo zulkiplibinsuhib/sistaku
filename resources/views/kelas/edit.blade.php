@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Kelas')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -44,42 +44,42 @@
                     <div class="form-group col-6 ">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline1" name="semester" value="1"
-                                class="custom-control-input" name="semester">
-                            <label class="custom-control-label" for="customRadioInline1">1</label>
+                                class="custom-control-input" name="semester" {{($kelas->semester == '1')?'checked':''}}>
+                            <label class="custom-control-label " for="customRadioInline1" >1</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline2" name="semester" value="2"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='2')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline2">2</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline3" name="semester" value="3"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='3')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline3">3</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline4" name="semester" value="4"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='4')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline4">4</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline5" name="semester" value="5"
-                                class="custom-control-input" name="semester">
+                                class="custom-control-input" name="semester" {{($kelas->semester =='5')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline5">5</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline6" name="semester" value="6"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='6')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline6">6</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline7" name="semester" value="7"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='7')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline7">7</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline8" name="semester" value="8"
-                                class="custom-control-input">
+                                class="custom-control-input" {{($kelas->semester =='8')?'checked':''}}>
                             <label class="custom-control-label" for="customRadioInline8">8</label>
                         </div>
                     </div>

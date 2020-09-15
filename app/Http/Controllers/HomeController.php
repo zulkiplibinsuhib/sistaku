@@ -11,6 +11,7 @@ use App\Dosen;
 use App\Kelas;
 use App\User;
 use App\Rekap;
+use App\Kurikulum;
 use DB;
 
 class HomeController extends Controller
@@ -40,6 +41,7 @@ class HomeController extends Controller
             $data['dosen'] = Dosen::where('prodi',Auth::user()->prodi)->count();
             $data['kelas'] = Kelas::where('prodi',Auth::user()->prodi)->count();
             $data['users'] = User::where('prodi',Auth::user()->prodi)->count();
+            $data['kurikulum'] = User::where('prodi',Auth::user()->prodi)->count();
            
         }
         else{
@@ -49,6 +51,8 @@ class HomeController extends Controller
         $data['dosen'] = Dosen::count();
         $data['kelas'] = Kelas::count();
         $data['users'] = User::count();
+        $data['kurikulum'] = Kurikulum::count();
+       
         }
         
         return view('home',$data);

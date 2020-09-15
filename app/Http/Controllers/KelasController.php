@@ -21,9 +21,7 @@ class KelasController extends Controller
         $cari_semester = DB::table('matkul')->groupBy('semester')->get();
         $get_prodiAndKelas = DB::table('kelas')
                                 ->join('prodi', 'kelas.prodi', '=', 'prodi.id')
-                                ->select('kelas.kelas','kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id','kelas.id','kelas.tahun')->orderBy('tahun');
-      
-                                
+                                ->select('kelas.kelas','kelas.kode','prodi.nama','kelas.semester','kelas.mhs','kelas.keterangan','prodi.id','kelas.id','kelas.tahun')->orderBy('kode');
         if(!empty($id)){
             $get_prodiAndKelas = $get_prodiAndKelas->where('kelas.prodi',$id);
         }
@@ -79,10 +77,7 @@ class KelasController extends Controller
             'tahun' => 'required',
             'mhs' => 'required',
             'keterangan' => 'required',
-            
-            
         ]);
-        
         DB::table('kelas')->insert(['kode'=>$request->kode,
                                     'kelas'=>$request->kelas,
                                     'prodi'=>$request->prodi ?? $request->user()->prodi,
@@ -128,8 +123,6 @@ class KelasController extends Controller
             'tahun' => 'required',
             'mhs' => 'required',
             'keterangan' => 'required',
-            
-            
         ]);
         DB::table('kelas')->where('id',$id)->update(['kode'=>$request->kode,
                                                     'prodi'=>$request->prodi,

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Rekapitulasi')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -16,10 +16,10 @@
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Rekapitulasi
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>List Rekap Dosen
                     </h3>
                     <div class="card-tools ">
-                        <form class="form-inline" action="" method="get">
+                    <form class="form-inline" action="" method="get">
                         <input type="text" class="form-control card-tools mr-sm-2" style=" width: 100px;" name="jam"
                                         id="jam" placeholder="Maks. Jam">
                             <select name="prodi" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
@@ -32,11 +32,16 @@
                             </select>
 
                             <select name="tahun" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
-                                id="inlineFormCustomSelectPref">
+                                id="tahun">
                                 <option selected disabled>Tahun Akademik</option>
                                 @foreach($cari_tahun as $dosen)
                                 <option value="{{$dosen->tahun_akademik}}">{{$dosen->tahun_akademik}}</option>
                                 @endforeach
+                            </select>
+                            <select name="semester" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="semester" disabled>
+                                <option selected disabled>Semester</option>
+                                <option value="ganjil">Ganjil</option>
+                                <option value="genap">Genap</option>
                             </select>
 
                             <button type="submit" class="btn btn-primary my-1 ">Filter</button>
@@ -46,11 +51,34 @@
                 </div>
 
                 <div class="card-body table-responsive">
-                <a href="{{ route('.export') }}"
-                                           class="btn btn-secondary" target="_blank">
-                                            <i class="fas fa-download"></i>
-                                        </a>
-                    <table class="table table-bordered table table-striped" id="dosen">
+                <form action="/rekap/export_excel" autocomplete="off" class="form-inline input-daterange">
+                        <div class="form-group mb-2">
+                        <select name="pilih_prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_prodi">
+                                <option selected disabled>Prodi</option>
+                                @foreach($pilih_prodi as $prodi)
+                                <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
+                                @endforeach
+                            </select>
+                            
+                            <select name="pilih_tahun" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_tahun" disabled>
+                                <option selected disabled>Tahun Akademik</option>
+                                @foreach($pilih_tahun as $tahun)
+                                <option value="{{$tahun->tahun_akademik}}">{{$tahun->tahun_akademik}}</option>
+                                @endforeach
+                            </select>
+                            <select name="pilih_semester" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_semester" disabled>
+                                <option selected disabled>Semester</option>
+                                <option value="ganjil">Ganjil</option>
+                                <option value="genap">Genap</option>
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-1 mb-2">
+                            <div>
+                            </div>
+                            <button type="submit" name="cetak" id="cetak" class="btn btn-info ml-1"><i class="fas fa-download"></i> Download Excel</a>
+                        </div>
+                    </form>
+                    <table class="table table-bordered table table-striped" id="rekap">
                         <thead>
                             <tr class="text-center <?php?>">
                                 <th rowspan="2" class="align-middle">No</th>
@@ -109,7 +137,30 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Disable -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log($('#pilih_prodi'))
+        $('#pilih_prodi').on('input', function () {
+            $('#pilih_tahun').prop('disabled',false)
+        });
+   
+        $('#pilih_tahun').on('input', function () {
+            $('#pilih_semester').prop('disabled',false)
+        });
+        $('#tahun').on('input', function () {
+            $('#semester').prop('disabled',false)
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#rekap ').DataTable({    
+        });
+    });
 
+</script>
 
 
 

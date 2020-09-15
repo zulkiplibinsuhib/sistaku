@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Input Sebaran')
+@section('title','Sebaran')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -23,7 +23,7 @@
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Input Sebaran
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Create Sebaran
                     </h3>
                     <div class="card-tools ">
                         <select name="kurikulum" class="custom-select my-1 mr-sm-2 col-md-4" id="kurikulum">

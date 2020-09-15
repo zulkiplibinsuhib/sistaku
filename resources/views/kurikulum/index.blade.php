@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Kurikulum')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
@@ -17,7 +17,7 @@
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
                     <h3 class="card-title text-bold">
-                        <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Kurikulum
+                        <i class="fas fa-list-alt text-dark mr-2"></i>List Kurikulum
                     </h3>
 
                 </div>
@@ -41,16 +41,19 @@
                                 <td>{{ $row->nama_prodi}}</td>
                                 <td>
                                     <div class="d-flex justify-content-center align">
-                                        <a
-                                            href="{{ route('kurikulum.edit',$row->id) }}"
+                                        <div>
+                                            <a href="{{ route('kurikulum.edit',$row->id) }}"
                                             class="btn btn-sm btn-warning fas fa-edit mr-2"
                                             title=" Edit"></a>
-                                        <form action="{{route('kurikulum.destroy',$row->id)}}" method="post" title="Hapus">
-                                            @csrf @method('Delete')
-                                            <button
-                                                class="btn btn-danger btn-sm fas fa-trash-alt "
-                                                onclick="return confirm('Yakin Mau di Hapus ?')"
-                                                type="submit"></button>
+                                        </div>
+                                        <div>
+                                            <form action="{{route('kurikulum.destroy',$row->id)}}" method="post" title="Hapus">
+                                                @csrf @method('Delete')
+                                                <button class="btn btn-danger btn-sm fas fa-trash-alt "
+                                                    onclick="return confirm('Yakin Mau di Hapus ?')"
+                                                    type="submit">
+                                                </button>
+                                        </div>
                                         </form>
                                     </td>
                                 </div>

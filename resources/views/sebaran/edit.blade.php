@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Update Sebaran ')
+@section('title','Sebaran')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">

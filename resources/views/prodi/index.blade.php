@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Program Studi')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
@@ -24,7 +24,7 @@
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Program Studi
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>List Program Studi
                     </h3>
 
                 </div>
@@ -57,7 +57,7 @@
                                                 onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
                                         </form>
                                 </td>
-                </div>
+                                    </div>
                 </tr>
                 @endforeach
                 </tbody>

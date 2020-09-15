@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Program Studi')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
@@ -22,7 +22,7 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input Program Studi
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Create Program Studi
                 </h3>
             </div>
             <div class="card-body">
@@ -31,12 +31,12 @@
 
                     <tr>
                         <td><label class="offset-4">Kode Prodi</label> </td>
-                        <td>{{ Form::text('kode',null,['placeholder'=>'Enter kode prodi ','class'=>'form-control col-10 ','required'])}}
+                        <td>{{ Form::text('kode',null,['placeholder'=>'Ex. IF ','class'=>'form-control col-10 ','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label class="offset-4">Prodi</label> </td>
-                        <td>{{ Form::text('nama',null,['placeholder'=>'Enter nama prodi','class'=>'form-control col-10 ','required'])}}
+                        <td>{{ Form::text('nama',null,['placeholder'=>'Ex. Teknik Informaika','class'=>'form-control col-10 ','required'])}}
                         </td>
                     </tr>
 

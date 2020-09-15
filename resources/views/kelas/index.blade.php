@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Kelas')
 @section('content')
 
 @if (session('status'))
@@ -16,7 +16,7 @@
         <div class="col-12">
             <div class="card card-info card-outline text-sm-3">
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Kelas
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>List Kelas
                     </h3>
                     <div class="card-tools ">
                         <form class="form-inline" action="" method="get">
@@ -37,7 +37,7 @@
                                 @endforeach
 
                             </select>
-                            <select name="semester" class="custom-select my-1 mr-sm-2 col-md-2 " style="width: 150px;"
+                            <select name="semester" class="custom-select my-1 mr-sm-2  " style="width: 150px;"
                                 id="inlineFormCustomSelectPref">
                                 <option selected disabled>Semester</option>
                                 @foreach($cari_semester as $semester)
@@ -102,5 +102,19 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+<script>
+        $(document).ready(function () {
+            $('#kelas ').DataTable({
+                order: [
+                [3, 'asc']
+            ],
+            rowGroup: {
+                dataSrc: 3
+            }
+            });
+        });
+
+    </script>
 @endsection()

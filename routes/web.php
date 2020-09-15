@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 Auth::routes();
+Route::get('rekap/export_excel', 'RekapController@export_excel')->name('rekap.export');
 Route::get('sebaran/export_excel', 'SebaranController@export_excel')->name('sebaran.export');
 Route::get('sebaran/export_excel/prodi', 'SebaranController@export_excel_prodi')->name('sebaran.export.prodi');
 Route::get('/export', 'RekapController@export')->name('.export');
@@ -30,7 +31,6 @@ Route::get('sebaran/tambah_form4', 'SebaranController@kurikulum_2014_genap')->na
 
 // AJAX REQUEST
 Route::get('rekap/get_dosen', 'RekapController@ajax_dosen')->name('rekap.ajax_dosen');
-
 Route::get('sebaran/get_data', 'SebaranController@ajax_create')->name('sebaran.ajax_create');
 Route::get('sebaran/get_kelas', 'SebaranController@pilih_kelas')->name('sebaran.pilih_kelas');
 // Route::get('sebaran/send-form', 'SebaranController@send_form')->name('sebaran.send_form');

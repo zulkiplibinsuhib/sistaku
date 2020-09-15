@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Dosen')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -24,7 +24,7 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input Dosen
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Create Dosen
                 </h3>
             </div>
             <div class="card-body">
@@ -33,12 +33,12 @@
 
                     <tr>
                         <td><label class="offset-4">Nama Dosen</label> </td>
-                        <td>{{ Form::text('name',null,['placeholder'=>'Enter Nama Dosen ','class'=>'form-control col-10' ,'required'])}}
+                        <td>{{ Form::text('name',null,['placeholder'=>'Masukkan Nama Lengkap Dosen  ','class'=>'form-control col-10' ,'required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label class="offset-4">NIDN</label> </td>
-                        <td>{{ Form::number('nidn',null,['placeholder'=>'Enter NIDN','class'=>'form-control col-10','required'])}}
+                        <td>{{ Form::number('nidn',null,['placeholder'=>'Masukkan NIDN','class'=>'form-control col-10','required'])}}
                         </td>
                     </tr>
                     <tr>

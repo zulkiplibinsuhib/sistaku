@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Sebaran Politeknik TEDC Bandung')
+@section('title','Sebaran')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -24,7 +24,7 @@
             <div class="card card-info card-outline text-sm-3">
            
                 <div class="card-header">
-                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>Daftar Sebaran
+                    <h3 class="card-title text-bold"> <i class="fas fa-list-alt text-dark mr-2"></i>List Sebaran
                     </h3>
                     <div class="card-tools ">
                         <form class="form-inline" action="" method="get">
@@ -57,21 +57,49 @@
                
                 <div class="card-body table-responsive">
                  @if(Auth::user()->level == 'prodi')
-                    <form action="/sebaran/export_excel/prodi" autocomplete="off" class="form-inline input-daterange">
-                        <div class="form-group mx-sm-1 mb-2">
-                            
-                            <button type="submit" name="cetak" id="cetak" class="btn btn-info ml-1"><i class="fa fa-print"></i> Cetak Sebaran</a>
-                        </div>
-                    </form>
                     @endif
                     @if(Auth::user()->level == 'admin')
                     <form action="/sebaran/export_excel" autocomplete="off" class="form-inline input-daterange">
                         <div class="form-group mb-2">
-                        <select name="pilih_prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="inlineFormCustomSelectPref">
+                        <select name="pilih_prodi" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_prodi">
                                 <option selected disabled>Prodi</option>
-                                @foreach(App\Prodi::all() as $prodi)
+                                @foreach($pilih_prodi as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                                 @endforeach
+                            </select>
+                            
+                            <select name="pilih_tahun" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_tahun" disabled>
+                                <option selected disabled>Tahun Akademik</option>
+                                @foreach($pilih_tahun as $tahun)
+                                <option value="{{$tahun->tahun_akademik}}">{{$tahun->tahun_akademik}}</option>
+                                @endforeach
+                            </select>
+                            <select name="pilih_semester" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_semester" disabled>
+                                <option selected disabled>Semester</option>
+                                <option value="ganjil">Ganjil</option>
+                                <option value="genap">Genap</option>
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-1 mb-2">
+                            <div>
+                            </div>
+                            <button type="submit" name="cetak" id="cetak" class="btn btn-info ml-1"><i class="fas fa-download"></i> Download Excel</a>
+                        </div>
+                    </form>
+                    @endif
+                    @if(Auth::user()->level == 'prodi')
+                    <form action="/sebaran/export_excel/prodi" autocomplete="off" class="form-inline input-daterange">
+                        <div class="form-group mb-2">
+                            <select name="pilih_tahun" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_tahun" >
+                                <option selected disabled>Tahun Akademik</option>
+                                @foreach($pilih_tahun as $tahun)
+                                <option value="{{$tahun->tahun_akademik}}">{{$tahun->tahun_akademik}}</option>
+                                @endforeach
+                            </select>
+                            <select name="pilih_semester" class="custom-select my-1 mr-sm-2" style="width: 200px;" id="pilih_semester" disabled>
+                                <option selected disabled>Semester</option>
+                                <option value="ganjil">Ganjil</option>
+                                <option value="genap">Genap</option>
                             </select>
                         </div>
                         <div class="form-group mx-sm-1 mb-2">
@@ -81,6 +109,7 @@
                         </div>
                     </form>
                     @endif
+                    
                     <table class="sebaran table table-bordered table table-striped" id="sebaran">
                         <thead>
                             <tr class="text-center">
@@ -156,7 +185,33 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Disable -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log($('#pilih_prodi'))
+        $('#pilih_prodi').on('input', function () {
+            $('#pilih_tahun').prop('disabled',false)
+        });
+        $('#pilih_tahun').on('input', function () {
+            $('#pilih_semester').prop('disabled',false)
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.sebaran').DataTable({
+        order: [
+            [3, 'asc']
+        ],  
+        rowGroup: {
+            dataSrc: 3
+        }
+        
+        });
+    });
 
+</script>
 
 
 

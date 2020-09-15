@@ -1,124 +1,221 @@
 @extends('layout')
-@section('title','BERANDA')
+@section('title','Halaman Utama')
 @section('content')
 <!-- Small boxes (Stat box) -->
 <div class="row">
-<div>
-      <div class="callout callout-warning col-12" style="margin:-15px 15px 15px 15px;">											
+<div class="container-fluid">
+      <div class="callout callout-warning col-12" " >											
           <h4><i class=""></i> SISTEM INFORMASI PENENTUAN DOSEN PENGAMPU MATA KULIAH</h4>
           Selamat Datang Operator di SISTAKU. Disini Anda Dapat melakukan pengelolaan data Akademik , seperti mengelola data dosen, mata kuliah tiap kurikulum, kelas dan membuat sebaran mata kuliah serta menentukan dosen pengampu mata kuliah. 
           Sistem informasi ini bertujuan untuk memudahkan proses membuat sebaran di setiap Program Studi dan memudahkan Akademik dalam merekap semua data sebaran serta dapat mengetahui jumlah jam mengajar setiap dosen pengampu mata kuliah. Dengan adanya sistem informasi ini, berharap
           tidak terjadi lagi duplikasi mata kuliah .Salam dan Terimakasih
       </div>
   </div>
-    @if(Auth::user()->level == 'admin')
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info text-center ">
-            <div class="inner">
-                <h3>
-                    {{$prodi}}
-                </h3>
-                <h4>Program Studi</h4>
+    
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+        @if(Auth::user()->level == 'admin')
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <a href="prodi" class="info-box-icon bg-info elevation-1"><i class="far fa-file-alt"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Program Studi</span>
+                <span class="info-box-number">
+                {{$prodi}}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <div class="icon">
-                <i class="far fa-file-alt"></i>
+            <!-- /.info-box -->
+          </div>
+          
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <a href="kurikulum" class="info-box-icon bg-danger elevation-1"><i class="far fa-file-alt"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Kurikulum</span>
+                <span class="info-box-number">{{$kurikulum}}</span> 
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <a href="prodi" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    @endif
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-orange text-center">
-            <div class="inner">
-                <h3>{{$dosen}}</h3>
-                <h4>Dosen</h4>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
 
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="dosen" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box   -->
-        <div class="small-box bg-success text-center">
-            <div class="inner">
-                <h3>{{$kelas}}</h3>
-                <h4>Kelas</h4>
-            </div>
-            <div class="icon">
-                <i class="far fas fa-cube"></i>
-            </div>
-            <a href="kelas" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
 
-        <div class="small-box bg-warning text-center">
-            <div class="inner">
-                <h3>
-                    {{$matkul}}
-                </h3>
-                <h4>Mata Kuliah</h4>
-            </div>
-            <div class="icon">
-                <i class="fas fa-book-open"></i>
-            </div>
-            <a href="matkul" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <a href="dosen"  class="info-box-icon bg-success elevation-1"><i class="fas fa-chalkboard-teacher"></i></a>
 
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-danger text-center">
-            <div class="inner">
-                <h3>{{$sebaran}}</h3>
-                <h4>Sebaran</h4>
+              <div class="info-box-content">
+                <span class="info-box-text">Dosen</span>
+                <span class="info-box-number">{{$dosen}}</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <div class="icon">
-                <i class="fas fa-file-archive"></i>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <a href="kelas" class="info-box-icon bg-warning elevation-1"><i class="far fas fa-cube"></i></a>
+              <span ></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Kelas</span>
+                <span class="info-box-number">{{$kelas}}</span>
+              </div>
+              
+              <!-- /.info-box-content -->
             </div>
-            <a href="sebaran" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <a href="matkul" class="info-box-icon bg-info elevation-1"><i class="fas fa-book-open"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Mata Kuliah</span>
+                <span class="info-box-number">
+                {{$matkul}}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <a href="sebaran" class="info-box-icon bg-danger elevation-1"><i class="fas fa-file-archive"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Sebaran</span>
+                <span class="info-box-number">{{$sebaran}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <a href="rekap"  class="info-box-icon bg-success elevation-1"><i class="ion ion-stats-bars"></i></a>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Rekapitulasi</span>
+                <span class="info-box-number">{{$dosen}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <a href="kelas" class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></a>
+              <span ></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Users</span>
+                <span class="info-box-number">{{$users}}</span>
+              </div>
+              
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          @endif
+          @if(Auth::user()->level == 'prodi')
+          
+          
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <a href="kurikulum" class="info-box-icon bg-danger elevation-1"><i class="far fa-file-alt"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Kurikulum</span>
+                <span class="info-box-number">{{$kurikulum}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3 offset-1">
+            <div class="info-box mb-3">
+              <a href="dosen"  class="info-box-icon bg-success elevation-1"><i class="fas fa-chalkboard-teacher"></i></a>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Dosen</span>
+                <span class="info-box-number">{{$dosen}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3 offset-1">
+            <div class="info-box mb-3">
+                <a href="kelas" class="info-box-icon bg-warning elevation-1"><i class="far fas fa-cube"></i></a>
+              <span ></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Kelas</span>
+                <span class="info-box-number">{{$kelas}}</span>
+              </div>
+              
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 ">
+            <div class="info-box">
+              <a href="matkul" class="info-box-icon bg-info elevation-1"><i class="fas fa-book-open"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Mata Kuliah</span>
+                <span class="info-box-number">
+                {{$matkul}}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          
+          <div class="col-12 col-sm-6 col-md-3 offset-1">
+            <div class="info-box mb-3">
+              <a href="sebaran" class="info-box-icon bg-danger elevation-1"><i class="fas fa-file-archive"></i></a>
+              <div class="info-box-content">
+                <span class="info-box-text">Sebaran</span>
+                <span class="info-box-number">{{$sebaran}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+         
+          
+          @endif
+          
+          <!-- /.col -->
         </div>
-    </div>
-    @if(Auth::user()->level == 'admin')
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info text-center ">
-            <div class="inner">
-                <h3>
-                    {{$dosen}}
-                </h3>
-                <h4>Rekapitulasi</h4>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="rekap" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    @endif
-    @if(Auth::user()->level == 'admin')
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success text-center ">
-            <div class="inner">
-                <h3>
-                    {{$users}}
-                </h3>
-                <h4>Users</h4>
-            </div>
-            <div class="icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <a href="users" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    @endif
+        
+    
     
 
 </div>

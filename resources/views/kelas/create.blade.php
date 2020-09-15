@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Kelas')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -24,7 +24,7 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input Kelas
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Create Kelas
                 </h3>
             </div>
             <div class="card-body">
@@ -33,14 +33,14 @@
                     <div class="form-group row">
                         <label for="kode" class="offset-1 col-3 col-form-label">Kode Kelas</label>
                         <div class="col-6">
-                            <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Kelas"
+                            <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Kelas (Ex. IF1A)"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kelas" class=" offset-1 col-3 col-form-label">Nama Kelas</label>
+                        <label for="kelas" class=" offset-1 col-3 col-form-label">Nama Kelas </label>
                         <div class="col-6">
-                            <input type="text" class="form-control " name="kelas" placeholder="Nama Kelas" required>
+                            <input type="text" class="form-control " name="kelas" placeholder="Nama Kelas (Ex. Teknik Informatika A)" required>
                         </div>
                     </div>
                     @if(empty(Auth::user()->prodi))

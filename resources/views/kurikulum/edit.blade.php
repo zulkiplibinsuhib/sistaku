@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Kurikulum')
 @section('content')
 
 @if ($errors->any())

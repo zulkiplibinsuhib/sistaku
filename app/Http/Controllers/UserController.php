@@ -11,7 +11,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = DB::table('users')->get();
+        $data['users'] = DB::table('users')
+                        ->join('prodi','users.prodi','=','prodi.id')
+                        ->select('users.email','users.name','users.level','prodi.nama','users.id')
+                        ->get();
         return view ('users.index',$data);
     }
 
@@ -46,7 +49,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $data['prodi'] = DB::table('users')->where('id',$id)->first();
+        $data['users'] = DB::table('users')->where('id',$id)->first();
         return view('users.edit',$data);
     }
 
@@ -55,7 +58,6 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'prodi' => 'required',
             'level' => 'required',
             'password' => 'required'
             
@@ -65,7 +67,7 @@ class UserController extends Controller
                                                     'prodi'=>$request->prodi,
                                                     'level'=>$request->level,
                                                     'password'=>$request->password,]);
-                                                    return redirect('prodi')->with('status', 'Data updated successfully  .');
+                                                    return redirect('users')->with('status', 'Data updated successfully  .');
     }
 
     public function destroy($id)

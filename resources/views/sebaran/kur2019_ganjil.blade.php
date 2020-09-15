@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Input Sebaran')
+@section('title','Sebaran')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -73,8 +73,10 @@
                     </table>
                     <div>
                         <button class=" btn btn-primary" id="tambah_1" value="1">Tambah Tabel</button>
+                        <!-- <a id="tb-1" class="btn float-right">Semester 3 <i class="fas fa-sort"></i> </a> -->
                     </div>
                     <hr><br>
+                    <!-- <div style="display: none;" id="slide-2"> -->
                     <table class="sebaran-table table table-bordered table table-striped" id="table-2">
                         <h4 class="text-center">Semester 3</h4>
                         <select id="pilih_kelas3" class="form-control col-2 ">
@@ -119,6 +121,9 @@
                     <div>
                         <button class="btn btn-primary" id="tambah_2" value="1">Tambah Tabel</button>
                     </div>
+                    <!-- </div> -->
+                   
+                    
                     <hr><br>
                     <table class="sebaran-table table table-bordered table table-striped" id="table-3">
                         <h4 class="text-center">Semester 5</h4>
@@ -742,6 +747,11 @@
                 return false;
             });
         });
+        // $(function (){
+        //     $('#tb-1').click(function(){
+        //         $('#slide-2').slideToggle();
+        //     })
+        // })
 
     </script>
 

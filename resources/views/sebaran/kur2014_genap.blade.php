@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Input Sebaran')
+@section('title','Sebaran')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">

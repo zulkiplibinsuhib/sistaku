@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Users')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
@@ -47,18 +47,22 @@
                                 <td>{{$no++}} </td>
                                 <td>{{ $row->name}}</td>
                                 <td>{{ $row->email}}</td>
-                                <td>{{ $row->prodi}}</td>
+                                <td>{{ $row->nama}}</td>
                                 <td>{{ $row->level}}</td>
 
                                 <td>
-
-                                    <form action="{{route('users.destroy',$row->id)}}" method="post" title="Hapus">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                    <a href="{{ route('users.edit',$row->id) }}"
+                                            class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
+                                    <form action="{{route('users.destroy',$row->id)}}" method="post" title="Hapus"></div>
+                                    <div>
                                         @csrf
                                         @method('Delete')
                                         <button class="btn btn-danger btn-sm fas fa-trash-alt "
-                                            onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button>
+                                            onclick="return confirm('Yakin Mau di Hapus ?')" type="submit"></button></div>
                                     </form>
-
+                                </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -72,14 +76,15 @@
 </section>
 
 @endsection()
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
+        $(document).ready(function () {
+            $('.users').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
 
-</script>
+                ]
+            });
+        });
+
+    </script>

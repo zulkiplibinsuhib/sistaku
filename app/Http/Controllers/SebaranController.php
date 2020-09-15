@@ -30,6 +30,11 @@ class SebaranController extends Controller
         $data['sebaran'] = DB::table('sebaran')->get();
         $cari_semester = DB::table('sebaran')->orderBy('semester')->groupBy('semester')->get();
         $cari_tahun = DB::table('sebaran')->orderBy('tahun_akademik')->groupBy('tahun_akademik')->get();
+        $pilih_tahun = DB::table('sebaran')->orderBy('tahun_akademik')->groupBy('tahun_akademik')->get();
+        $data['pilih_prodi'] = DB::table('sebaran')
+                                ->join('prodi','sebaran.prodi','=','prodi.id')
+                                ->select('prodi.id','prodi.nama')
+                                ->orderBy('prodi.id')->groupBy('prodi.id')->get();
         $sebaran = DB::table('sebaran')
                              ->leftJoin('prodi','sebaran.prodi', '=', 'prodi.id')
                              ->leftJoin('kelas','sebaran.kd_kelas','=','kelas.id')
@@ -40,7 +45,7 @@ class SebaranController extends Controller
                              'matkul.teori','matkul.praktek','matkul.jam_minggu','sebaran.dosen_mengajar','sebaran.approved','prodi.id')->orderBy('semester');
                             
         if($id){$sebaran = $sebaran->where('sebaran.prodi',$id);} 
-       
+
        if(!empty($_GET)){
           if(!empty($_GET['prodi'])){
             $prodi = $_GET['prodi'];
@@ -59,6 +64,7 @@ class SebaranController extends Controller
        
         $data['cari_semester'] = $cari_semester;  
         $data['cari_tahun'] = $cari_tahun;  
+        $data['pilih_tahun'] = $pilih_tahun;  
         return view('sebaran.index',$data);
     }   
     
@@ -110,10 +116,10 @@ class SebaranController extends Controller
         $data_semester8 = DB::table('matkul')->where('kurikulum',2019)->where('semester',$semester8)->orderBy('matkul');
 
         if($id){
-            $data_semester1 = $data_semester2->where('prodi',$id)->get();
-            $data_semester3 = $data_semester4->where('prodi',$id)->get();
-            $data_semester5 = $data_semester6->where('prodi',$id)->get();
-            $data_semester7 = $data_semester8->where('prodi',$id)->get();
+            $data_semester2 = $data_semester2->where('prodi',$id)->get();
+            $data_semester4 = $data_semester4->where('prodi',$id)->get();
+            $data_semester6 = $data_semester6->where('prodi',$id)->get();
+            $data_semester8 = $data_semester8->where('prodi',$id)->get();
           }
           $data_dosen = DB::table('dosen')->where('prodi',Auth::user()->prodi)->get();
           
@@ -235,6 +241,8 @@ class SebaranController extends Controller
      */
     public function create()
     {
+        $data['pilih_kelas'] = DB::table('kelas')->where('semester',1)->orderBy('tahun')->get();
+
         $year =  date('Y')   ;
         $year1 = $year++ ;
         $semester = DB::table('matkul')->where('prodi',Auth::user()->prodi)->groupBy('semester')->get();
@@ -253,6 +261,7 @@ class SebaranController extends Controller
         $data['semester5'] = $semester5;
         $data['semester6'] = $semester6;
         $data['semester7'] = $semester7;
+        $data['semester8'] = $semester8;
         $data['year'] = $year;
         $data['year1'] = $year1;
         $matkul_kur2019 = DB::table('matkul')->where('kurikulum',2019)->get();
@@ -509,14 +518,12 @@ class SebaranController extends Controller
     }
     public function export_excel(Request $request)
 	{
-        $pilih_prodi = $request->pilih_prodi;
-            
-        $data['pilih_prodi']=$pilih_prodi;
-            return Excel::download(new SebaranExport($pilih_prodi), 'sebaran.xlsx');
+        
+            return Excel::download(new SebaranExport($request), 'sebaran.xlsx');
         
     }
     public function export_excel_prodi(Request $request)
 	{
-		return Excel::download(new SebaranProdiExport, 'sebaran.xlsx');
+        return Excel::download(new SebaranProdiExport($request), 'sebaran.xlsx');
 	}
 }

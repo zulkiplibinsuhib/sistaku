@@ -28,15 +28,8 @@ class DosenController extends Controller
                             ->join('prodi', 'dosen.prodi', '=', 'prodi.id')
                             ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang')
                             ->groupBy('name');
-                            
-       
-        
-        
         if(!empty($id)){
-        $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id);
-        
-        }
-        
+        $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id); }
         
         if(!empty($_GET)){ 
             if(!empty($_GET['prodi'])){
@@ -50,21 +43,15 @@ class DosenController extends Controller
                     $get_prodiAndDosen->where('dosen.bidang',$bidang);
                   } 
                 }
-                
         $get_prodiAndDosen = $get_prodiAndDosen->get();
-        
-     
-        
             $data['get_prodiAndDosen'] = $get_prodiAndDosen;
             $data['cari_bidang'] = $cari_bidang;
-            
-           
         return view('dosen.index',$data);
     }
-    public function export_excel()
-	{
-		return Excel::download(new DosenExport, 'dosen.xlsx');
-	}
+    // public function export_excel()
+	// {
+	// 	return Excel::download(new DosenExport, 'dosen.xlsx');
+	// }
 
     /**
      * Show the form for creating a new resource.
@@ -91,8 +78,6 @@ class DosenController extends Controller
             'jenis_kelamin' => 'required',
             'status' => 'required',
             'bidang' => 'required',
-            
-            
         ]);
         $all_prodi = $request->prodi;
         if($all_prodi == 'all'){
@@ -103,7 +88,8 @@ class DosenController extends Controller
                 'jenis_kelamin'=>$request->jenis_kelamin,
                 'status'=>$request->status,
                 'bidang'=>$request->bidang,
-                'prodi'=>$prodi->id ?? $request->user()->prodi ]);     
+                'prodi'=>$prodi->id ?? $request->user()->prodi]);  
+                // 'created_at' => now()   
             }
         }else{
             DB::table('dosen')->insert(['name'=>$request->name,
@@ -153,20 +139,13 @@ class DosenController extends Controller
                 $jumlah_jam->where('sebaran.tahun_akademik',$tahun);
                 $jumlah_sks->where('sebaran.tahun_akademik',$tahun);
                 } 
-           
         }
-        
-       
-       
         $data['dosen'] = $dosen ;
         $data['jumlah_sks'] = $jumlah_sks->sum('sks') ;
         $data['jumlah_jam'] = $jumlah_jam->sum('jam_minggu') ;
         $data['get_data'] = $get_data ->get() ;
         $data['cari_tahun'] = $cari_tahun ;
-        
         return view('dosen.show',$data);
-        
-        
     }
 
     /**
@@ -204,7 +183,7 @@ class DosenController extends Controller
                                                     'status'=>$request->status,
                                                     'prodi'=>$request->prodi,
                                                     'bidang'=>$request->bidang,]);
-                                                    return redirect('dosen')->with('status', 'Data updated successfully  .');
+         return redirect('dosen')->with('status', 'Data updated successfully  .');
     }
 
     /**

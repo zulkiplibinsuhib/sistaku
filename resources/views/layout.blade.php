@@ -22,6 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('admin_lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="icon" href="{{ asset('admin_lte/dist/img/AdminLTELogo.png')}}" type="image/x-icon/">
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed  layout-fixed ">
@@ -109,14 +110,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{route('prodi.index')}}"
                                         class=" nav-link {{Request::is('prodi')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Program Studi</p>
+                                        <p>List Program Studi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('prodi.create')}}"
                                         class="nav-link {{Request::is('prodi/create')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Program Studi</p>
+                                        <p>Create Program Studi</p>
                                     </a>
                                 </li>
 
@@ -137,14 +138,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{route('kurikulum.index')}}"
                                         class=" nav-link {{Request::is('kurikulum')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Kurikulum</p>
+                                        <p>List Kurikulum</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('kurikulum.create')}}"
                                         class="nav-link {{Request::is('kurikulum/create')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Kurikulum</p>
+                                        <p>Create Kurikulum</p>
                                     </a>
                                 </li>
 
@@ -164,14 +165,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{route('dosen.index')}}"
                                         class="nav-link {{Request::is('dosen')?'active':''}} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Dosen</p>
+                                        <p>List Dosen</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('dosen.create')}}"
                                         class="nav-link {{Request::is('dosen/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Dosen</p>
+                                        <p>Create Dosen</p>
                                     </a>
                                 </li>
 
@@ -191,14 +192,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ route('kelas.index')}}"
                                         class="nav-link {{Request::is('kelas')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Kelas</p>
+                                        <p>List Kelas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('kelas.create')}}"
                                         class="nav-link {{Request::is('kelas/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Kelas</p>
+                                        <p>Create Kelas</p>
                                     </a>
                                 </li>
 
@@ -218,14 +219,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ route('matkul.index')}}"
                                         class="nav-link {{Request::is('matkul')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Mata Kuliah</p>
+                                        <p>List Mata Kuliah</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('matkul.create')}}"
                                         class="nav-link {{Request::is('matkul/create')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Mata Kuliah</p>
+                                        <p>Create Mata Kuliah</p>
                                     </a>
                                 </li>
 
@@ -251,7 +252,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ route('sebaran.index')}}"
                                         class="nav-link {{Request::is('sebaran')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Sebaran</p>
+                                        <p>List Sebaran</p>
                                     </a>
                                 </li>
                                 @if(Auth::user()->level == 'prodi')
@@ -259,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="#"
                                         class="nav-link {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}} ">
                                         <i class="far fa-circle nav-icon "></i>
-                                        <p>Input Sebaran</p>
+                                        <p>Create Sebaran</p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                     <li class="nav-item ">
@@ -332,7 +333,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ route('users.index')}}"
                                         class="nav-link {{Request::is('users')?'active':''}}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar User</p>
+                                        <p>List User</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -361,8 +362,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12 ">
                             <h1 class="m-0 text-dark">@yield('title')</h1>
+                            
                         </div><!-- /.col -->
 
                     </div>
@@ -381,6 +383,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; ZulkipliBinSuhib - Politeknik TEDC Bandung.</strong>
+            
+        </footer>
         
     </div>
 
@@ -420,32 +426,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </script>
 
     </script>
-    <script>
-        $(document).ready(function () {
-            $('#matkul').DataTable({
-                order: [
-                    [5, 'asc']
-                ],
-                rowGroup: {
-                    dataSrc: 5
-                }
-            });
-        });
-
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('').DataTable({
-                order: [
-                    [1, 'asc']
-                ],
-                rowGroup: {
-                    dataSrc: 1
-                }
-            });
-        });
-
-    </script>
 
     <script>
         $(document).ready(function () {
@@ -457,40 +437,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </script>
 
-    <script>
-        $(document).ready(function () {
-            $('#kelas ').DataTable({
-            });
-        });
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#dosen ').DataTable({
-            });
-            $('#show_dosen ').DataTable({
-            });
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('.sebaran').DataTable({
-            });
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('.users').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-
-                ]
-            });
-        });
-
-    </script>
+    
+    
+    
 </body>
 
 </html>

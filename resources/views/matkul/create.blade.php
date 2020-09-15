@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','SISTAKU')
+@section('title','Mata Kuliah')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -24,7 +24,7 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input Mata Kuliah
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Create Mata Kuliah
                 </h3>
             </div>
             <div class="card-body">
