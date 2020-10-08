@@ -32,7 +32,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Name</th>
+                                <th>Username</th>
                                 <th>Email</th>
                                 <th>Program Studi</th>
                                 <th>Level</th>

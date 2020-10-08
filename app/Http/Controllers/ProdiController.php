@@ -7,6 +7,10 @@ use DB;
 
 class ProdiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +48,12 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+        $data = DB::table('prodi')
+                ->where('kode',$request->kode)
+                ->first();
+        if(!empty($data)){
+            return redirect()->back()->withErrors("Program Studi dengan kode {$data->kode} sudah ada .");       
+         }
         $validatedData = $request->validate([
             'kode' => 'required',
             'nama' => 'required',

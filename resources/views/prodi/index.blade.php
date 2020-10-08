@@ -34,8 +34,8 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Kode Prodi</th>
-                                <th>Prodi</th>
+                                <th>Kode Program Studi</th>
+                                <th>Nama Program Studi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

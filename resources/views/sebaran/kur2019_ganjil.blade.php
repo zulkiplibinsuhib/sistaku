@@ -33,8 +33,8 @@
                     {{ Form::open(['url'=>'sebaran'])}}
                     <table class="sebaran-table table table-bordered table table-striped" id="table-1">
                         <h4 class="text-center">Semester 1</h4>
-                        <select id="pilih_kelas" class="form-control col-2 ">
-                            <option selected value="">Pilih Kode Kelas</option>
+                        <select id="pilih_kelas" class="form-control col-2 " required>
+                            <option disabled selected value="">Pilih Kode Kelas</option>
                             @foreach($pilih_kelas1 as $row)
                             <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
                             @endforeach

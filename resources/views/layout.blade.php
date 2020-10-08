@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="icon" href="{{ asset('admin_lte/dist/img/AdminLTELogo.png')}}" type="image/x-icon/">
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed  layout-fixed ">
+<body class="hold-transition sidebar-mini  layout-navbar-fixed  layout-fixed ">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-info navbar-info ml-auto" ">
@@ -46,8 +46,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <a class="nav-link fas fa-sign-out-alt text-light  " href="{{ route('logout') }}"
                         onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit(); confirm('Apakah {{ Auth::user()->name }} mau keluar ?')" type="submit">
+                              document.getElementById('logout-form').submit(); " >
                         {{ __('Logout') }}
+
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -60,9 +61,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-light-info elevation-4">
+        <aside class="main-sidebar sidebar-light-info elevation-4" >
             <!-- Brand Logo -->
-            <a href="home" class="brand-link navbar-light ">
+            <a href="home" class="brand-link navbar-light " >
                 <img src="{{ asset('admin_lte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light-bold">SISTAKU</span>
@@ -70,11 +71,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <!-- Sidebar -->
-            <div class="sidebar">
+            <div class="sidebar" >
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex ">
                     <div class="image">
-                        <img src="{{asset('admin_lte/dist/img/user.jpg')}}" class="img-circle elevation-2"
+                        <img src="{{asset('icons/user.png')}}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
                     <div class="info">
@@ -84,8 +85,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent text-sm" data-widget="treeview" role="menu"
+                        data-accordion="false" >
                         <li class="nav-item">
                             <a href="{{route('home')}}" class="nav-link {{Request::is('home')?'active':''}} ">
                                 <i class="nav-icon fas fa-home"></i>
@@ -98,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @if(Auth::user()->level == 'admin')
                         <li
                             class="nav-item has-treeview {{Request::is('prodi')?'menu-open':''}} {{Request::is('prodi/create')?'menu-open':''}}">
-                            <a href="#" class="nav-link  ">
+                            <a href="#" class="nav-link ">
                                 <i class="nav-icon far fa-file-alt"></i>
                                 <p class="text ">
                                     PROGRAM STUDI
@@ -124,6 +125,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         @endif
+                        <li
+                            class="nav-item has-treeview {{Request::is('prodi')?'menu-open':''}} {{Request::is('prodi/create')?'menu-open':''}}">
+                            <a href="#" class="nav-link  ">
+                                <i class="nav-icon far fa-file-alt"></i>
+                                <p class="text ">
+                                   BIDANG DOSEN
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="{{route('bidang.index')}}"
+                                        class=" nav-link {{Request::is('bidang')?'active':''}} ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Bidang Dosen</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('bidang.create')}}"
+                                        class="nav-link {{Request::is('bidang/create')?'active':''}} ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create Bidang Dosen</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                         <li
                             class="nav-item has-treeview {{Request::is('kurikulum')?'menu-open':''}} {{Request::is('kurikulum/create')?'menu-open':''}}">
                             <a href="#" class="nav-link  ">
@@ -240,7 +268,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     SEBARAN
                                     <i class="right fas fa-angle-left"></i>
                                     @if(Auth::user()->level == 'admin')
-                                    <?php $status = App\Sebaran::where('approved','0')->count(); ?>
+                                    <?php $status = App\Sebaran::where('approved','0')->count();  ?>
                                     <span class="badge badge-danger right">
                                         {{$status}}
                                     </span>
@@ -261,6 +289,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         class="nav-link {{Request::is('sebaran')?'menu-open':''}} {{Request::is('sebaran/kurikulum_2014_ganjil')?'menu-open':''}} ">
                                         <i class="far fa-circle nav-icon "></i>
                                         <p>Create Sebaran</p>
+                                        <i class="right fas fa-angle-left"></i>
                                     </a>
                                     <ul class="nav nav-treeview">
                                     <li class="nav-item ">
@@ -272,25 +301,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <li class="nav-item ">
                                             <a href="{{ route('sebaran.create_kur2014_ganjil')}}" class="nav-link {{Request::is('sebaran/kurikulum_2014_ganjil')?'active':''}}">
                                                 <i class="far fa-dot-circle nav-icon  "></i>
-                                                <p>Kurikulum 2014 - Ganjil</p>
+                                                <p>Kurikulum 2014-Ganjil</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('sebaran.create_kur2014_genap')}}" class="nav-link {{Request::is('sebaran/kurikulum_2014_genap')?'active':''}}">
                                                 <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Kurikulum 2014 - Genap</p>
+                                                <p>Kurikulum 2014-Genap</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('sebaran.create_kur2019_ganjil')}}" class="nav-link {{Request::is('sebaran/kurikulum_2019_ganjil')?'active':''}}">
                                                 <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Kurikulum 2019 - Ganjil</p>
+                                                <p>Kurikulum 2019-Ganjil</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('sebaran.create_kur2019_genap')}}" class="nav-link {{Request::is('sebaran/kurikulum_2019_genap')?'active':''}}">
                                                 <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Kurikulum 2019 - Genap</p>
+                                                <p>Kurikulum 2019-Genap</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -362,7 +391,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12 ">
+                        <div class="col-sm-12">
                             <h1 class="m-0 text-dark">@yield('title')</h1>
                             
                         </div><!-- /.col -->

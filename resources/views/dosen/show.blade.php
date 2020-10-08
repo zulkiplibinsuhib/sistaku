@@ -15,11 +15,11 @@
                     <!-- Profile Image -->
                     <div class="card card-info card-outline">
                         <div class="card-body box-profile">
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle" src="{{asset('icons/user.png')}}""
-                       alt=" User profile picture">
-                            </div>
-                            <h3 class="profile-username text-center">{{$dosen->name}} </h3>
+                                alt=" User profile picture">
+                            </div> -->
+                            <h3 class="profile-username text-center text-bold">{{$dosen->name}} </h3> <hr>
                             <p class="text-muted text-center">Dosen</p>
                             <p class="text-muted text-center text-bold"> Politeknik TEDC Bandung</p>
 

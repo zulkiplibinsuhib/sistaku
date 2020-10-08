@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 
 class DosenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +30,8 @@ class DosenController extends Controller
         $get_prodiAndDosen = 
                             DB::table('dosen')
                             ->join('prodi', 'dosen.prodi', '=', 'prodi.id')
-                            ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang')
+                            ->join('bidang_dosen','bidang_dosen.id','=','dosen.bidang')
+                            ->select('dosen.name','dosen.nidn','dosen.jenis_kelamin','dosen.status','prodi.nama','dosen.id','dosen.bidang','bidang_dosen.nama_bidang')
                             ->groupBy('name');
         if(!empty($id)){
         $get_prodiAndDosen = $get_prodiAndDosen->where('dosen.prodi',$id); }
@@ -61,8 +66,10 @@ class DosenController extends Controller
     public function create()
     {
         $data_dosen = DB::table('dosen')->pluck('name');
+        $bidang_dosen = DB::table('bidang_dosen')->groupBy('nama_bidang')->get();
+        $data['bidang_dosen'] = $bidang_dosen;
         $data['data_dosen'] = $data_dosen;
-        return view('dosen.create'); 
+        return view('dosen.create',$data); 
     }
 
     /**
@@ -73,6 +80,12 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
+        $data = DB::table('dosen')
+                ->where('nidn',$request->nidn)
+                ->first();
+        if(!empty($data)){
+            return redirect()->back()->withErrors("Dosen dengan NIDN {$data->nidn} sudah ada .");       
+         }
         $validatedData = $request->validate([
             'nidn' => 'required',
             'jenis_kelamin' => 'required',
@@ -114,7 +127,10 @@ class DosenController extends Controller
     {
         $cari_tahun = DB::table('sebaran')->groupBy('tahun_akademik')->get();
        
-        $dosen = Dosen::find($id); 
+        $dosen = DB::table('dosen')
+                ->join('bidang_dosen','bidang_dosen.id','=','dosen.bidang')
+                ->select('dosen.id','bidang_dosen.nama_bidang as bidang','dosen.jenis_kelamin','dosen.nidn','dosen.status','dosen.name','dosen.nidn')
+                ->where('dosen.id',$id)->first(); 
         
         $jumlah_sks =DB::table('sebaran')
                     ->join('dosen','sebaran.dosen_mengajar','=','dosen.nidn')

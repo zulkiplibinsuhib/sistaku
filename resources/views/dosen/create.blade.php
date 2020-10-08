@@ -53,8 +53,12 @@
                     </tr>
                     <tr>
                         <td><label class="offset-4">Bidang</label> </td>
-                        <td>{{ Form::select('bidang',['Produktif'=>'Produktif','MKDU'=>'MKDU'],null,['class'=>'form-control col-10','required'])}}
-                        </td>
+                        <td><select name="bidang" class="form-control col-10" required>
+                                <option selected disabled>Pilih Bidang Dosen</option>
+                                @foreach($bidang_dosen as $bidang)
+                                <option value="{{$bidang->id}}">{{$bidang->nama_bidang}}</option>
+                                @endforeach
+                            </select></td>
                     </tr>
                     @if(empty(Auth::user()->prodi))
                     <tr>

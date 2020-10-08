@@ -62,7 +62,7 @@
                                 <td>{{ $row->nidn}}</td>
                                 <td>{{ $row->jenis_kelamin}}</td>
                                 <td>{{ $row->status}}</td>
-                                <td>{{ $row->bidang}}</td>
+                                <td>{{ $row->nama_bidang}}</td>
                                 <!-- <td>{{ $row->nama}}</td> -->
                                 <td>
                                     <div class="d-flex justify-content-center">

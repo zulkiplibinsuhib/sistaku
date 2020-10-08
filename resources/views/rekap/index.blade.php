@@ -21,7 +21,7 @@
                     <div class="card-tools ">
                     <form class="form-inline" action="" method="get">
                         <input type="text" class="form-control card-tools mr-sm-2" style=" width: 100px;" name="jam"
-                                        id="jam" placeholder="Maks. Jam">
+                            id="jam" placeholder="Maks. Jam">
                             <select name="prodi" class="custom-select my-1 mr-sm-2" style=" width: 200px;"
                                 id="inlineFormCustomSelectPref">
                                 

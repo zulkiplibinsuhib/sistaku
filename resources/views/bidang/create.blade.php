@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Users')
+@section('title','Bidang Dosen')
 @section('content')
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show col-4" role="alert">
@@ -22,53 +22,40 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Input User
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Create Bidang Dosen
                 </h3>
             </div>
             <div class="card-body">
-                {{ Form::open(['url'=>'users'])}}
+                {{ Form::open(['url'=>'bidang'])}}
                 <table class="table table-borderless">
 
                     <tr>
-                        <td><label class="offset-4">Email</label> </td>
-                        <td>{{ Form::email('email',null,['placeholder'=>'example@gmail.com  ','class'=>'form-control col-10','required'])}}
+                        <td><label class="offset-4">Nama Bidang</label> </td>
+                        <td>{{ Form::text('nama_bidang',null,['placeholder'=>'Ex. Produktif ','class'=>'form-control col-10 ','required'])}}
                         </td>
                     </tr>
-                    <tr>
-                        <td><label for="" class="offset-4">Username</label> </td>
-                        <td>{{ Form::text('name',null,['placeholder'=>'Username ','class'=>'form-control col-10','required'])}}
-                        </td>
-                    </tr>
+                    @if(empty(Auth::user()->prodi))
                     <tr>
                         <td><label for="prodi" class="offset-4 ">Prodi</label></td>
-                        <td>
-                            <select name="prodi" class="form-control col-10">
+                        <td><select name="prodi" class="form-control  col-10">
                                 <option selected disabled>Pilih Prodi</option>
+                                <option value="all">All Prodi</option>
                                 @foreach(App\Prodi::all() as $prodi)
                                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                                 @endforeach
                             </select></td>
                     </tr>
-                    <tr>
-                        <td><label for="" class="offset-4">Level</label> </td>
-                        <td>{{ Form::select('level',['prodi'=>'Prodi','admin'=>'Admin'],null,['class'=>'form-control col-10'])}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="" class="offset-4">Password</label> </td>
-                        <td>{{ Form::text('password',null,['placeholder'=>'Enter Password','class'=>'form-control col-10','required'])}}
-                        </td>
-                    </tr>
+
+                    @endif
 
                 </table>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info float-right">Input</button>
-                    <a href="{{ route('users.index')}}" class="btn btn-default ">Cancel</a>
+                    <a href="{{ route('bidang.index')}}" class="btn btn-default ">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 @endsection

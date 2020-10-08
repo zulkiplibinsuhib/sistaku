@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,6 +74,14 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        $data = DB::table('kelas')
+                ->where('kode',$request->kode)
+                ->where('prodi',$request->prodi)
+                ->where('tahun',$request->tahun)
+                ->first();
+        if(!empty($data)){
+            return redirect()->back()->withErrors("Kelas {$data->kode} angkatan tahun {$data->tahun} sudah ada .");       
+         }
         $validatedData = $request->validate([
             'kode' => 'required',
             'kelas' => 'required',

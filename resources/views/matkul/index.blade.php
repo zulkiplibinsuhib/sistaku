@@ -45,8 +45,8 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Mata Kuliah</th>
+                                <th>Kode Mata Kuliah</th>
+                                <th>Nama Mata Kuliah</th>
                                 <th>SKS</th>
                                 <th>T</th>
                                 <th>P</th>
@@ -105,6 +105,5 @@
     });
 
 </script>
-
 
 @endsection()

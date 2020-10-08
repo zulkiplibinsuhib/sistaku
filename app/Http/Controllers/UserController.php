@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data['users'] = DB::table('users')
@@ -25,6 +29,12 @@ class UserController extends Controller
 
     public function store(Request $data)
     {
+        $data_users = DB::table('users')
+                ->where('users.email',$data->email)
+                ->first();
+        if(!empty($data_users)){
+            return redirect()->back()->withErrors("Email sudah digunakan");       
+         }
         $validatedData = $data->validate([
             'name' => 'required',
             'email' => 'required',

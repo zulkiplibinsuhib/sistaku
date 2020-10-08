@@ -19,7 +19,6 @@
         </button>
     </div>
     @endif
-
 <div class="row">
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
@@ -33,46 +32,43 @@
 
                     <tr>
                         <td><label class="offset-4">Kode Mata Kuliah</label> </td>
-                        <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Enter Kode Mata Kuliah ','class'=>'form-control col-10 offset-1','required'])}}
+                        <td>{{ Form::text('kode_matkul',null,['placeholder'=>'Masukkan Kode Mata Kuliah ','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
-                        <td> <label class="offset-4">Mata Kuliah</label> </td>
-                        <td>{{ Form::text('matkul',null,['placeholder'=>'Enter Mata Kuliah','class'=>'form-control col-10 offset-1','required'])}}
+                        <td> <label class="offset-4">Nama Mata Kuliah</label> </td>
+                        <td>{{ Form::text('matkul',null,['placeholder'=>'Masukkan Nama Mata Kuliah','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td> <label class="offset-4">SKS</label> </td>
-                        <td>{{ Form::number('sks',null,['placeholder'=>'Enter SKS','class'=>'form-control col-10 offset-1','required'])}}
+                        <td>{{ Form::number('sks',null,['placeholder'=>' SKS','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label class="offset-4">Teori</label> </td>
-                        <td>{{ Form::number('teori',null,['placeholder'=>'Enter jam teori','class'=>'form-control col-10 offset-1','required'])}}
+                        <td>{{ Form::number('teori',null,['placeholder'=>' Jam Teori','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label class="offset-4">Praktek</label> </td>
-                        <td>{{ Form::number('praktek',null,['placeholder'=>'Enter jam praktek','class'=>'form-control col-10 offset-1','required'])}}
+                        <td>{{ Form::number('praktek',null,['placeholder'=>' Jam Praktek','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label class="offset-4">Jam / Minggu</label> </td>
-                        <td>{{ Form::number('jam_minggu',null,['placeholder'=>'Enter jam per minggu','class'=>'form-control col-10 offset-1','required'])}}
+                        <td>{{ Form::number('jam_minggu',null,['placeholder'=>'Jumlah Jam / Minggu','class'=>'form-control col-10 offset-1','required'])}}
                         </td>
                     </tr>
                     <tr>
                         <td><label for="kurikulum" class="offset-4">Kurikulum</label></td>
                         <td> <select name="kurikulum" class="form-control offset-1 col-10" >
                             <option selected disabled>Pilih Kurikulum</option>
-                            @foreach($kurikulum as $kurikulum)
-                            <option value="{{$kurikulum->nama}}">{{$kurikulum->nama}}</option>
-                            @endforeach
-                           
-                        </select>
+                            <option value="2014">2014</option>
+                            <option value="2019">2019</option>
+                         </select>
                         </td>
-                    </tr>
-                    
+                    </tr>                  
                     <tr>
                         <td><label for="semester" class="offset-4">Semester</label></td>
                         <td>
@@ -118,8 +114,6 @@
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioInline8">8</label>
                                 </div>
-
-
                             </div>
                         </td>
                     </tr>
@@ -134,11 +128,9 @@
                                 @endforeach
                             </select></td>
                     </tr>
-
                     @endif
                     </td>
                     </tr>
-
                 </table>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info float-right">Input</button>
@@ -148,5 +140,4 @@
         </div>
     </div>
 </div>
-
 @endsection

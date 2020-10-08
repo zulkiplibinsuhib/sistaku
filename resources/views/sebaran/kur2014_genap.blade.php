@@ -135,7 +135,7 @@
                                 <th>Dosen PDPT</th>
                             </tr>
                         </thead>
-                        @foreach ($semester8 as $row6)
+                        @foreach ($semester6 as $row6)
                         <tr class="text-center">
                             <td>{{$row6->matkul}} </td>
                             <input type="hidden" name="mata_kuliah[]" value="{{$row6->id}}">

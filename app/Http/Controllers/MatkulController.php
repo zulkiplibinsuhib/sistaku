@@ -10,6 +10,10 @@ use App\Matkul;
 
 class MatkulController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +25,8 @@ class MatkulController extends Controller
         
         $cari_semester = DB::table('matkul')->groupBy('semester')->get();
         $get_ProdiAndMatkul = DB::table('matkul')
-                            ->join ('prodi', 'matkul.prodi', '=', 'prodi.id')
-                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','matkul.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','prodi.nama')
-                            ;
+                            ->leftJoin ('prodi', 'matkul.prodi', '=', 'prodi.id')
+                            ->select('matkul.id','matkul.kode_matkul','matkul.matkul','matkul.sks','matkul.teori','matkul.praktek','matkul.jam_minggu','matkul.kurikulum','matkul.semester','matkul.teori','matkul.praktek','matkul.jam_minggu','prodi.nama');
                              
         if($id){
             $get_ProdiAndMatkul = $get_ProdiAndMatkul->where('matkul.prodi',$id);
@@ -41,6 +44,7 @@ class MatkulController extends Controller
         }
        
         $get_ProdiAndMatkul = $get_ProdiAndMatkul->get();
+       
         $data['get_ProdiAndMatkul'] = $get_ProdiAndMatkul;
         $data['cari_semester'] = $cari_semester;          
         
@@ -75,6 +79,12 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
+        $data = DB::table('matkul')
+                ->where('kode_matkul',$request->kode_matkul)
+                ->first();
+        if(!empty($data)){
+            return redirect()->back()->withErrors("Mata Kuliah dengan kode {$data->kode_matkul} sudah ada .");       
+         }
         $validatedData = $request->validate([
             'matkul' => 'required',
             'sks' => 'required',

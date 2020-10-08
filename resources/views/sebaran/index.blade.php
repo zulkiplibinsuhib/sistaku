@@ -155,10 +155,16 @@
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         @if(!$row->approved)
+                                        @if(Auth::user()->level == 'prodi')
+                                        <a href="{{ route('sebaran.edit',$row->id_sebaran) }}" 
+                                            class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
+                                            @endif
+                                        @endif
+                                        @if(Auth::user()->level == 'admin')
                                         <a href="{{ route('sebaran.edit',$row->id_sebaran) }}" 
                                             class="btn btn-sm btn-warning fas fa-edit mr-2" title="Edit"></a>
                                         @endif
-                                        @if(Auth::user()->level == 'admin')
+                                        @if(!$row->approved)
                                         <form action="{{route('sebaran.destroy',$row->id_sebaran)}}" method="post"
                                             title="Hapus">
                                             @csrf
@@ -167,6 +173,8 @@
                                                 onclick="return confirm('Yakin mau menghapus data ini ?')"
                                                 type="submit"></button>
                                         </form>
+                                        @endif
+                                        @if(Auth::user()->level == 'admin')
                                         @if(!$row->approved)
                                         <a href="{{route('sebaran.approve',$row->id_sebaran)}}" class="" title="Konfirmasi"
                                             type="submit"><img src="{{ asset('icons/check.png')}} " width="30px"

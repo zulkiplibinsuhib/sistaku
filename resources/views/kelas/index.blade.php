@@ -55,7 +55,7 @@
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Kode Kelas</th>
-                                <th>Kelas</th>
+                                <th>Nama Kelas</th>
                                 @if(empty(Auth::user()->prodi))
                                 <th>Prodi</th>
                                 @endif

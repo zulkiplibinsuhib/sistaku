@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title','Program Studi')
+@section('title','bidang')
 @section('content')
 
 @if ($errors->any())
@@ -23,30 +23,26 @@
     <div class="col-12">
         <div class="card card-info card-outline text-sm-3">
             <div class="card-header">
-                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Update Program Studi
+                <h3 class="card-title text-bold"> <i class="fas fa-edit text-dark mr-2"></i>Form Update bidang
                 </h3>
             </div>
             <div class="card-body">
-                {{ Form::model($prodi,['url'=>'prodi/'.$prodi->id,'method'=>'put'])}}
+                {{ Form::model($bidang_dosen,['url'=>'bidang/'.$bidang_dosen->id,'method'=>'put'])}}
                 <table class="table table-borderless">
-                    <tr>
-                        <td> <label class="offset-4">Kode Prodi</label>
-                        <td>{{ Form::text('kode',null,['placeholder'=>'Kode prodi','class'=>'form-control col-10','required'])}}
-                        </td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> <label class="offset-4">Nama Prodi</label>
-                        <td>{{ Form::text('nama',null,['placeholder'=>'Program studi','class'=>'form-control col-10','required'])}}
-                        </td>
-                        </td>
-                    </tr>
 
+                    <tr>
+                        <td> <label class="offset-4">Nama bidang</label>
+                        <td>{{ Form::text('nama_bidang',null,['placeholder'=>'Ex. bidang 2019','class'=>'form-control col-10','required'])}}
+                        </td>
+                        </td>
+                    </tr>
+                    <tr>{{ Form::hidden('prodi',null,['placeholder'=>'','class'=>'form-control','required','readonly'])}}
+                    </tr>
 
                 </table>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info float-right">Update</button>
-                    <a href="{{ route('prodi.index')}}" class="btn btn-default ">Cancel</a>
+                    <a href="{{ route('bidang.index')}}" class="btn btn-default ">Cancel</a>
                 </div>
             </div>
         </div>

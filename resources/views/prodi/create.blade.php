@@ -35,7 +35,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="offset-4">Prodi</label> </td>
+                        <td><label class="offset-4">Nama Prodi</label> </td>
                         <td>{{ Form::text('nama',null,['placeholder'=>'Ex. Teknik Informaika','class'=>'form-control col-10 ','required'])}}
                         </td>
                     </tr>

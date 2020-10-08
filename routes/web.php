@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('welcome');
 });
 Auth::routes();
 Route::get('rekap/export_excel', 'RekapController@export_excel')->name('rekap.export');
@@ -26,7 +26,6 @@ Route::get('sebaran/tambah_form1', 'SebaranController@kurikulum_2019_ganjil')->n
 Route::get('sebaran/tambah_form2', 'SebaranController@kurikulum_2019_genap')->name('sebaran.kurikulum_2019_genap');
 Route::get('sebaran/tambah_form3', 'SebaranController@kurikulum_2014_ganjil')->name('sebaran.kurikulum_2014_ganjil');
 Route::get('sebaran/tambah_form4', 'SebaranController@kurikulum_2014_genap')->name('sebaran.kurikulum_2014_genap');
-
 
 
 // AJAX REQUEST
@@ -72,6 +71,8 @@ Route::resource('rekap', 'RekapController');
 
 // KELAS
 Route::resource('kelas', 'KelasController'); 
+// KELAS
+Route::resource('bidang', 'BidangController'); 
 
 
 // Route::get('kelas', 'KelasController@index')->name('kelas.index');

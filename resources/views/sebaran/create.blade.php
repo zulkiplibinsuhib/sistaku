@@ -46,7 +46,7 @@
                     <table class="sebaran-table table table-bordered table table-striped" id="sebaran-table">
                     <select id="pilih_kelas" class="form-control col-2 " disabled>
                             <option selected value="" disabled>Pilih Kode Kelas</option>
-                            @foreach(App\Kelas::all() as $row)
+                            @foreach($pilih_kelas as $row)
                             <option value="{{$row->id}}">{{$row->kode}} - {{$row->tahun}}</option>
                             @endforeach
                         </select>
